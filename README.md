@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/nbouteme/projet-cpp.svg?branch=master)](https://travis-ci.org/nbouteme/projet-cpp)
+
 projet-cpp
 ==========
 
