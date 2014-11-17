@@ -1,0 +1,11 @@
+language: cpp
+compiler:
+  - gcc
+cache: apt
+before_install:
+        - lsb_release -sc
+install:
+script:
+        - mkdir build && cd build
+        - cmake ..
+        - make -j2
