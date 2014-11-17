@@ -4,7 +4,11 @@ compiler:
 cache: apt
 before_install:
         - lsb_release -sc
+        - sudo add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty main universe"
+        - sudo apt-get clean
+        - sudo apt-get update
 install:
+        - sudo apt-get install -f -y g++
 script:
         - mkdir build && cd build
         - cmake ..
