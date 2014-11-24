@@ -23,19 +23,21 @@ Implémentation
 
 Simon doit implémenter les types suivants:
 
-- [] value_type
-- [] allocator_type
-- [] reference
-- [] const_reference
-- [] pointer	
-- [] const_pointer
-- [] iterator
-- [] const_iterator
-- [] reverse_iterator
-- [] const_reverse_iterator
-- [] difference_type
-- [] iterator_traits
-- [] size_type
+- [ ] value_type
+- [ ] allocator_type
+- [ ] reference
+- [ ] const_reference
+- [ ] pointer	
+- [ ] const_pointer
+
+Pour implementer les type iterator, tu dois implementer la classe node_iterator (voir Aide.md)
+- [ ] iterator
+- [ ] const_iterator
+- [ ] reverse_iterator
+- [ ] const_reverse_iterator
+- [ ] difference_type
+- [ ] iterator_traits
+- [ ] size_type
 
 
 
@@ -44,14 +46,22 @@ Simon doit implémenter les types suivants:
 
 Adrien doit implementer:
 
-- constructeur
-- destructeur
-- empty
-- size
-- max_size
+- [ ] constructeur
+- [ ] destructeur
+- [ ] empty
+- [ ] size
+- [ ] max_size
 
 Imade:
 
-- Les données membres
-- begin
-- end
+- [ ] begin
+- [ ] end
+
+## Classes ##
+
+Simon:
+node_iterator
+const_node_iterator
+
+Imade:
+node
