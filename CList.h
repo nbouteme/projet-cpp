@@ -1,7 +1,7 @@
 
 
-#pragma once // Remplace les conditions pour éviter l'auto inclusion
-
+#pragma once 
+template<typename T> class CList; // Classe generique
 class CList
 {
     template<typename T>
@@ -13,8 +13,17 @@ class CList
     typedef T const_pointer;
 
     public:
-        CList();
-       ~CList();
+		CList::CList()
+		{
+			//ctor
+		}
+
+		CList::~CList()
+		{
+			//dtor
+		}
+	   
+
     protected:
     private:
 };
