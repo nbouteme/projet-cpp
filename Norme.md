@@ -11,6 +11,8 @@ Le style de code est le style Allman, c'est a dire que:
 - Les lignes vides ne doivent pas contenir d'espaces.
 - Une ligne vide doit suivre une ou plusieurs déclarations succesives.
 
+Indentez avec des tabulations.
+
 Fonctionnalités du C++
 ======================
 
@@ -63,6 +65,9 @@ Les puristes se plaindront que `#pragma once` n'est pas standard, et
 n'est pas supporté par un certain compilateur d'IBM qui n'a pas eu de
 mise à jour depuis presque 3 ans. Ces mêmes personnes déclarent des
 tableau de type C de taille variable.
+
+*Note:* Le 25 novembre, Alain Casali a distribué un header écrit par Floran Narenji
+ou #pragma once été utilisé, donc ya de bonnes chances qu'il soit autorisé.
 
 ## Déclarations anticipées ##
 
