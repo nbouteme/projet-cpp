@@ -1,6 +1,7 @@
 #pragma once 
 #include <cstddef> // ptrdiff_t
-template<typename T> class node_iterator;
+template<typename T>
+class node_iterator;
 {
     public:
 	
@@ -36,29 +37,29 @@ template<typename T> class node_iterator;
 				
 		}
 	
-		template <class node_iterator>
+
 		node_iterator::operator+()(node_iterator a, node_iterator b)
 		{
 			// WIP
 		}
 		
-		template <class node_iterator>
+
 		node_iterator::operator*() (node_iterator a, node_iterator b)
 		{
 		// WIP
 		}
-		template <class node_iterator>
+
 		node_iterator::operator->() (node_iterator a, node_iterator b)
 		{
 		// WIP
 		}
-		template <class node_iterator>
+
 		node_iterator::operator==() (node_iterator a, node_iterator b)
 		{
 		// WIP
 		}
 		
-		template <class node_iterator>
+
 		node_iterator::operator<() (node_iterator a, node_iterator b)
 		{
 		// WIP
@@ -112,19 +113,18 @@ template<typename T> class node_iterator;
 		
 		
 		
-		template <class node_iterator>
+
 		bool are_equal (node_iterator node1, node_iterator node2)
 		{
 			//WIP
 		}
 		
-		template <class node_iterator>
+
 		bool is_lower (node_iterator node1, node_iterator node2)
 		{
 			//WIP
 		}
 
-		template <class node_iterator>
 		bool is_bigger (node_iterator node1, node_iterator node2)
 		{
 			//WIP
