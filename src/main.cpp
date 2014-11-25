@@ -1,4 +1,6 @@
 #include <cstdio>
+#include "CList.h" // On inclus CList dans le main
+#include "node_iterator.h" // On inclus le node_iterator
 
 using namespace std;
 

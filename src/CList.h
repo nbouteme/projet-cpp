@@ -22,7 +22,6 @@ class CList
 		{
 			//dtor
 		}
-	   
 
     protected:
     private:

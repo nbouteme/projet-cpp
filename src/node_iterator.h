@@ -19,19 +19,19 @@ class node_iterator
 		{
 			// WIP
 		}
-
+		
 		template <class node_iterator>
 		node_iterator multiply (node_iterator a, node_iterator b)
 		{
 		// WIP
 		}
-
+		
 		template <class node_iterator>
 		bool are_equal (node_iterator node1, node_iterator node2)
 		{
 			//WIP
 		}
-
+		
 		template <class node_iterator>
 		bool is_lower (node_iterator node1, node_iterator node2)
 		{
@@ -43,7 +43,6 @@ class node_iterator
 		{
 			//WIP
 		}   
-
 
         node_iterator::node_iterator()
 		{
