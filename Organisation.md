@@ -15,7 +15,6 @@ Testeur
 
 - Nabil Boutemeur
 
-
 Implémentation
 ==============
 
@@ -39,7 +38,7 @@ Pour implementer les type iterator, tu dois implementer la classe node_iterator 
 - [ ] iterator_traits
 - [ ] size_type
 
-
+Simon, et Simon seulement et *seulement ca*, _ni plus ni moins_!
 
 
 ## Méthodes ##
