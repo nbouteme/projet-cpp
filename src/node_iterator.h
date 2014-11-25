@@ -1,20 +1,17 @@
 #pragma once 
 #include <cstddef> // ptrdiff_t
 template<typename T> class node_iterator;
-class node_iterator
 {
     public:
 	
 		struct Node_Structure //Comme tout ses membre doivent etre public, on utilisera la mot cle struct pour la declarer
 		{
-			ptrdiff_t difference_type;
+			typedef ptrdiff_t difference_type;
 			//iterator_category?
-			template<typename T>
-			T value_type;
-			T* pointer;// I Dunno
-			T& reference;// I Dunno
-			template<typename T>
-			T Data; //The Data of the node
+			typedef T value_type;
+			typedef T* pointer;// I Dunno
+			typedef T& reference;// I Dunno
+			typedef T Data; //The Data of the node
 		};
 		
 		node_iterator::node_iterator() //Constructeur multiparametre
