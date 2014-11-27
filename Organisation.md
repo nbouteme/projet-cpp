@@ -46,10 +46,19 @@ Simon, et Simon seulement et *seulement ca*, _ni plus ni moins_!
 Adrien doit implementer:
 
 - [ ] constructeur
+Le constructeur cree une seule sentinelle, dont le base_node suivant est lui-meme et son precedent pointe aussi sur lui meme
 - [ ] destructeur
+le destructeur appelle clear et desalloue les ressource de la sentinell
 - [ ] empty
+doit renvoyer vrai si le suivant de la sentinelle est lui meme
 - [ ] size
+doit mesurer la taille a chaque execution, necessaire pour reduire la complexitee de splice
 - [ ] max_size
+renvoie ~0U;
+- [ ] clear
+execute erase sur begin() tant que begin ne vaut pas end
+- [ ] erase
+demande au neoeud de se detacher de la liste et libere le noeud
 
 Imade:
 
@@ -59,8 +68,13 @@ Imade:
 ## Classes ##
 
 Simon:
-node_iterator
-const_node_iterator
+- [ ] node_iterator
+- [ ] const_node_iterator
 
 Imade:
-node
+- [ ] node
+
+*Changement !* : la struct node doit etre separee en 2 classes, une
+ node_base qui contient seulement les pointeurs next et prev et une classe node qui
+ herite publiquement de node base, pour ne pas avoir a stocker de valeur pour les
+ sentinelles
