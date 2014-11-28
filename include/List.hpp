@@ -19,25 +19,6 @@ namespace nsSdD
             }
         }
 
-        struct node
-        {
-    	    typedef node* pointer;
-    
-        	pointer prev = nullptr;
-        	pointer next = nullptr;
-        	T data;
-        
-        	void hook (pointer elem)
-        	{
-        		pointer tmp = elem->prev;
-        		next = elem;
-        		prev = elem->prev;
-        		elem->prev = this;
-        		if(tmp)
-        		tmp->next = this;
-        	}
-        };
-
         base_node sentinel;
 
     public:
@@ -90,5 +71,6 @@ namespace nsSdD
             node_iterator tmp = end();
             erase(--tmp);
         }
+
     };
 }
