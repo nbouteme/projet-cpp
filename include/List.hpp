@@ -90,10 +90,5 @@ namespace nsSdD
             node_iterator tmp = end();
             erase(--tmp);
         }
-
-        numeric_limits<size_type> max_size()
-        {
-            return(max());
-        }
     };
 }
