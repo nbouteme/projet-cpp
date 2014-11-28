@@ -1,16 +1,23 @@
 #pragma once
 
+#include<cstddef>
+#include<iterator>
+#include<limits>
+
 namespace nsSdD
 {
     template <typename T>
     class List
     {
+        typedef size_t size_type;
+
         struct base_node
         {
-            typedef node* pointer;
+            typedef base_node* pointer;
     
             pointer prev = nullptr;
             pointer next = nullptr;
+
             void hook (pointer elem)
             {
                 elem->prev->next = this;
@@ -18,6 +25,7 @@ namespace nsSdD
                 prev = elem->prev;
                 elem->prev = this;
             }
+
             void unhook ()
             {                
                 next->prev = prev;
@@ -30,7 +38,7 @@ namespace nsSdD
         struct node : public base_node
         {
             T data;
-            node (const T& val) : val(data) {};
+            node (const T& val) : data(val) {};
         };
         
         struct node_iterator
@@ -41,46 +49,46 @@ namespace nsSdD
 			typedef node_iterator& reference;
 			typedef std::bidirectional_iterator_tag	iterator_category;
 			
-			node_iterator(const base_node* val = nullptr) : node_ptr(val) {}	
+			node_iterator(base_node* val = nullptr) : node_ptr(val) {}	
 			pointer node_ptr;
 			
-			node_iterator& operator++() ()
+			node_iterator& operator++()
 			{
 				node_ptr = node_ptr->next;
 				return *this;
 			}
 			
-			node_iterator operator++() (int)
+			node_iterator operator++(int)
 			{
 				base_node* tmp = node_ptr;
 				node_ptr = node_ptr->next;
 				return tmp;
 			}
 			
-			node_iterator operator--() (int)
+			node_iterator operator--(int)
 			{
 				base_node* tmp = node_ptr;
 				node_ptr = node_ptr->prev;
 				return tmp;
 			}
 			
-			bool operator ==() (node_iterator node)
+            node_iterator& operator--()
+            {
+                node_ptr = node_ptr->prev;
+                return *this;
+            }
+
+			bool operator == (node_iterator node)
 			{
 				return node_ptr == node.node_ptr;
 			}	
 			
-			bool operator!=() (node_iterator node)
+			bool operator!= (node_iterator node)
 			{
 				return node_ptr != node.node_ptr;
 			}	
 			
-			node_iterator& operator--() ()
-			{
-				node_ptr = node_ptr->prev;
-				return *this;
-			}
-			
-			value_type& operator*() ()
+			value_type& operator*()
 			{
 				return reinterpret_cast<node*>(node_ptr)->data;
 			}
@@ -96,9 +104,7 @@ namespace nsSdD
         void _clear()
         {
             while(begin() != end())
-            {
                 erase (begin());
-            }
         }
 
         base_node sentinel;
@@ -156,12 +162,22 @@ namespace nsSdD
 
         bool empty()
         {
-            return &sentinel == sentinel->prev;   
+            return &sentinel == sentinel.prev;   
         }
     
         size_type size()
         {
-            return std::distance(begin,end);
+            return std::distance(begin(), end());
+        }
+
+        node_iterator begin()
+        {
+            return sentinel.next;
+        }
+
+        node_iterator end()
+        {
+            return &sentinel;
         }
 
         size_type max_size()
