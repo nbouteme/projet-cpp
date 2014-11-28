@@ -45,9 +45,16 @@ Il est aussi necessaire d'ecrire une version const de la surcharge:
 
 const reference operator*() const noexcept;
 
-
 ## Constructeur de List ##
 
 List possede un constructeur par defaut qui ne peut lever une exception que si le constructeur de la classe contenue dans la liste peut lever une exception.
 Cela sera implementer plus tard, pour l'instant ecriver des constructeur lambdas.
 
+## Classe list ##
+
+Il est prevu a l'heure d'ecriture de ces ligne, d'implementer tout les membres present sur http://www.cplusplus.com/reference/list/list/ sauf ceux de la categorie Operation, et les midifier emplace* et assign,
+qui seront implemente apres les smart pointer
+
+La classe list a pour seule donnee membre un base_node qui est la sentinelle de la liste, elle est initialisee dans le constructeur telle que son suivant et son precendent pointent vers lui meme
+La fonction size() recalcule a chaque appel la taille de la liste. Cela peut sembler lourd, mais quand il s'agit d'utiliser splice pour manipuler la liste, maintenir une variable de longueur est bien plus lourd,
+et de plus, tout les algorithme fonctionnant sur les type de conteneur liste chainee le traite de maniere sequentielle.
