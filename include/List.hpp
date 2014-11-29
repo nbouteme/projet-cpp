@@ -127,16 +127,19 @@ namespace nsSdD
             init();
         }
 
-        void insert(node_iterator position, const T& val)
+        node_iterator insert(node_iterator position, const T& val)
         {
             node *elem = new node(val);
             elem->hook(position.node_ptr);
+            return elem;
         }
 
-        void erase(node_iterator position)
+        node_iterator erase(node_iterator position)
         {
+            node_iterator tmp(position.node_ptr->next);
             position.node_ptr->unhook();
             delete position.node_ptr;
+            return tmp;
         }
 
         void push_front(const T& val)

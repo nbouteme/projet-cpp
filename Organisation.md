@@ -59,15 +59,10 @@ Imade:
 - [ ] begin
 - [ ] end
 - [ ] empty
-doit renvoyer vrai si le suivant de la sentinelle est lui meme
 - [ ] size
-doit mesurer la taille a chaque execution, necessaire pour reduire la complexitee de splice
 - [ ] max_size
-renvoie std::numeric_limits<size_type>::max()
 - [ ] clear
-execute erase sur begin() tant que begin ne vaut pas end
 - [ ] erase
-demande au neoeud de se detacher de la liste et libere le noeud
 
 ## Classes ##
 
