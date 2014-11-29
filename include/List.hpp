@@ -168,7 +168,44 @@ namespace nsSdD
         {
             return std::numeric_limits<size_type>::max();
         }
+        
+        T& front()
+        {
+            return *begin();
+        }
+        
+        T& back ()
+        {
+            node_iterator tmp;
+            tmp = end();
+            return *(--tmp);
+        }
+        
+        void assign (node_iterator first, node_iterator last)
+        {
+            clear();
+            while (first != last)
+            {
+                node* tmp = new node(*first);
+                push_back(tmp);
+                ++first;
+            }
+        }  
+        void assign (size_type n, const value_type& val)
+        {
+            while (!empty())
+            {
+                data = val;
+                if (n > size())
+                {
+                    push_back(val);
+                }
+                
+           }
+
+        }
+
     };
-}
+
 
 
