@@ -48,11 +48,13 @@ namespace nsSdD
 			typedef base_node* pointer;
 			typedef node_iterator& reference;
 			typedef std::bidirectional_iterator_tag	iterator_category;
+            typedef const base_node* const_pointer;
+            typedef const node_iterator& const_reference;
 			
 			node_iterator(base_node* val = nullptr) : node_ptr(val) {}	
 			pointer node_ptr;
 			
-			node_iterator& operator++()
+			const_reference operator++()
 			{
 				node_ptr = node_ptr->next;
 				return *this;
@@ -72,7 +74,7 @@ namespace nsSdD
 				return tmp;
 			}
 			
-            node_iterator& operator--()
+            const_reference operator--()
             {
                 node_ptr = node_ptr->prev;
                 return *this;
@@ -82,6 +84,11 @@ namespace nsSdD
 			{
 				return node_ptr == node.node_ptr;
 			}	
+			
+		    value_type* operator->()
+		   	{
+		   		return &reinterpret_cast<node*>(node_ptr)->data; 
+		   	}		
 			
 			bool operator!= (node_iterator node)
 			{
@@ -93,7 +100,72 @@ namespace nsSdD
 				return reinterpret_cast<node*>(node_ptr)->data;
 			}
 			
-		};	
+		};
+
+        struct const_node_iterator
+        {
+            typedef T         value_type;
+            typedef ptrdiff_t difference_type;
+            typedef base_node* pointer;
+            typedef node_iterator& reference;
+            typedef std::bidirectional_iterator_tag iterator_category;
+            typedef const base_node* const_pointer;
+            typedef const node_iterator& const_reference;
+            
+            const_node_iterator(const base_node* val = nullptr) : node_ptr(val) {}   
+            const_node_iterator(const node_iterator& val) : node_ptr(val.node_ptr) {}   
+            const pointer node_ptr;
+            
+            const_reference operator++()
+            {
+                node_ptr = node_ptr->next;
+                return *this;
+            }
+            
+            const node_iterator operator++(int)
+            {
+                base_node* tmp = node_ptr;
+                node_ptr = node_ptr->next;
+                return tmp;
+            }
+            
+            const node_iterator operator--(int)
+            {
+                base_node* tmp = node_ptr;
+                node_ptr = node_ptr->prev;
+                return tmp;
+            }
+            
+            const_reference operator--()
+            {
+                node_ptr = node_ptr->prev;
+                return *this;
+            }
+
+            bool operator  == (node_iterator node) const
+            {
+                return node_ptr == node.node_ptr;
+            }   
+            
+            const value_type* operator->() const
+            {
+                return &reinterpret_cast<node*>(node_ptr)->data; 
+            }       
+            
+            bool operator!= (node_iterator node) const 
+            {
+                return node_ptr != node.node_ptr;
+            }   
+            
+            const_reference operator*()
+            {
+                return reinterpret_cast<node*>(node_ptr)->data;
+            }
+            
+        };
+
+
+
 
         void init()
         {
