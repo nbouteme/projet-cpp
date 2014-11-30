@@ -33,6 +33,7 @@ namespace nsSdD
                 prev = nullptr;
                 next = nullptr;
             }
+
         };
         
         struct node : public base_node
@@ -193,10 +194,36 @@ namespace nsSdD
             _clear();
         }
 
+        void unique (BinaryPredicate binary_pred)
+        {
+            node!_iterator it = begin();
+            while(it != end())
+            {
+                while(*it == it.node_ptr->next->data)
+                    erase(it.node_ptr->next); 
+                it++;
+            }
+        }
+
+
         void clear()
         {
             _clear();
             init();
+        }
+
+
+         void remove (const value_type& val)
+        {        
+
+            for(node_iterator it = node_iterator.begin(); it != node_iterator.end(); ++it)
+            {
+                if (*it == val)
+                {   
+                    erase(it);
+                    return;    
+                }   
+            }    
         }
 
         node_iterator insert(node_iterator position, const T& val)
@@ -259,6 +286,7 @@ namespace nsSdD
         {
             return std::numeric_limits<size_type>::max();
         }
+
     };
 }
 
