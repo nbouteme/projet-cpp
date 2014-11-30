@@ -3,6 +3,7 @@
 #include<cstddef>
 #include<iterator>
 #include<limits>
+#include<memory>
 
 namespace nsSdD
 {
@@ -32,6 +33,30 @@ namespace nsSdD
                 prev->next = next;
                 prev = nullptr;
                 next = nullptr;
+            }
+
+            void transfer(node_iterator first, node_iterator last)
+            {
+                if (last.node_ptr != this)
+                {
+                       last->prev->next = this;
+                       first->prev->next = last;
+                       this->prev->next = first;
+                       pointer tmp_this = this->prev;
+                       this->prev = last->prev;
+                       first->prev = last->prev->next;
+                       first->prev = tmp_this;
+                }
+            }
+
+             void reverse()
+            {
+                base_node* tmp = this;
+                do
+                {
+                    std::swap(tmp->prev, tmp->next);
+                    tmp = tmp->prev;
+                } while(this != tmp);
             }
         };
         
@@ -187,6 +212,35 @@ namespace nsSdD
         {
             return std::numeric_limits<size_type>::max();
         }
+
+        void swap(List& x)
+        {
+            std::swap(sentinel, x.sentinel);
+        }
+
+        void splice(node_iterator position, List& x, node_iterator first, node_iterator last)
+        {
+            position.node_ptr->transfer(first, last);
+        }
+
+        void reverse()
+        {
+            if(!empty() && sentinel.next->next != &sentinel)
+            {
+                sentinel.reverse();
+            }
+        }
+
+        void remove_if(std::function<bool(const T&)> predicate)
+        {
+            node_iterator it = begin(); 
+            while(it != end())
+                if (predicate(*it))
+                    erase(it++);
+        }
+
+
+
     };
 }
 
