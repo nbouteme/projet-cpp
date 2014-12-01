@@ -16,12 +16,12 @@ int main(int argc, char *argv[])
 
 
 
-	printf("%d\n", l.size());
+	printf("%lu\n", l.size());
 	l.clear();
-	printf("%d\n", l.size());
+	printf("%lu\n", l.size());
 	if (l.empty())
-		printf("%d\n", l.size());
+		printf("%lu\n", l.size());
 	if (!l.empty())
-		printf("%d\n", l.size());
+		printf("%lu\n", l.size());
     return 0;
 }

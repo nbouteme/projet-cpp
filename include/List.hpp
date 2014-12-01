@@ -194,7 +194,7 @@ namespace nsSdD
             _clear();
         }
 
-        iterator insert (node_iterator position, node_iterator first, node_iterator last)
+        node_iterator insert (node_iterator position, node_iterator first, node_iterator last)
         {
             while(first != last)
             {  
@@ -207,7 +207,7 @@ namespace nsSdD
 
         void unique()
         {
-            node!_iterator it = begin();
+            node_iterator it = begin();
             while(it != end())
             {
                 while(*it == it.node_ptr->next->data)
@@ -224,10 +224,10 @@ namespace nsSdD
         }
 
 
-         void remove (const value_type& val)
+         void remove (const T& val)
         {        
 
-            for(node_iterator it = node_iterator.begin(); it != node_iterator.end(); ++it)
+            for(node_iterator it = begin(); it != end(); ++it)
             {
                 if (*it == val)
                 {   
