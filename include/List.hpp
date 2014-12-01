@@ -194,7 +194,18 @@ namespace nsSdD
             _clear();
         }
 
-        void unique (BinaryPredicate binary_pred)
+        iterator insert (node_iterator position, node_iterator first, node_iterator last)
+        {
+            while(first != last)
+            {  
+                insert(position, *first);
+                ++first;
+            }   
+        }
+
+
+
+        void unique()
         {
             node!_iterator it = begin();
             while(it != end())
