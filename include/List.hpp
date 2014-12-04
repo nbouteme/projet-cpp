@@ -202,14 +202,34 @@ namespace nsSdD
         
         void assign (node_iterator first, node_iterator last)
         {
-            clear();
-            while (first != last)
+            node_iterator frst = begin();
+            node_iterator lst = end();
+
+            while (first != last && frst != lst)
             {
-                node* tmp = new node(*first);
-                push_back(tmp);
+    
+                *first = *frst;
                 ++first;
+                ++frst;
+            }
+            if(first == last)
+            {
+               while (frst != lst)
+               {
+                    erase(frst);
+                    ++frst;
+               }
+            }   
+            else
+            {
+                while (first != last)
+                {
+                    push_back(*first);
+                    ++first;
+                }
             }
         }  
+        
         void assign (size_type n, const value_type& val)
         {
             while (!empty())
@@ -223,7 +243,7 @@ namespace nsSdD
            }
 
         }
-
+.3
     };
 
 
