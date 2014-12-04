@@ -376,6 +376,48 @@ namespace nsSdD
             return std::numeric_limits<size_type>::max();
         }
 
+        T& front()
+        {
+            return *begin();
+        }
+
+        T& back ()
+        {
+            node_iterator tmp;
+            tmp = end();
+            return *(--tmp);
+        }
+
+        void assign (node_iterator first, node_iterator last)
+        {
+            node_iterator frst = begin();
+            node_iterator lst = end();
+
+            while (first != last && frst != lst)
+            {
+
+                *first = *frst;
+                ++first;
+                ++frst;
+            }
+            if(first == last)
+            {
+               while (frst != lst)
+               {
+                    erase(frst);
+                    ++frst;
+               }
+            }
+            else
+            {
+                while (first != last)
+                {
+                    push_back(*first);
+                    ++first;
+                }
+            }
+        }
+
         void swap(List& x)
         {
             base_node::swap(sentinel, x.sentinel);
@@ -431,7 +473,7 @@ namespace nsSdD
             else//ou on rajoute ce qui manque
                 insert(last, n - std::distance(first, last));
         }
-        
+
         void merge(List& x, std::function<bool(const T &a, const T& b)> comp)
         {
             if(this == &x) return; //on ne merge pas avec elle meme !
@@ -455,12 +497,12 @@ namespace nsSdD
             if (first2 != last2)// on est arrivé a la fin de la 1ere liste
                 transfer(last, first2, last2);//tout le reste va a la fin
         }
-        
+
         void sort()
         {
             // merge s'attend a avoir une liste deja triee en parametre,
             // donc on peut l'utiliser pour notre mergesort O(N log N)
-            
+
             if (sentinel.next       != &sentinel &&
                 sentinel.next->next != &sentinel) // une liste vide ou avec 1 element est deja triee
             {
