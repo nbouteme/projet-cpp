@@ -2,13 +2,14 @@
 
 namespace nsSdD
 {
-    struct base_node
+    class base_node
     {
         typedef base_node* pointer;
-
+		
+		public:
         pointer prev = nullptr;
         pointer next = nullptr;
-
+		
         void hook(pointer elem)
         {
             next = elem;
