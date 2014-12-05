@@ -21,11 +21,11 @@ namespace nsSdD
     template <typename T>
     class List
     {
-        struct node_iterator;
         typedef size_t size_type;
-
-        struct node_iterator
+		private:
+        class node_iterator
         {
+			public:
             typedef T                                   value_type;
             typedef ptrdiff_t                           difference_type;
             typedef base_node*                          pointer;
@@ -81,7 +81,7 @@ namespace nsSdD
                 return reinterpret_cast<node<T>*>(node_ptr)->data;
             }
         };
-
+		public:
         void init()
         {
             sentinel->next = sentinel.get();
@@ -126,7 +126,6 @@ namespace nsSdD
         //     return 0;
         // }
         // ne compile pas
-    public:
         List()
         {
             init();
