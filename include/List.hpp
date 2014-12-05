@@ -24,7 +24,7 @@ namespace nsSdD
         typedef size_t size_type;
         class node_iterator
         {
-	    public:
+	public:
             typedef T                                   value_type;
             typedef ptrdiff_t                           difference_type;
             typedef base_node*                          pointer;
@@ -80,7 +80,7 @@ namespace nsSdD
                 return reinterpret_cast<node<T>*>(node_ptr)->data;
             }
         };
-		private:
+        private:
         void init()
         {
             sentinel->next = sentinel.get();
