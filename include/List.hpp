@@ -22,7 +22,6 @@ namespace nsSdD
     class List
     {
         typedef size_t size_type;
-		private:
         class node_iterator
         {
 			public:
@@ -81,7 +80,7 @@ namespace nsSdD
                 return reinterpret_cast<node<T>*>(node_ptr)->data;
             }
         };
-		public:
+		private:
         void init()
         {
             sentinel->next = sentinel.get();
@@ -126,6 +125,7 @@ namespace nsSdD
         //     return 0;
         // }
         // ne compile pas
+		public:
         List()
         {
             init();
