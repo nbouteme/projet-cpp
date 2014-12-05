@@ -3,18 +3,20 @@
 
 using namespace std;
 
-int main(int argc, char *argv[])
+int main()
 {
 	nsSdD::List<int> l;
-    
-    l.push_back(8);
-	l.push_back(7);
-	l.push_back(6);
-	l.push_back(5);
-	l.push_back(4);
-	l.push_back(3);
-    l.sort();
-    
+	nsSdD::List<int> n;
+    l.push_back(1);
+    l.push_back(2);
+    l.push_back(3);
+    l.push_back(4);
+    l.push_back(5);
+    l.push_back(6);
+    n.push_back(4);
+    n.push_back(5);
+    n.push_back(6);
+    l = n;
     for(auto i : l)
         printf("%d\n", i);
     return 0;

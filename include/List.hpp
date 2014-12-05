@@ -5,95 +5,24 @@
 #include <limits>
 #include <memory>
 #include <cassert>
+#include <node.hpp>
 
 namespace nsSdD
 {
+    // L'implémentation utilise un minimum vital de smart_pointer (aka
+    // pas de weak_ptr), car deja ca a rien a foutre dans une
+    // structure de donnee complexe, ensuite la gestion de la memoire
+    // etait parfaite a la base, mais maintenant avec les
+    // smart_pointer on a encore plus de problemes a resoudre. Les
+    // weak ptr font une pagaille pas croyable dans le code. Mais bon
+    // sa c'est un eu faute d'avoir choisi d'implementer une liste
+    // circulaire. Au final, la liste est plus grosse et plus lente
+    // que ce quel a besoin d'etre
     template <typename T>
     class List
     {
         struct node_iterator;
         typedef size_t size_type;
-
-        struct base_node
-        {
-            typedef base_node* pointer;
-
-            pointer prev = nullptr;
-            pointer next = nullptr;
-            void hook(pointer elem)
-            {
-                next = elem;
-                prev = elem->prev;
-                elem->prev->next = this;
-                elem->prev = this;
-            }
-
-            void unhook()
-            {
-                 prev->next = next;
-                 next->prev = prev;
-                 prev = nullptr;
-                 next = nullptr;
-            }
-
-            void transfer(base_node* first, base_node* last)
-            {
-                if(last != this)
-                {
-                    last->prev->next = this;
-                    first->prev->next = last;
-                    prev->next = first;
-                    pointer tmp_this = prev;
-                    prev = last->prev;
-                    last->prev = first->prev;
-                    first->prev = tmp_this;
-                }
-            }
-
-            void reverse()
-            {
-                base_node* tmp = this;
-                do
-                {
-                    std::swap(tmp->prev, tmp->next);
-                    tmp = tmp->prev;
-                } while(this != tmp);
-            }
-
-            static void swap(base_node& x, base_node& y)
-            {
-                if (x.next != &x)
-                {// x non vide
-                    if(y.next != &y)
-                    {// et y non vide
-                        std::swap(x.next, y.next);
-                        std::swap(x.prev, y.prev);//echange les lien internes a x et y
-                        x.next->prev = x.prev->next = &x;//les precedent et suivant etait ceux de y, donc on reassigne
-                        y.next->prev = y.prev->next = &y;
-                    }
-                    else
-                    {// et y vide
-                        y.next = x.next;
-                        y.prev = x.prev;//reconstitue les pointeurs internes a x
-                        y.next->prev = y.prev->next = &y; //reconsitue les pointeur sur x
-                        x.next = x.prev = &x;//x devient vide
-                    }
-                }
-                else if (y.next != &y)
-                {// x vide et y non vide
-                    x.next = y.next;
-                    x.prev = y.prev;//reconstitue les pointeur internes a y
-                    x.next->prev = x.prev->next = &x;//reconstitue les pointeurs sur y
-                    y.next = y.prev = &y;//y devient vide
-                }
-            }
-        };
-
-        struct node : public base_node
-        {
-            T data;
-            node (const T& val) : data(val) {}
-        };
 
         struct node_iterator
         {
@@ -102,13 +31,11 @@ namespace nsSdD
             typedef base_node*                          pointer;
             typedef node_iterator&                      reference;
             typedef std::bidirectional_iterator_tag     iterator_category;
-            typedef const base_node*                    const_pointer;
-            typedef const node_iterator&                const_reference;
 
             node_iterator(base_node* val = nullptr) : node_ptr(val) {}
             pointer node_ptr;
 
-            const_reference operator++()
+            node_iterator operator++()
             {
                 node_ptr = node_ptr->next;
                 return *this;
@@ -128,98 +55,37 @@ namespace nsSdD
                 return tmp;
             }
 
-            const_reference operator--()
+            node_iterator operator--()
             {
                 node_ptr = node_ptr->prev;
                 return *this;
             }
 
-            bool operator == (node_iterator node)
+            bool operator== (node_iterator node)
             {
                 return node_ptr == node.node_ptr;
             }
 
             pointer operator->()
             {
-                return reinterpret_cast<node*>(node_ptr);
+                return reinterpret_cast<node<T>*>(node_ptr);
             }
 
-            bool operator!= (node_iterator node)
+            bool operator!= (const node_iterator& node)
             {
                 return node_ptr != node.node_ptr;
             }
 
             value_type& operator*()
             {
-                return reinterpret_cast<node*>(node_ptr)->data;
-            }
-        };
-
-        struct const_node_iterator
-        {
-            typedef T         value_type;
-            typedef ptrdiff_t difference_type;
-            typedef base_node* pointer;
-            typedef node_iterator& reference;
-            typedef std::bidirectional_iterator_tag iterator_category;
-            typedef const base_node* const_pointer;
-            typedef const node_iterator& const_reference;
-
-            const_node_iterator(const base_node* val = nullptr) : node_ptr(val) {}
-            const_node_iterator(const node_iterator& val) : node_ptr(val.node_ptr) {}
-            const pointer node_ptr;
-
-            const_reference operator++()
-            {
-                node_ptr = node_ptr->next;
-                return *this;
-            }
-
-            const node_iterator operator++(int)
-            {
-                base_node* tmp = node_ptr;
-                node_ptr = node_ptr->next;
-                return tmp;
-            }
-
-            const node_iterator operator--(int)
-            {
-                base_node* tmp = node_ptr;
-                node_ptr = node_ptr->prev;
-                return tmp;
-            }
-
-            const_reference operator--()
-            {
-                node_ptr = node_ptr->prev;
-                return *this;
-            }
-
-            bool operator  == (node_iterator node) const
-            {
-                return node_ptr == node.node_ptr;
-            }
-
-            const value_type* operator->() const
-            {
-                return &reinterpret_cast<node*>(node_ptr)->data;
-            }
-
-            bool operator!= (node_iterator node) const
-            {
-                return node_ptr != node.node_ptr;
-            }
-
-            const_reference operator*()
-            {
-                return reinterpret_cast<node*>(node_ptr)->data;
+                return reinterpret_cast<node<T>*>(node_ptr)->data;
             }
         };
 
         void init()
         {
-            sentinel.next = &sentinel;
-            sentinel.prev = &sentinel;
+            sentinel->next = sentinel.get();
+            sentinel->prev = sentinel.get();
         }
 
         void _clear()
@@ -233,8 +99,33 @@ namespace nsSdD
             position.node_ptr->transfer(first.node_ptr, last.node_ptr);
         }
 
-        base_node sentinel;
-
+        // Attention mesdames et messieurs c'est de la haute technique!
+        std::shared_ptr<base_node> sentinel = std::make_shared<base_node>();
+        //C'est literallement identique que
+        //base_node sentinel;
+        // si ce n'est que c'est plus lent a instancier, et plus long
+        // a ecrire et necessite de rajouter des .get() de partout les
+        // weak pointer sont literallement inutilisable dans notre
+        // contexte on a une classe base_node qui ne contient pas de
+        // donnee, et une classe node<T> qui contient des donnee la
+        // classe base node<T> est utilisee directement seulement par
+        // la sentinelle alors c'est elle qui devrait etre
+        // proprietaire et responsable de la liberation de la memoire,
+        // et donc ses membres next et prev devrait etre des shared
+        // ptr mais du coup, on perd la relation entre base_node et
+        // node<T> car node<T> ne doit alors avoir que des membre qui
+        // sont weak les const& et le polymorphisme avec les
+        // shared_ptr sont mutuellement exclusif aussi
+        // class A{};
+        // class B : A{};
+        // void f(const shared_ptr<A>&){}
+        // int main(int argc, char *argv[])
+        // {
+        //     shared_ptr<B> b = make_shared<B>();
+        //     f(b);
+        //     return 0;
+        // }
+        // ne compile pas
     public:
         List()
         {
@@ -243,16 +134,17 @@ namespace nsSdD
 
         List(size_type n, const T& val = T()) : List()
         {
-            insert(end(), n, val);
+            while(n)
+                push_back(val), --n;
         }
 
-        List(const List& x)
+        List(const List& x) : List()
         {
             for(auto &val : x)
                 push_back(val);
         }
 
-        List(node_iterator first, node_iterator last)
+        List(node_iterator first, node_iterator last) : List()
         {
             insert(end(), first, last);
         }
@@ -262,14 +154,26 @@ namespace nsSdD
             _clear();
         }
 
+        List<T>& operator=(const List<T> &rhs)
+        {
+            if(this == &rhs) return *this;
+            assign(rhs.begin(), rhs.end());
+            return *this;
+        }
+
         void unique()
         {
-            node_iterator it = begin();
-            while(it != end())
+            if(empty()) return;
+            node_iterator first = begin();
+            node_iterator last  = end();
+            node_iterator next  = first;
+            while(++next != last)
             {
-                while(*it == it.node_ptr->next->data)
-                    erase(it.node_ptr->next);
-                it++;
+                if(*first == *next)
+                    erase(next);
+                else
+                    first = next;
+                next = first;
             }
         }
 
@@ -279,26 +183,41 @@ namespace nsSdD
             init();
         }
 
+        // [23.3.5.4]
+        // 12. Suprime tout les element de la liste si *it = val
+        // 13. Ne leve pas d'exception sauf si la comparaison est surchargée tel que elle puisse en lever une
         void remove (const T& val)
         {
             for(node_iterator it = begin(); it != end(); ++it)
                 if(*it == val)
-                {
-                    erase(it);
-                    return;
-                }
+                    it = erase(it);
         }
 
+        void remove_if(std::function<bool(const T&)> predicate)
+        {
+            node_iterator it = begin();
+            while(it != end())
+                if (predicate(*it))
+                    it = erase(it++);
+        }
+
+        // [23.3.5.4]
+        // 1. L'insertion dans la liste n'affecte pas la validité des iterateur existant
+        // 2. L'insertion de plusieurs element est linéaire.
         node_iterator insert (node_iterator position, node_iterator first, node_iterator last)
         {
-            while(first != last)
-                insert(position, *first),
-                ++first;
+            List t(first, last);
+            node_iterator tmp = t.begin();
+            splice(position, t);
+            return tmp;
         }
 
+        // [23.3.5.4]
+        // 1. L'insertion dans la liste n'affecte pas la validité des iterateur existant
+        // 2. L'insertion d'un seul élément est constante.
         node_iterator insert(node_iterator position, const T& val)
         {
-            node *elem = new node(val);
+            node<T> *elem = new node<T>(val);
             elem->hook(position.node_ptr);
             return elem;
         }
@@ -315,21 +234,6 @@ namespace nsSdD
             return ret;
         }
 
-        node_iterator erase(node_iterator position)
-        {
-            node_iterator tmp(position.node_ptr->next);
-            position.node_ptr->unhook();
-            delete position.node_ptr;
-            return tmp;
-        }
-
-        node_iterator erase(node_iterator first, node_iterator last)
-        {
-            while(first != last)
-                erase(first), ++first;
-            return last;
-        }
-
         void push_front(const T& val)
         {
             insert(begin(), val);
@@ -338,6 +242,27 @@ namespace nsSdD
         void push_back(const T& val)
         {
             insert(end(), val);
+        }
+
+        // [23.3.5.4]
+        // 1. La supresseion d'un element n'affecte que les iterateurs sur cet element
+        // 2. La supression d'un seul élément est constante.
+        node_iterator erase(node_iterator position)
+        {
+            node_iterator tmp(position.node_ptr->next);
+            position.node_ptr->unhook();
+            delete position.node_ptr;
+            return tmp;
+        }
+
+        // [23.3.5.4]
+        // 1. La supresseion d'un element n'affecte que les iterateurs sur cet element
+        // 2. La supression de plusieurs elements est linéaire.
+        node_iterator erase(node_iterator first, node_iterator last)
+        {
+            while(first != last)
+                first = erase(first);
+            return last;
         }
 
         void pop_front()
@@ -353,22 +278,23 @@ namespace nsSdD
 
         bool empty()
         {
-            return &sentinel == sentinel.prev;
+            return sentinel.get() == sentinel->prev;
         }
 
+        // La complexité est constante, pour eviter d'avoir un autre membre et de devoir mettre a jour ce rendre qui rendrait splice lineaire.
         size_type size()
         {
             return std::distance(begin(), end());
         }
 
-        node_iterator begin()
+        node_iterator begin() const
         {
-            return sentinel.next;
+            return sentinel->next;
         }
 
-        node_iterator end()
+        node_iterator end() const
         {
-            return &sentinel;
+            return sentinel->next->prev;
         }
 
         size_type max_size()
@@ -394,42 +320,36 @@ namespace nsSdD
             node_iterator lst = end();
 
             while (first != last && frst != lst)
-            {
-
-                *first = *frst;
-                ++first;
+                *frst = *first,
+                ++first,
                 ++frst;
-            }
             if(first == last)
-            {
-               while (frst != lst)
-               {
-                    erase(frst);
-                    ++frst;
-               }
-            }
+                erase(frst, lst);
             else
-            {
-                while (first != last)
-                {
-                    push_back(*first);
-                    ++first;
-                }
-            }
+                insert(lst, first, last);
         }
 
+        // Swap a complexité constante
         void swap(List& x)
         {
-            base_node::swap(sentinel, x.sentinel);
+            base_node::swap(*sentinel, *x.sentinel);
         }
 
+        // [23.3.5.5]
+        // 2. splice detruit une liste en deplacant ses elements vers une autre
+        // 4. x devient vide
+        // 5. compléxité: constante
         void splice(node_iterator position, List& x)
         {
-            position.node_ptr->transfer(x.begin(), x.end());
+            if(&x != this) // [23.3.5.5] 3
+            position.node_ptr->transfer(x.begin().node_ptr, x.end().node_ptr);
         }
 
-        // D'apres le standard, x est censé être utilisé pour verifier si le
-        // type d'allocator est le meme
+        // [23.3.5.5]
+        // 6. deplace i avant position si x possede le meme allocateur que this
+        // et n'affecte pas la liste si position == i ou ++i
+        // 7. i doit etre valide
+        // 8. complexité constante
         void splice(node_iterator position, List& x, node_iterator i)
         {
             (void)x;
@@ -439,30 +359,28 @@ namespace nsSdD
             position.node_ptr->transfer(i.node_ptr, j.node_ptr);
         }
 
+        // [23.3.5.5]
+        // 9.deplace les elements de x dans l'interval [first;last[ avant position
+        // 10.comportement indefini si position est entre first et last
+        // 11.Complexité constante si &x == this, et au moins lineaire dans le cas contraire.
+        // mais notre implementation est constante dans les 2 cas
         void splice(node_iterator position, List& x, node_iterator first, node_iterator last)
         {
+            (void)x;
             position.node_ptr->transfer(first, last);
         }
 
+        // [23.3.5.5]
+        // 23. Inverse l'ordre de la liste
+        // Complexité lineaire
         void reverse()
         {
-            if(!empty() && sentinel.next->next != &sentinel)
-                sentinel.reverse();
+            if(!empty() && sentinel->next->next != sentinel.get())
+                sentinel->reverse();
         }
 
-        void remove_if(std::function<bool(const T&)> predicate)
-        {
-            node_iterator it = begin();
-            while(it != end())
-                if (predicate(*it))
-                    erase(it++);
-        }
-
-        void merge(List& x)
-        {
-            merge(x, [](const T &a, const T& b){ return a < b; });
-        }
-
+        // [23.3.5.5]
+        // 4. T doit être copiable
         void resize(size_type n, const T& val = T())
         {
             node_iterator first = begin();
@@ -472,6 +390,17 @@ namespace nsSdD
                 erase(first, last);
             else//ou on rajoute ce qui manque
                 insert(last, n - std::distance(first, last));
+        }
+
+        // [23.3.5.5]
+        // 19. *this et x doivent etre trié, autrement le comportement est indéfini 
+        // 20. ne fait rien si &x == this, sinon, fusionne les 2 listes en detruisant x
+        // les iterateur sont toujours valide, sauf que ils pointent sur des membre de *this au lieu de x
+        // 21. x devient vide
+        // 22. complexité lineraire
+        void merge(List& x)
+        {
+            merge(x, [](const T &a, const T& b){ return a < b; });
         }
 
         void merge(List& x, std::function<bool(const T &a, const T& b)> comp)
@@ -498,13 +427,18 @@ namespace nsSdD
                 transfer(last, first2, last2);//tout le reste va a la fin
         }
 
+        // [23.3.5.5]
+        // 25. Necessite la comparaison <
+        // 26. Trie la liste sans affecter la validité des iterateur existant
+        // 27. Stable (l'ordre d'element egaux ne change pas)
+        // 28. Complexité N log N
         void sort()
         {
             // merge s'attend a avoir une liste deja triee en parametre,
             // donc on peut l'utiliser pour notre mergesort O(N log N)
 
-            if (sentinel.next       != &sentinel &&
-                sentinel.next->next != &sentinel) // une liste vide ou avec 1 element est deja triee
+            if (sentinel->next       != sentinel.get() &&
+                sentinel->next->next != sentinel.get()) // une liste vide ou avec 1 element est deja triee
             {
                 List reg;//cette liste repartie les element dans les partitions
                 List tmp[sizeof(void*) << 3];
@@ -545,4 +479,11 @@ namespace nsSdD
             }
         }
     };
+
+    // specialisation de complexité constante de swap au lieu d'etre lineaire
+    template <class T>
+    void swap(List<T>& x, List<T>& y)
+    {
+        x.swap(y);
+    }
 }
