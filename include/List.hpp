@@ -24,7 +24,7 @@ namespace nsSdD
         typedef size_t size_type;
         class node_iterator
         {
-			public:
+	    public:
             typedef T                                   value_type;
             typedef ptrdiff_t                           difference_type;
             typedef base_node*                          pointer;
