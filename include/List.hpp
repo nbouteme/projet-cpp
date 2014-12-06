@@ -22,69 +22,71 @@ namespace nsSdD
     class CList
     {
         typedef size_t size_type;
-
-        struct CNode_iterator
+        typedef CNodeIterator iterator;
+        
+        struct CNodeIterator
         {
             typedef T                                   value_type;
             typedef ptrdiff_t                           difference_type;
             typedef CBaseNode*                          pointer;
-            typedef CNode_iterator&                      reference;
+            typedef CNodeIterator&                      reference;
             typedef std::bidirectional_iterator_tag     iterator_category;
+    
 
-            CNode_iterator(CBaseNode* val = nullptr) : CNode_ptr(val) {}
-            pointer CNode_ptr;
+            CNodeIterator(CBaseNode* val = nullptr) : m_CNodePtr(val) {}
+            pointer m_CNodePtr;
 
-            CNode_iterator operator++()
+            CNodeIterator operator++()
             {
-                CNode_ptr = CNode_ptr->m_next;
+                m_CNodePtr = m_CNodePtr->m_next;
                 return *this;
             }
 
-            CNode_iterator operator++(int)
+            CNodeIterator operator++(int)
             {
-                CBaseNode* tmp = CNode_ptr;
-                CNode_ptr = CNode_ptr->m_next;
+                CBaseNode* tmp = m_CNodePtr;
+                m_CNodePtr = m_CNodePtr->m_next;
                 return tmp;
             }
 
-            CNode_iterator operator--(int)
+            CNodeIterator operator--(int)
             {
-                CBaseNode* tmp = CNode_ptr;
-                CNode_ptr = CNode_ptr->m_prev;
+                CBaseNode* tmp = m_CNodePtr;
+                m_CNodePtr = m_CNodePtr->m_prev;
                 return tmp;
             }
 
-            CNode_iterator operator--()
+            CNodeIterator operator--()
             {
-                CNode_ptr = CNode_ptr->m_prev;
+                m_CNodePtr = m_CNodePtr->m_prev;
                 return *this;
             }
 
-            bool operator== (CNode_iterator CNode)
+            bool operator== (iterator CNode)
             {
-                return CNode_ptr == CNode.CNode_ptr;
+                return m_CNodePtr == CNode.m_CNodePtr;
             }
 
             pointer operator->()
             {
-                return reinterpret_cast<CNode<T>*>(CNode_ptr);
+                return reinterpret_cast<CNode<T>*>(m_CNodePtr);
             }
 
-            bool operator!= (const CNode_iterator& CNode)
+            bool operator!= (const iterator& CNode)
             {
-                return CNode_ptr != CNode.CNode_ptr;
+                return m_CNodePtr != CNode.m_CNodePtr;
             }
 
             value_type& operator*()
             {
-                return reinterpret_cast<CNode<T>*>(CNode_ptr)->m_data;
+                return reinterpret_cast<CNode<T>*>(m_CNodePtr)->m_data;
             }
         };
 
         void init()
         {
-            sentinel->m_next = sentinel.get();
-            sentinel->m_prev = sentinel.get();
+            m_sentinel->m_next = m_sentinel.get();
+            m_sentinel->m_prev = m_sentinel.get();
         }
 
         void _clear()
@@ -93,22 +95,22 @@ namespace nsSdD
                 erase(begin());
         }
 
-        void transfer(CNode_iterator position, CNode_iterator first, CNode_iterator last)
+        void transfer(iterator position, iterator first, iterator last)
         {
-            position.CNode_ptr->transfer(first.CNode_ptr, last.CNode_ptr);
+            position.m_CNodePtr->transfer(first.m_CNodePtr, last.m_CNodePtr);
         }
 
         // Attention mesdames et messieurs c'est de la haute technique!
-        std::shared_ptr<CBaseNode> sentinel = std::make_shared<CBaseNode>();
+        std::shared_ptr<CBaseNode> m_sentinel = std::make_shared<CBaseNode>();
         //C'est literallement identique que
-        //CBaseCNode sentinel;
+        //CBaseCNode m_sentinel;
         // si ce n'est que c'est plus lent a instancier, et plus long
         // a ecrire et necessite de rajouter des .get() de partout les
         // weak pointer sont literallement inutilisable dans notre
         // contexte on a une classe CBaseCNode qui ne contient pas de
         // donnee, et une classe CNode<T> qui contient des donnee la
         // classe base CNode<T> est utilisee directement seulement par
-        // la sentinelle alors c'est elle qui devrait etre
+        // la m_sentinelle alors c'est elle qui devrait etre
         // proprietaire et responsable de la liberation de la memoire,
         // et donc ses membres m_next et m_prev devrait etre des shared
         // ptr mais du coup, on perd la relation entre CBaseCNode et
@@ -126,8 +128,8 @@ namespace nsSdD
         // }
         // ne compile pas
     public:
-        CList(
-)        {
+        CList()
+        {
             init();
         }
 
@@ -143,7 +145,7 @@ namespace nsSdD
                 push_back(val);
         }
 
-        CList(CNode_iterator first, CNode_iterator last) : CList()
+        CList(iterator first, iterator last) : CList()
         {
             insert(end(), first, last);
         }
@@ -163,9 +165,9 @@ namespace nsSdD
         void unique()
         {
             if(empty()) return;
-            CNode_iterator first = begin();
-            CNode_iterator last  = end();
-            CNode_iterator m_next  = first;
+            CNodeIterator first = begin();
+            CNodeIterator last  = end();
+            CNodeIterator m_next  = first;
             while(++m_next != last)
             {
                 if(*first == *m_next)
@@ -187,14 +189,14 @@ namespace nsSdD
         // 13. Ne leve pas d'exception sauf si la comparaison est surchargée tel que elle puisse en lever une
         void remove (const T& val)
         {
-            for(CNode_iterator it = begin(); it != end(); ++it)
+            for(CNodeIterator it = begin(); it != end(); ++it)
                 if(*it == val)
                     it = erase(it);
         }
 
         void remove_if(std::function<bool(const T&)> predicate)
         {
-            CNode_iterator it = begin();
+            CNodeIterator it = begin();
             while(it != end())
                 if (predicate(*it))
                     it = erase(it++);
@@ -203,10 +205,10 @@ namespace nsSdD
         // [23.3.5.4]
         // 1. L'insertion dans la CListe n'affecte pas la validité des iterateur existant
         // 2. L'insertion de plusieurs element est linéaire.
-        CNode_iterator insert (CNode_iterator position, CNode_iterator first, CNode_iterator last)
+        CNodeIterator insert (iterator position, iterator first, iterator last)
         {
             CList t(first, last);
-            CNode_iterator tmp = t.begin();
+            CNodeIterator tmp = t.begin();
             splice(position, t);
             return tmp;
         }
@@ -214,18 +216,18 @@ namespace nsSdD
         // [23.3.5.4]
         // 1. L'insertion dans la CListe n'affecte pas la validité des iterateur existant
         // 2. L'insertion d'un seul élément est constante.
-        CNode_iterator insert(CNode_iterator position, const T& val)
+        CNodeIterator insert(iterator position, const T& val)
         {
             CNode<T> *elem = new CNode<T>(val);
-            elem->hook(position.CNode_ptr);
+            elem->hook(position.m_CNodePtr);
             return elem;
         }
 
-        CNode_iterator insert(CNode_iterator position, size_type n, const T& val)
+        CNodeIterator insert(iterator position, size_type n, const T& val)
         {
             if(n == 0) return position;
             CList tmp(n, val);
-            CNode_iterator ret = tmp.begin();
+            CNodeIterator ret = tmp.begin();
             splice(position, tmp);
             // le standard dis que meme en modifian la CListe, les
             // iterateur reste valides, mais pointent maintenant vers
@@ -246,18 +248,18 @@ namespace nsSdD
         // [23.3.5.4]
         // 1. La supresseion d'un element n'affecte que les iterateurs sur cet element
         // 2. La supression d'un seul élément est constante.
-        CNode_iterator erase(CNode_iterator position)
+        CNodeIterator erase(iterator position)
         {
-            CNode_iterator tmp(position.CNode_ptr->m_next);
-            position.CNode_ptr->unhook();
-            delete position.CNode_ptr;
+            CNodeIterator tmp(position.m_CNodePtr->m_next);
+            position.m_CNodePtr->unhook();
+            delete position.m_CNodePtr;
             return tmp;
         }
 
         // [23.3.5.4]
         // 1. La supresseion d'un element n'affecte que les iterateurs sur cet element
         // 2. La supression de plusieurs elements est linéaire.
-        CNode_iterator erase(CNode_iterator first, CNode_iterator last)
+        CNodeIterator erase(iterator first, iterator last)
         {
             while(first != last)
                 first = erase(first);
@@ -271,13 +273,13 @@ namespace nsSdD
 
         void pop_back()
         {
-            CNode_iterator tmp = end();
+            CNodeIterator tmp = end();
             erase(--tmp);
         }
 
         bool empty()
         {
-            return sentinel.get() == sentinel->m_prev;
+            return m_sentinel.get() == m_sentinel->m_prev;
         }
 
         // La complexité est constante, pour eviter d'avoir un autre membre et de devoir mettre a jour ce rendre qui rendrait splice lineaire.
@@ -286,14 +288,14 @@ namespace nsSdD
             return std::distance(begin(), end());
         }
 
-        CNode_iterator begin() const
+        CNodeIterator begin() const
         {
-            return sentinel->m_next;
+            return m_sentinel->m_next;
         }
 
-        CNode_iterator end() const
+        CNodeIterator end() const
         {
-            return sentinel->m_next->m_prev;
+            return m_sentinel->m_next->m_prev;
         }
 
         size_type max_size()
@@ -308,15 +310,15 @@ namespace nsSdD
 
         T& back ()
         {
-            CNode_iterator tmp;
+            CNodeIterator tmp;
             tmp = end();
             return *(--tmp);
         }
 
-        void assign (CNode_iterator first, CNode_iterator last)
+        void assign (iterator first, iterator last)
         {
-            CNode_iterator frst = begin();
-            CNode_iterator lst = end();
+            CNodeIterator frst = begin();
+            CNodeIterator lst = end();
 
             while (first != last && frst != lst)
                 *frst = *first,
@@ -331,17 +333,17 @@ namespace nsSdD
         // Swap a complexité constante
         void swap(CList& x)
         {
-            CBaseNode::swap(*sentinel, *x.sentinel);
+            CBaseNode::swap(*m_sentinel, *x.m_sentinel);
         }
 
         // [23.3.5.5]
         // 2. splice detruit une CListe en deplacant ses elements vers une autre
         // 4. x devient vide
         // 5. compléxité: constante
-        void splice(CNode_iterator position, CList& x)
+        void splice(iterator position, CList& x)
         {
             if(&x != this) // [23.3.5.5] 3
-            position.CNode_ptr->transfer(x.begin().CNode_ptr, x.end().CNode_ptr);
+            position.m_CNodePtr->transfer(x.begin().m_CNodePtr, x.end().m_CNodePtr);
         }
 
         // [23.3.5.5]
@@ -349,13 +351,13 @@ namespace nsSdD
         // et n'affecte pas la CListe si position == i ou ++i
         // 7. i doit etre valide
         // 8. complexité constante
-        void splice(CNode_iterator position, CList& x, CNode_iterator i)
+        void splice(iterator position, CList& x, iterator i)
         {
             (void)x;
-            CNode_iterator j = i;
+            CNodeIterator j = i;
             ++j;
             if(position == i || position == j) return;
-            position.CNode_ptr->transfer(i.CNode_ptr, j.CNode_ptr);
+            position.m_CNodePtr->transfer(i.m_CNodePtr, j.m_CNodePtr);
         }
 
         // [23.3.5.5]
@@ -363,10 +365,10 @@ namespace nsSdD
         // 10.comportement indefini si position est entre first et last
         // 11.Complexité constante si &x == this, et au moins lineaire dans le cas contraire.
         // mais notre implementation est constante dans les 2 cas
-        void splice(CNode_iterator position, CList& x, CNode_iterator first, CNode_iterator last)
+        void splice(iterator position, CList& x, iterator first, iterator last)
         {
             (void)x;
-            position.CNode_ptr->transfer(first, last);
+            position.m_CNodePtr->transfer(first, last);
         }
 
         // [23.3.5.5]
@@ -374,16 +376,16 @@ namespace nsSdD
         // Complexité lineaire
         void reverse()
         {
-            if(!empty() && sentinel->m_next->m_next != sentinel.get())
-                sentinel->reverse();
+            if(!empty() && m_sentinel->m_next->m_next != m_sentinel.get())
+                m_sentinel->reverse();
         }
 
         // [23.3.5.5]
         // 4. T doit être copiable
         void resize(size_type n, const T& val = T())
         {
-            CNode_iterator first = begin();
-            CNode_iterator last = end();
+            CNodeIterator first = begin();
+            CNodeIterator last = end();
             while(first != last && --n) ++first;
             if(first != last)//on reduit
                 erase(first, last);
@@ -406,16 +408,16 @@ namespace nsSdD
         {
             if(this == &x) return; //on ne merge pas avec elle meme !
 
-            CNode_iterator first  =   begin();
-            CNode_iterator first2 = x.begin();
+            CNodeIterator first  =   begin();
+            CNodeIterator first2 = x.begin();
 
-            CNode_iterator last   =   end();
-            CNode_iterator last2  = x.end();
+            CNodeIterator last   =   end();
+            CNodeIterator last2  = x.end();
 
             while (first != last && first2 != last2)//jusqua la fin d'une des CListes
                 if (comp(*first2, *first)) // si l'element de la 2eme CList est inf
                 {
-                    CNode_iterator m_next = first2;//on sauvegarde le suivant
+                    CNodeIterator m_next = first2;//on sauvegarde le suivant
                     transfer(first, first2, ++m_next);//et on transfere l'element
                     first2 = m_next; // avance dans la seconde CListe
                 }
@@ -436,8 +438,8 @@ namespace nsSdD
             // merge s'attend a avoir une CListe deja triee en parametre,
             // donc on peut l'utiliser pour notre mergesort O(N log N)
 
-            if (sentinel->m_next != sentinel.get() &&
-                sentinel->m_next->m_next != sentinel.get()) // une CListe vide ou avec 1 element est deja triee
+            if (m_sentinel->m_next != m_sentinel.get() &&
+                m_sentinel->m_next->m_next != m_sentinel.get()) // une CListe vide ou avec 1 element est deja triee
             {
                 CList reg;//cette CListe repartie les element dans les partitions
                 CList tmp[sizeof(void*) << 3];
