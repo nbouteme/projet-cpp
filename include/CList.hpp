@@ -25,8 +25,9 @@ namespace nsSdD
         typedef size_t size_type;
         typedef CNodeIterator iterator;
         
-        struct CNodeIterator
+        class CNodeIterator
         {
+	public:
             typedef T                                   value_type;
             typedef ptrdiff_t                           difference_type;
             typedef CBaseNode*                          pointer;
@@ -37,27 +38,27 @@ namespace nsSdD
             CNodeIterator(CBaseNode* val = nullptr) : m_CNodePtr(val) {}
             pointer m_CNodePtr;
 
-            CNodeIterator operator++()
+            iterator operator++()
             {
                 m_CNodePtr = m_CNodePtr->m_next;
                 return *this;
             }
 
-            CNodeIterator operator++(int)
+            iterator operator++(int)
             {
                 CBaseNode* tmp = m_CNodePtr;
                 m_CNodePtr = m_CNodePtr->m_next;
                 return tmp;
             }
 
-            CNodeIterator operator--(int)
+            iterator operator--(int)
             {
                 CBaseNode* tmp = m_CNodePtr;
                 m_CNodePtr = m_CNodePtr->m_prev;
                 return tmp;
             }
 
-            CNodeIterator operator--()
+            iterator operator--()
             {
                 m_CNodePtr = m_CNodePtr->m_prev;
                 return *this;
@@ -83,7 +84,7 @@ namespace nsSdD
                 return reinterpret_cast<CNode<T>*>(m_CNodePtr)->m_data;
             }
         };
-
+    private:
         void init()
         {
             m_sentinel->m_next = m_sentinel.get();
@@ -206,7 +207,7 @@ namespace nsSdD
         // [23.3.5.4]
         // 1. L'insertion dans la CListe n'affecte pas la validité des iterateur existant
         // 2. L'insertion de plusieurs element est linéaire.
-        CNodeIterator insert (iterator position, iterator first, iterator last)
+        iterator insert (iterator position, iterator first, iterator last)
         {
             CList t(first, last);
             CNodeIterator tmp = t.begin();
@@ -217,14 +218,14 @@ namespace nsSdD
         // [23.3.5.4]
         // 1. L'insertion dans la CListe n'affecte pas la validité des iterateur existant
         // 2. L'insertion d'un seul élément est constante.
-        CNodeIterator insert(iterator position, const T& val)
+        iterator insert(iterator position, const T& val)
         {
             CNode<T> *elem = new CNode<T>(val);
             elem->hook(position.m_CNodePtr);
             return elem;
         }
 
-        CNodeIterator insert(iterator position, size_type n, const T& val)
+        iterator insert(iterator position, size_type n, const T& val)
         {
             if(n == 0) return position;
             CList tmp(n, val);
@@ -249,7 +250,7 @@ namespace nsSdD
         // [23.3.5.4]
         // 1. La supresseion d'un element n'affecte que les iterateurs sur cet element
         // 2. La supression d'un seul élément est constante.
-        CNodeIterator erase(iterator position)
+        iterator erase(iterator position)
         {
             CNodeIterator tmp(position.m_CNodePtr->m_next);
             position.m_CNodePtr->unhook();
@@ -260,7 +261,7 @@ namespace nsSdD
         // [23.3.5.4]
         // 1. La supresseion d'un element n'affecte que les iterateurs sur cet element
         // 2. La supression de plusieurs elements est linéaire.
-        CNodeIterator erase(iterator first, iterator last)
+        iterator erase(iterator first, iterator last)
         {
             while(first != last)
                 first = erase(first);
