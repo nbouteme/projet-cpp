@@ -5,8 +5,8 @@ using namespace std;
 
 int main()
 {
-	nsSdD::List<int> l;
-	nsSdD::List<int> n;
+	nsSdD::CList<int> l;
+	nsSdD::CList<int> n;
     l.push_back(1);
     l.push_back(2);
     l.push_back(3);

@@ -5,9 +5,9 @@
 namespace nsSdD
 {
     template<typename T>
-    struct node : public base_node
+    struct CNode : public CBaseNode
     {
-        T data;
-        node (const T& val) : data(val) {}
+        T m_data;
+        CNode (const T& val) : m_data(val) {}
     };
 }

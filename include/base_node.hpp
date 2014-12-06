@@ -2,84 +2,84 @@
 
 namespace nsSdD
 {
-    struct base_node
+    struct CBaseNode
     {
-        typedef base_node* pointer;
+        typedef CBaseNode* pointer;
 
-        pointer prev = nullptr;
-        pointer next = nullptr;
+        pointer m_prev = nullptr;
+        pointer m_next = nullptr;
 
         void hook(pointer elem)
         {
-            next = elem;
-            prev = elem->prev;
-            elem->prev->next = this;
-            elem->prev = this;
+            m_next = elem;
+            m_prev = elem->m_prev;
+            elem->m_prev->m_next = this;
+            elem->m_prev = this;
         }
 
         pointer GetSuivant()
         {
-            return next;
+            return m_next;
         }
 
         
         void unhook()
         {
-            prev->next = next;
-            next->prev = prev;
-            prev = nullptr;
-            next = nullptr;
+            m_prev->m_next = m_next;
+            m_next->m_prev = m_prev;
+            m_prev = nullptr;
+            m_next = nullptr;
         }
 
-        void transfer(base_node* first, base_node* last)
+        void transfer(CBaseNode* first, CBaseNode* last)
         {
             if(last != this)
                 {
-                    last->prev->next = this;
-                    first->prev->next = last;
-                    prev->next = first;
-                    pointer tmp_this = prev;
-                    prev = last->prev;
-                    last->prev = first->prev;
-                    first->prev = tmp_this;
+                    last->m_prev->m_next = this;
+                    first->m_prev->m_next = last;
+                    m_prev->m_next = first;
+                    pointer tmp_this = m_prev;
+                    m_prev = last->m_prev;
+                    last->m_prev = first->m_prev;
+                    first->m_prev = tmp_this;
                 }
         }
 
         void reverse()
         {
-            base_node* tmp = this;
+            CBaseNode* tmp = this;
             do
             {
-                std::swap(tmp->prev, tmp->next);
-                tmp = tmp->prev;
+                std::swap(tmp->m_prev, tmp->m_next);
+                tmp = tmp->m_prev;
             } while(this != tmp);
         }
 
-        static void swap(base_node& x, base_node& y)
+        static void swap(CBaseNode& x, CBaseNode& y)
         {
-            if (x.next != &x)
+            if (x.m_next != &x)
             {// x non vide
-                if(y.next != &y)
+                if(y.m_next != &y)
                     {// et y non vide
-                        std::swap(x.next, y.next);
-                        std::swap(x.prev, y.prev);//echange les lien internes a x et y
-                        x.next->prev = x.prev->next = &x;//les precedent et suivant etait ceux de y, donc on reassigne
-                        y.next->prev = y.prev->next = &y;
+                        std::swap(x.m_next, y.m_next);
+                        std::swap(x.m_prev, y.m_prev);//echange les lien internes a x et y
+                        x.m_next->m_prev = x.m_prev->m_next = &x;//les precedent et suivant etait ceux de y, donc on reassigne
+                        y.m_next->m_prev = y.m_prev->m_next = &y;
                     }
                 else
                 {// et y vide
-                    y.next = x.next;
-                    y.prev = x.prev;//reconstitue les pointeurs internes a x
-                    y.next->prev = y.prev->next = &y; //reconsitue les pointeur sur x
-                    x.next = x.prev = &x;//x devient vide
+                    y.m_next = x.m_next;
+                    y.m_prev = x.m_prev;//reconstitue les pointeurs internes a x
+                    y.m_next->m_prev = y.m_prev->m_next = &y; //reconsitue les pointeur sur x
+                    x.m_next = x.m_prev = &x;//x devient vide
                 }
             }
-            else if (y.next != &y)
+            else if (y.m_next != &y)
             {// x vide et y non vide
-                x.next = y.next;
-                x.prev = y.prev;//reconstitue les pointeur internes a y
-                x.next->prev = x.prev->next = &x;//reconstitue les pointeurs sur y
-                y.next = y.prev = &y;//y devient vide
+                x.m_next = y.m_next;
+                x.m_prev = y.m_prev;//reconstitue les pointeur internes a y
+                x.m_next->m_prev = x.m_prev->m_next = &x;//reconstitue les pointeurs sur y
+                y.m_next = y.m_prev = &y;//y devient vide
             }
         }
     };
