@@ -80,7 +80,7 @@ namespace nsSdD
                 return reinterpret_cast<node<T>*>(node_ptr)->data;
             }
         };
-        private:
+    private:
         void init()
         {
             sentinel->next = sentinel.get();
