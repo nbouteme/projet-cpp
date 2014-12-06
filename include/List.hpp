@@ -21,7 +21,6 @@ namespace nsSdD
     template <typename T>
     class List
     {
-        struct node_iterator;
         typedef size_t size_type;
 
         struct node_iterator
