@@ -404,37 +404,35 @@ TEST(size)
 
 int main()
 {
+    // TODO: Changer le type pour tester avec diverse classes, std::list par exemple
+    using list = nsSdD::List;
+    using int_list = list<int>;
+    
     // Test d'instanciation
     {
-        using namespace nsSdD;
-        using namespace std;
-
-        List<NonCopyable>();
-        List<NonInstanciable>();
-        List<int>();
         list<NonCopyable>();
         list<NonInstanciable>();
-        list<int>();
+        int_list();
     }
 
-    test_insert    (nsSdD::List<int>());
-    test_push_back (nsSdD::List<int>());
-    test_pop_back  (nsSdD::List<int>());
-    test_pop_front (nsSdD::List<int>());
-    test_push_front(nsSdD::List<int>());
-    test_front     (nsSdD::List<int>());
-    test_back      (nsSdD::List<int>());
-    test_merge     (nsSdD::List<int>());
-    test_sort      (nsSdD::List<int>());
-    test_erase     (nsSdD::List<int>());
-    test_remove    (nsSdD::List<int>());
-    test_unique    (nsSdD::List<int>());
-    test_clear     (nsSdD::List<int>());
-    test_remove    (nsSdD::List<int>());
-    test_remove_if (nsSdD::List<int>());
-    test_reverse   (nsSdD::List<int>());
+    test_insert     <int_list>();
+    test_push_back  <int_list>();
+    test_pop_back   <int_list>();
+    test_pop_front  <int_list>();
+    test_push_front <int_list>();
+    test_front      <int_list>();
+    test_back       <int_list>();
+    test_merge      <int_list>();
+    test_sort       <int_list>();
+    test_erase      <int_list>();
+    test_remove     <int_list>();
+    test_unique     <int_list>();
+    test_clear      <int_list>();
+    test_remove     <int_list>();
+    test_remove_if  <int_list>();
+    test_reverse    <int_list>();
 
     //permet de montrer que la detection fonctionne:
-    //test_test (nsSdD::List<int>());
+    //test_test <int_list>();
     return 0;
 }

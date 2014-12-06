@@ -17,7 +17,7 @@
 
 #define HAS_MEMBER(member)                 \
 template <class T>                         \
-class has_member_##member                  \
+struct has_member_##member                 \
 {                                          \
     using yes = char[2];                   \
     using  no = int;                       \
@@ -30,7 +30,6 @@ class has_member_##member                  \
     template < typename C>                 \
     static yes& test(C*);                  \
                                            \
-public:                                    \
     static constexpr bool val =            \
     sizeof(test<Derived>(nullptr)) ==      \
     sizeof(yes);                           \
