@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base_node.hpp>
+#include <CBaseNode.hpp>
 
 namespace nsSdD
 {

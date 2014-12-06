@@ -5,7 +5,7 @@
 #include <limits>
 #include <memory>
 #include <cassert>
-#include <node.hpp>
+#include <CNode.hpp>
 
 namespace nsSdD
 {
@@ -21,6 +21,7 @@ namespace nsSdD
     template <typename T>
     class CList
     {
+        class CNodeIterator;
         typedef size_t size_type;
         typedef CNodeIterator iterator;
         
