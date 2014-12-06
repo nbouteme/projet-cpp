@@ -1,4 +1,4 @@
-#include <List.hpp>
+#include <CList.hpp>
 #include <list>
 #include <sstream>
 #include <test_traits.hpp>
@@ -19,8 +19,8 @@ TEST(insert)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
 
     l.insert(l.begin(), 1);
     l.insert(l.begin(), 2);
@@ -51,8 +51,8 @@ TEST(sort)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 1000; ++i)
         l.push_back(rand());
@@ -72,8 +72,8 @@ TEST(erase)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100; ++i)
         l.push_back(rand());
@@ -99,8 +99,8 @@ TEST(unique)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100000; ++i)
         l.push_back(rand());
@@ -120,10 +120,10 @@ TEST(merge)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
-    List<int> x;
-    list<int> y;
+    CList<int> l;
+    CList<int> n;
+    CList<int> x;
+    CList<int> y;
 
     srand(0);
     for(int i = 0; i < 10; ++i)
@@ -161,8 +161,8 @@ TEST(pop_back)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100; ++i)
         l.push_back(rand());
@@ -188,8 +188,8 @@ TEST(pop_front)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100; ++i)
         l.push_front(rand());
@@ -215,8 +215,8 @@ TEST(push_back)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100; ++i)
         l.push_back(rand());
@@ -242,8 +242,8 @@ TEST(push_front)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100; ++i)
         l.push_front(rand());
@@ -270,8 +270,8 @@ TEST(front)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100; ++i)
         l.push_front(rand());
@@ -291,8 +291,8 @@ TEST(back)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100; ++i)
         l.push_back(rand());
@@ -312,7 +312,7 @@ TEST(clear)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
+    CList<int> l;
     srand(0);
     for(int i = 0; i < 100; ++i)
         l.push_front(rand());
@@ -327,8 +327,8 @@ TEST(remove)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100000; ++i)
         l.push_front(rand());
@@ -348,8 +348,8 @@ TEST(remove_if)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100000; ++i)
         l.push_front(rand());
@@ -369,8 +369,8 @@ TEST(reverse)
     using namespace nsSdD;
     using namespace std;
     stringstream out, comp;
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100000; ++i)
         l.push_front(rand());
@@ -390,8 +390,8 @@ TEST(size)
     using namespace nsSdD;
     using namespace std;
 
-    List<int> l;
-    list<int> n;
+    CList<int> l;
+    CList<int> n;
     srand(0);
     for(int i = 0; i < 100; ++i)
         l.push_front(rand());
@@ -405,13 +405,12 @@ TEST(size)
 int main()
 {
     // TODO: Changer le type pour tester avec diverse classes, std::list par exemple
-    using list = nsSdD::List;
-    using int_list = list<int>;
+    using int_list = nsSdD::CList<int>;
     
     // Test d'instanciation
     {
-        list<NonCopyable>();
-        list<NonInstanciable>();
+        nsSdD::CList<NonCopyable>();
+        nsSdD::CList<NonInstanciable>();
         int_list();
     }
 

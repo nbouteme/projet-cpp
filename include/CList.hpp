@@ -5,7 +5,7 @@
 #include <limits>
 #include <memory>
 #include <cassert>
-#include <node.hpp>
+#include <CNode.hpp>
 
 namespace nsSdD
 {
@@ -19,72 +19,75 @@ namespace nsSdD
     // circulaire. Au final, la liste est plus grosse et plus lente
     // que ce quel a besoin d'etre
     template <typename T>
-    class List
+    class CList
     {
+        class CNodeIterator;
         typedef size_t size_type;
-
-        struct node_iterator
+        typedef CNodeIterator iterator;
+        
+        struct CNodeIterator
         {
             typedef T                                   value_type;
             typedef ptrdiff_t                           difference_type;
-            typedef base_node*                          pointer;
-            typedef node_iterator&                      reference;
+            typedef CBaseNode*                          pointer;
+            typedef CNodeIterator&                      reference;
             typedef std::bidirectional_iterator_tag     iterator_category;
+    
 
-            node_iterator(base_node* val = nullptr) : node_ptr(val) {}
-            pointer node_ptr;
+            CNodeIterator(CBaseNode* val = nullptr) : m_CNodePtr(val) {}
+            pointer m_CNodePtr;
 
-            node_iterator operator++()
+            CNodeIterator operator++()
             {
-                node_ptr = node_ptr->next;
+                m_CNodePtr = m_CNodePtr->m_next;
                 return *this;
             }
 
-            node_iterator operator++(int)
+            CNodeIterator operator++(int)
             {
-                base_node* tmp = node_ptr;
-                node_ptr = node_ptr->next;
+                CBaseNode* tmp = m_CNodePtr;
+                m_CNodePtr = m_CNodePtr->m_next;
                 return tmp;
             }
 
-            node_iterator operator--(int)
+            CNodeIterator operator--(int)
             {
-                base_node* tmp = node_ptr;
-                node_ptr = node_ptr->prev;
+                CBaseNode* tmp = m_CNodePtr;
+                m_CNodePtr = m_CNodePtr->m_prev;
                 return tmp;
             }
 
-            node_iterator operator--()
+            CNodeIterator operator--()
             {
-                node_ptr = node_ptr->prev;
+                m_CNodePtr = m_CNodePtr->m_prev;
                 return *this;
             }
 
-            bool operator== (node_iterator node)
+            bool operator== (iterator CNode)
             {
-                return node_ptr == node.node_ptr;
+                return m_CNodePtr == CNode.m_CNodePtr;
             }
 
             pointer operator->()
             {
-                return reinterpret_cast<node<T>*>(node_ptr);
+                return reinterpret_cast<CNode<T>*>(m_CNodePtr);
             }
 
-            bool operator!= (const node_iterator& node)
+            bool operator!= (const iterator& CNode)
             {
-                return node_ptr != node.node_ptr;
+                return m_CNodePtr != CNode.m_CNodePtr;
             }
 
             value_type& operator*()
             {
-                return reinterpret_cast<node<T>*>(node_ptr)->data;
+                return reinterpret_cast<CNode<T>*>(m_CNodePtr)->m_data;
             }
         };
 
         void init()
         {
-            sentinel->next = sentinel.get();
-            sentinel->prev = sentinel.get();
+            m_sentinel->m_next = m_sentinel.get();
+            m_sentinel->m_prev = m_sentinel.get();
         }
 
         void _clear()
@@ -93,26 +96,26 @@ namespace nsSdD
                 erase(begin());
         }
 
-        void transfer(node_iterator position, node_iterator first, node_iterator last)
+        void transfer(iterator position, iterator first, iterator last)
         {
-            position.node_ptr->transfer(first.node_ptr, last.node_ptr);
+            position.m_CNodePtr->transfer(first.m_CNodePtr, last.m_CNodePtr);
         }
 
         // Attention mesdames et messieurs c'est de la haute technique!
-        std::shared_ptr<base_node> sentinel = std::make_shared<base_node>();
+        std::shared_ptr<CBaseNode> m_sentinel = std::make_shared<CBaseNode>();
         //C'est literallement identique que
-        //base_node sentinel;
+        //CBaseCNode m_sentinel;
         // si ce n'est que c'est plus lent a instancier, et plus long
         // a ecrire et necessite de rajouter des .get() de partout les
         // weak pointer sont literallement inutilisable dans notre
-        // contexte on a une classe base_node qui ne contient pas de
-        // donnee, et une classe node<T> qui contient des donnee la
-        // classe base node<T> est utilisee directement seulement par
-        // la sentinelle alors c'est elle qui devrait etre
+        // contexte on a une classe CBaseCNode qui ne contient pas de
+        // donnee, et une classe CNode<T> qui contient des donnee la
+        // classe base CNode<T> est utilisee directement seulement par
+        // la m_sentinelle alors c'est elle qui devrait etre
         // proprietaire et responsable de la liberation de la memoire,
-        // et donc ses membres next et prev devrait etre des shared
-        // ptr mais du coup, on perd la relation entre base_node et
-        // node<T> car node<T> ne doit alors avoir que des membre qui
+        // et donc ses membres m_next et m_prev devrait etre des shared
+        // ptr mais du coup, on perd la relation entre CBaseCNode et
+        // CNode<T> car CNode<T> ne doit alors avoir que des membre qui
         // sont weak les const& et le polymorphisme avec les
         // shared_ptr sont mutuellement exclusif aussi
         // class A{};
@@ -126,34 +129,34 @@ namespace nsSdD
         // }
         // ne compile pas
     public:
-        List()
+        CList()
         {
             init();
         }
 
-        List(size_type n, const T& val = T()) : List()
+        CList(size_type n, const T& val = T()) : CList()
         {
             while(n)
                 push_back(val), --n;
         }
 
-        List(const List& x) : List()
+        CList(const CList& x) : CList()
         {
             for(auto &val : x)
                 push_back(val);
         }
 
-        List(node_iterator first, node_iterator last) : List()
+        CList(iterator first, iterator last) : CList()
         {
             insert(end(), first, last);
         }
 
-        ~List()
+        ~CList()
         {
             _clear();
         }
 
-        List<T>& operator=(const List<T> &rhs)
+        CList<T>& operator=(const CList<T> &rhs)
         {
             if(this == &rhs) return *this;
             assign(rhs.begin(), rhs.end());
@@ -163,16 +166,16 @@ namespace nsSdD
         void unique()
         {
             if(empty()) return;
-            node_iterator first = begin();
-            node_iterator last  = end();
-            node_iterator next  = first;
-            while(++next != last)
+            CNodeIterator first = begin();
+            CNodeIterator last  = end();
+            CNodeIterator m_next  = first;
+            while(++m_next != last)
             {
-                if(*first == *next)
-                    erase(next);
+                if(*first == *m_next)
+                    erase(m_next);
                 else
-                    first = next;
-                next = first;
+                    first = m_next;
+                m_next = first;
             }
         }
 
@@ -183,53 +186,53 @@ namespace nsSdD
         }
 
         // [23.3.5.4]
-        // 12. Suprime tout les element de la liste si *it = val
+        // 12. Suprime tout les element de la CListe si *it = val
         // 13. Ne leve pas d'exception sauf si la comparaison est surchargée tel que elle puisse en lever une
         void remove (const T& val)
         {
-            for(node_iterator it = begin(); it != end(); ++it)
+            for(CNodeIterator it = begin(); it != end(); ++it)
                 if(*it == val)
                     it = erase(it);
         }
 
         void remove_if(std::function<bool(const T&)> predicate)
         {
-            node_iterator it = begin();
+            CNodeIterator it = begin();
             while(it != end())
                 if (predicate(*it))
                     it = erase(it++);
         }
 
         // [23.3.5.4]
-        // 1. L'insertion dans la liste n'affecte pas la validité des iterateur existant
+        // 1. L'insertion dans la CListe n'affecte pas la validité des iterateur existant
         // 2. L'insertion de plusieurs element est linéaire.
-        node_iterator insert (node_iterator position, node_iterator first, node_iterator last)
+        CNodeIterator insert (iterator position, iterator first, iterator last)
         {
-            List t(first, last);
-            node_iterator tmp = t.begin();
+            CList t(first, last);
+            CNodeIterator tmp = t.begin();
             splice(position, t);
             return tmp;
         }
 
         // [23.3.5.4]
-        // 1. L'insertion dans la liste n'affecte pas la validité des iterateur existant
+        // 1. L'insertion dans la CListe n'affecte pas la validité des iterateur existant
         // 2. L'insertion d'un seul élément est constante.
-        node_iterator insert(node_iterator position, const T& val)
+        CNodeIterator insert(iterator position, const T& val)
         {
-            node<T> *elem = new node<T>(val);
-            elem->hook(position.node_ptr);
+            CNode<T> *elem = new CNode<T>(val);
+            elem->hook(position.m_CNodePtr);
             return elem;
         }
 
-        node_iterator insert(node_iterator position, size_type n, const T& val)
+        CNodeIterator insert(iterator position, size_type n, const T& val)
         {
             if(n == 0) return position;
-            List tmp(n, val);
-            node_iterator ret = tmp.begin();
+            CList tmp(n, val);
+            CNodeIterator ret = tmp.begin();
             splice(position, tmp);
-            // le standard dis que meme en modifian la liste, les
+            // le standard dis que meme en modifian la CListe, les
             // iterateur reste valides, mais pointent maintenant vers
-            // un element de cette liste
+            // un element de cette CListe
             return ret;
         }
 
@@ -246,18 +249,18 @@ namespace nsSdD
         // [23.3.5.4]
         // 1. La supresseion d'un element n'affecte que les iterateurs sur cet element
         // 2. La supression d'un seul élément est constante.
-        node_iterator erase(node_iterator position)
+        CNodeIterator erase(iterator position)
         {
-            node_iterator tmp(position.node_ptr->next);
-            position.node_ptr->unhook();
-            delete position.node_ptr;
+            CNodeIterator tmp(position.m_CNodePtr->m_next);
+            position.m_CNodePtr->unhook();
+            delete position.m_CNodePtr;
             return tmp;
         }
 
         // [23.3.5.4]
         // 1. La supresseion d'un element n'affecte que les iterateurs sur cet element
         // 2. La supression de plusieurs elements est linéaire.
-        node_iterator erase(node_iterator first, node_iterator last)
+        CNodeIterator erase(iterator first, iterator last)
         {
             while(first != last)
                 first = erase(first);
@@ -271,13 +274,13 @@ namespace nsSdD
 
         void pop_back()
         {
-            node_iterator tmp = end();
+            CNodeIterator tmp = end();
             erase(--tmp);
         }
 
         bool empty()
         {
-            return sentinel.get() == sentinel->prev;
+            return m_sentinel.get() == m_sentinel->m_prev;
         }
 
         // La complexité est constante, pour eviter d'avoir un autre membre et de devoir mettre a jour ce rendre qui rendrait splice lineaire.
@@ -286,14 +289,14 @@ namespace nsSdD
             return std::distance(begin(), end());
         }
 
-        node_iterator begin() const
+        CNodeIterator begin() const
         {
-            return sentinel->next;
+            return m_sentinel->m_next;
         }
 
-        node_iterator end() const
+        CNodeIterator end() const
         {
-            return sentinel->next->prev;
+            return m_sentinel->m_next->m_prev;
         }
 
         size_type max_size()
@@ -308,15 +311,15 @@ namespace nsSdD
 
         T& back ()
         {
-            node_iterator tmp;
+            CNodeIterator tmp;
             tmp = end();
             return *(--tmp);
         }
 
-        void assign (node_iterator first, node_iterator last)
+        void assign (iterator first, iterator last)
         {
-            node_iterator frst = begin();
-            node_iterator lst = end();
+            CNodeIterator frst = begin();
+            CNodeIterator lst = end();
 
             while (first != last && frst != lst)
                 *frst = *first,
@@ -329,33 +332,33 @@ namespace nsSdD
         }
 
         // Swap a complexité constante
-        void swap(List& x)
+        void swap(CList& x)
         {
-            base_node::swap(*sentinel, *x.sentinel);
+            CBaseNode::swap(*m_sentinel, *x.m_sentinel);
         }
 
         // [23.3.5.5]
-        // 2. splice detruit une liste en deplacant ses elements vers une autre
+        // 2. splice detruit une CListe en deplacant ses elements vers une autre
         // 4. x devient vide
         // 5. compléxité: constante
-        void splice(node_iterator position, List& x)
+        void splice(iterator position, CList& x)
         {
             if(&x != this) // [23.3.5.5] 3
-            position.node_ptr->transfer(x.begin().node_ptr, x.end().node_ptr);
+            position.m_CNodePtr->transfer(x.begin().m_CNodePtr, x.end().m_CNodePtr);
         }
 
         // [23.3.5.5]
         // 6. deplace i avant position si x possede le meme allocateur que this
-        // et n'affecte pas la liste si position == i ou ++i
+        // et n'affecte pas la CListe si position == i ou ++i
         // 7. i doit etre valide
         // 8. complexité constante
-        void splice(node_iterator position, List& x, node_iterator i)
+        void splice(iterator position, CList& x, iterator i)
         {
             (void)x;
-            node_iterator j = i;
+            CNodeIterator j = i;
             ++j;
             if(position == i || position == j) return;
-            position.node_ptr->transfer(i.node_ptr, j.node_ptr);
+            position.m_CNodePtr->transfer(i.m_CNodePtr, j.m_CNodePtr);
         }
 
         // [23.3.5.5]
@@ -363,27 +366,27 @@ namespace nsSdD
         // 10.comportement indefini si position est entre first et last
         // 11.Complexité constante si &x == this, et au moins lineaire dans le cas contraire.
         // mais notre implementation est constante dans les 2 cas
-        void splice(node_iterator position, List& x, node_iterator first, node_iterator last)
+        void splice(iterator position, CList& x, iterator first, iterator last)
         {
             (void)x;
-            position.node_ptr->transfer(first, last);
+            position.m_CNodePtr->transfer(first, last);
         }
 
         // [23.3.5.5]
-        // 23. Inverse l'ordre de la liste
+        // 23. Inverse l'ordre de la CListe
         // Complexité lineaire
         void reverse()
         {
-            if(!empty() && sentinel->next->next != sentinel.get())
-                sentinel->reverse();
+            if(!empty() && m_sentinel->m_next->m_next != m_sentinel.get())
+                m_sentinel->reverse();
         }
 
         // [23.3.5.5]
         // 4. T doit être copiable
         void resize(size_type n, const T& val = T())
         {
-            node_iterator first = begin();
-            node_iterator last = end();
+            CNodeIterator first = begin();
+            CNodeIterator last = end();
             while(first != last && --n) ++first;
             if(first != last)//on reduit
                 erase(first, last);
@@ -393,78 +396,78 @@ namespace nsSdD
 
         // [23.3.5.5]
         // 19. *this et x doivent etre trié, autrement le comportement est indéfini 
-        // 20. ne fait rien si &x == this, sinon, fusionne les 2 listes en detruisant x
+        // 20. ne fait rien si &x == this, sinon, fusionne les 2 CListes en detruisant x
         // les iterateur sont toujours valide, sauf que ils pointent sur des membre de *this au lieu de x
         // 21. x devient vide
         // 22. complexité lineraire
-        void merge(List& x)
+        void merge(CList& x)
         {
             merge(x, [](const T &a, const T& b){ return a < b; });
         }
 
-        void merge(List& x, std::function<bool(const T &a, const T& b)> comp)
+        void merge(CList& x, std::function<bool(const T &a, const T& b)> comp)
         {
             if(this == &x) return; //on ne merge pas avec elle meme !
 
-            node_iterator first  =   begin();
-            node_iterator first2 = x.begin();
+            CNodeIterator first  =   begin();
+            CNodeIterator first2 = x.begin();
 
-            node_iterator last   =   end();
-            node_iterator last2  = x.end();
+            CNodeIterator last   =   end();
+            CNodeIterator last2  = x.end();
 
-            while (first != last && first2 != last2)//jusqua la fin d'une des listes
-                if (comp(*first2, *first)) // si l'element de la 2eme List est inf
+            while (first != last && first2 != last2)//jusqua la fin d'une des CListes
+                if (comp(*first2, *first)) // si l'element de la 2eme CList est inf
                 {
-                    node_iterator next = first2;//on sauvegarde le suivant
-                    transfer(first, first2, ++next);//et on transfere l'element
-                    first2 = next; // avance dans la seconde liste
+                    CNodeIterator m_next = first2;//on sauvegarde le suivant
+                    transfer(first, first2, ++m_next);//et on transfere l'element
+                    first2 = m_next; // avance dans la seconde CListe
                 }
                 else
-                    ++first; // avance dans la premiere liste
+                    ++first; // avance dans la premiere CListe
 
-            if (first2 != last2)// on est arrivé a la fin de la 1ere liste
+            if (first2 != last2)// on est arrivé a la fin de la 1ere CListe
                 transfer(last, first2, last2);//tout le reste va a la fin
         }
 
         // [23.3.5.5]
         // 25. Necessite la comparaison <
-        // 26. Trie la liste sans affecter la validité des iterateur existant
+        // 26. Trie la CListe sans affecter la validité des iterateur existant
         // 27. Stable (l'ordre d'element egaux ne change pas)
         // 28. Complexité N log N
         void sort()
         {
-            // merge s'attend a avoir une liste deja triee en parametre,
+            // merge s'attend a avoir une CListe deja triee en parametre,
             // donc on peut l'utiliser pour notre mergesort O(N log N)
 
-            if (sentinel->next       != sentinel.get() &&
-                sentinel->next->next != sentinel.get()) // une liste vide ou avec 1 element est deja triee
+            if (m_sentinel->m_next != m_sentinel.get() &&
+                m_sentinel->m_next->m_next != m_sentinel.get()) // une CListe vide ou avec 1 element est deja triee
             {
-                List reg;//cette liste repartie les element dans les partitions
-                List tmp[sizeof(void*) << 3];
-                // listes de partitionements, le nombre de liste
+                CList reg;//cette CListe repartie les element dans les partitions
+                CList tmp[sizeof(void*) << 3];
+                // CListes de partitionements, le nombre de CListe
                 // utilisées est depend du nombre d'element a trier,
-                // le nombre de liste depends de la quantite de donnee adressable dans la ram de la machine,
+                // le nombre de CListe depends de la quantite de donnee adressable dans la ram de la machine,
                 // l'algo foire si on a un ensemble de donnee a trier
                 // de plus de quelque dizaines d'exibytes (enfin moins
                 // car par exemple sous linux la taille max d'un
                 // pointeur en user-space est de 48bits)
-                // sizeof(void*) << 3 veut juste dire "assez de liste
+                // sizeof(void*) << 3 veut juste dire "assez de CListe
                 // pour ne pas deborder", puisque pour deborder faut
                 // avoir plus d'element a trier que de memoire
                 // addressable
-                List *last = &tmp[0];//pointeur sur la derniere liste de partition utilisé
-                List *counter;// pointeur sur la liste de partition
+                CList *last = &tmp[0];//pointeur sur la derniere CListe de partition utilisé
+                CList *counter;// pointeur sur la CListe de partition
 
                 do
                 {
-                    reg.splice(reg.begin(), *this, begin());//on met le debut de notre liste dans une list temporaire
+                    reg.splice(reg.begin(), *this, begin());//on met le debut de notre CListe dans une CList temporaire
 
-                    for(counter = &tmp[0];//a partir de la premiere liste de partition
-                        counter != last && !counter->empty();//pour chaque liste de part non vide utilisée
+                    for(counter = &tmp[0];//a partir de la premiere CListe de partition
+                        counter != last && !counter->empty();//pour chaque CListe de part non vide utilisée
                         ++counter)
                     {
-                        counter->merge(reg);//reg devient vide, et ses elements sont placé correctement dans la liste courante
-                        reg.swap(*counter); //et on recupere cette liste pour le traitement
+                        counter->merge(reg);//reg devient vide, et ses elements sont placé correctement dans la CListe courante
+                        reg.swap(*counter); //et on recupere cette CListe pour le traitement
                     }
                     reg.swap(*counter);//la partition est faite
                     last += counter == last;//on incremente la partition
@@ -481,7 +484,7 @@ namespace nsSdD
 
     // specialisation de complexité constante de swap au lieu d'etre lineaire
     template <class T>
-    void swap(List<T>& x, List<T>& y)
+    void swap(CList<T>& x, CList<T>& y)
     {
         x.swap(y);
     }
