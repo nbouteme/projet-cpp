@@ -1,4 +1,7 @@
+#include <initializer_list>
 #include <CList.hpp>
+#include <list>
+#include <utility>
 #include <iostream>
 
 using namespace std;
@@ -15,6 +18,6 @@ using namespace std;
 
 int main()
 {
-    // Se referer au programme de test.
+    nsSdD::CList<int> a(nsSdD::CList<int>(10, 10));
     return 0;
 }

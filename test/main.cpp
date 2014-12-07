@@ -401,6 +401,27 @@ TEST(size)
     return true;
 }
 
+TEST(assign)
+{
+    using namespace nsSdD;
+    using namespace std;
+    stringstream out, comp;
+    T l;
+    T n;
+    srand(0);
+    for(int i = 0; i < 1000; ++i)
+        l.push_back(0);
+    srand(0);
+    for(int i = 0; i < 1000; ++i)
+        n.push_back(rand());
+    l.assign(n.begin(), n.end());
+    for(auto i : n) comp << i;
+    for(auto f = l.begin(); f != l.end(); ++f) out << *f;
+    IZI_ASSERT(out.str() == comp.str());
+    return true;
+}
+
+
 int main()
 {
     // TODO: Changer le type pour tester avec diverse classes, std::list par exemple
@@ -429,6 +450,7 @@ int main()
     test_remove     <int_list>();
     test_remove_if  <int_list>();
     test_reverse    <int_list>();
+    test_assign     <int_list>();
 
     //permet de montrer que la detection fonctionne:
     //test_test <int_list>(); // Il n'y a pas de membre test dans list, mais cela ne provoque pas d'erreur de compilation

@@ -8,7 +8,7 @@
 #include <cstddef>
 #include <limits>
 #include <memory>
-
+#include <type_traits>
 #include <CNode.hpp>
 
 /// Namespace holding data-structures
@@ -21,17 +21,17 @@ namespace nsSdD
     template <typename T>
     class CList
     {
+    public:
         /// Iterator having iterator_traits, allowing to use it in a range-based for loop
         class CNodeIterator;
-
-        /// Internal size type
-        typedef size_t size_type;
-        /// Internal iterator type
+        /// External iterator type
         typedef CNodeIterator iterator;
-        
+        /// External size type
+        typedef size_t size_type;
+
         class CNodeIterator
         {
-	public:
+        public:
             typedef T                                   value_type;
             typedef ptrdiff_t                           difference_type;
             typedef CBaseNode*                          pointer;
@@ -124,6 +124,10 @@ namespace nsSdD
             }
         };
     private:
+        typedef typename std::is_integral<int>::type int_type;
+        typedef typename std::is_integral<iterator>::type it_type;
+
+        
         /// Initialize an empty list
         void init()
         {
@@ -149,11 +153,31 @@ namespace nsSdD
             position.m_CNodePtr->transfer(first.m_CNodePtr, last.m_CNodePtr);
         }
 
+        /**
+         * Fills the list with \a n copies of \a val
+         * \param n Number of copies
+         * \param val Value to copy
+         */
+        template<typename C>
+        void it_init(C n, const T& val, int_type)
+        {
+            while(n)
+                push_back(val), --n;
+        }
+
+        template<typename C>
+        void it_init(C first, C last, it_type)
+        {
+            while(first != last)
+                push_back(*first), ++first;
+        }
+
         /// Dummy element that allows to have certain guarantees on the integrity of a list
+        //        std::shared_ptr<CBaseNode> m_sentinel = std::make_shared<CBaseNode>();
         std::shared_ptr<CBaseNode> m_sentinel = std::make_shared<CBaseNode>();
     public:
         /// Initializes an empty list
-        explicit CList()
+        explicit CList() noexcept
         {
             init();
         }
@@ -163,10 +187,19 @@ namespace nsSdD
          * \param n The number of elements to create
          * \param val A value to copy 
          */
-        CList(size_type n, const T& val = T()) : CList()
+        CList(size_type n, const T& val) : CList()
+        {//Ce constructeur ne peut jamais etre appelé directement
+            it_init(n, val, int_type());
+        }
+
+        /**
+         * \brief Creates a list of \a n default-constructed elements
+         * \param n The number of elements to create
+         */
+        explicit CList(size_type n) : CList()
         {
             while(n)
-                push_back(val), --n;
+                push_back(T()), --n;
         }
 
         /**
@@ -180,17 +213,36 @@ namespace nsSdD
         }
 
         /**
+         * \brief Acquires the ressources of x
+         * \param x The list to get ressources from
+         */
+        explicit CList(CList&& x) : CList()
+        {
+            swap(x);
+        }
+
+        /**
          * \brief Creates a list by copying the elements in the range [first;last[
          * \param first An iterator on the first element to copy
          * \param last An iterator on the next node of the last node to copy
          */
-        CList(iterator first, iterator last) : CList()
+        template <typename InputIterator>// Attention: Magie noir
+        CList(InputIterator first, InputIterator last) : CList() // On n'est pas sur que les InputIterator soit bien des iterateur, il peuvent bien etre des entiers
         {
-            insert(end(), first, last);
+            typedef typename std::is_integral<InputIterator>::type int_type;//on deduis le type a la compilation
+            it_init(first, last, int_type());//cette fonction a 2 surcharge, une avec un int_type, et l'autre sans.
         }
 
+        /**
+         * \brief Creates a list by copying the elements in the range [first;last[
+         * \param first An iterator on the first element to copy
+         * \param last An iterator on the next node of the last node to copy
+         */
+        CList(std::initializer_list<T> l) : CList(l.begin(), l.end())
+        {}
+
         /// Frees the allocated ressources
-        ~CList()
+        ~CList() noexcept
         {
             _clear();
         }
@@ -204,6 +256,28 @@ namespace nsSdD
         {
             if(this == &rhs) return *this;
             assign(rhs.begin(), rhs.end());
+            return *this;
+        }
+
+        /**
+         * \brief Moves the content of \a rhs to this
+         * moves the content of \a rhs to this
+         * \param rhs The Right Hand Side of the expression
+         */
+        CList<T>& operator=(CList<T> &&rhs)
+        {
+            swap(rhs);
+            return *this;
+        }
+
+        /**
+         * \brief Moves the content of \a rhs to this
+         * moves the content of \a rhs to this
+         * \param rhs The Right Hand Side of the expression
+         */
+        CList<T>& operator=(std::initializer_list<T> l)
+        {
+            assign(l.begin(), l.end());
             return *this;
         }
 
@@ -275,7 +349,8 @@ namespace nsSdD
          * \param last Iterator on the last element of the range
          * \return An iterator to the first added element
          */
-        iterator insert (iterator position, iterator first, iterator last)
+        template <typename InputIterator>
+        iterator insert (iterator position, InputIterator first, InputIterator last)
         {
             CList t(first, last);
             CNodeIterator tmp = t.begin();
@@ -454,6 +529,20 @@ namespace nsSdD
             return *(--tmp);
         }
 
+        /// Returns a reference to the first element of the list
+        const T& front() const noexcept
+        {
+            return *begin();
+        }
+
+        /// Returns a reference to the last element of the list
+        const T& back () const noexcept
+        {
+            CNodeIterator tmp;
+            tmp = end();
+            return *(--tmp);
+        }
+
         /**
          * \brief Assigns the content of the list by the elements in the [\a first; \a last[ range
          * If the range is smaller than the current list size, the extra elements are erased.
@@ -467,7 +556,8 @@ namespace nsSdD
          * \param first An iterator to the first element to assign
          * \param last An iterator following the last element to assign
          */
-        void assign (iterator first, iterator last)
+        template <typename InputIterator>
+        void assign (InputIterator first, InputIterator last)
         {
             CNodeIterator frst = begin();
             CNodeIterator lst = end();
@@ -480,6 +570,23 @@ namespace nsSdD
                 erase(frst, lst);
             else
                 insert(lst, first, last);
+        }
+
+        /**
+         * \brief Assigns the content of the list by \a n copies of \a val 
+         * \par Complexity
+         * Linear.
+         * \par Iterator Validity
+         * Every iterator are invalidated
+         * \par Data races
+         * Copied elements are accessed, container is modified, contained elements are modified
+         * \param n Number of elements
+         * \param val Value to copy
+         */
+        void assign (size_type n, const T&val)
+        {
+            CList<T> tmp(n, val);
+            assign(tmp.begin(), tmp.end());
         }
 
         /**
@@ -701,6 +808,39 @@ namespace nsSdD
                 swap(*(last - 1));//last pointe sur apres la derniere qui contien le resultat final
             }
         }
+
+        /**
+         * \brief Construct and move an element before \a position
+         * \param position Iterator to the position in the list
+         * \param args... Constructor parameters
+         */
+        template<typename... Args>
+        iterator emplace(iterator position, Args&&... args)
+        {
+            CNode<T> *tmp = new CNode<T>(std::forward<Args>(args)...);
+            tmp->hook(position.m_CNodePtr);
+            return tmp;
+        }
+
+        /**
+         * \brief Construct and move an element to the beginning of the list
+         * \param args... Constructor parameters
+         */
+        template<typename... Args>
+        void emplace_front(Args&&... args)
+        {
+            emplace(begin(), std::forward<Args>(args)...);
+        }
+
+        /**
+         * \brief Construct and move an element to the end of the list
+         * \param args... Constructor parameters
+         */
+        template<typename... Args>
+        void emplace_back(Args&&... args)
+        {
+            emplace(end(), std::forward<Args>(args)...);
+        }
     };
 
     /**
@@ -720,3 +860,4 @@ namespace nsSdD
         x.swap(y);
     }
 }
+// Je pense c'est tout, on a implémenté la totalité de l'interface list, sauf les const/reverse iterator et methodes associée, et les comparaisons

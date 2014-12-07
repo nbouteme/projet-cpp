@@ -33,7 +33,7 @@ namespace nsSdD
 
         /**
          * \brief Returns a pointer to the next node.
-         * This is unused and there only to maintain comptability with
+         * This is unused and only there to maintain comptability with
          * eventual tests.
          * \return A pointer to the next node
          */
@@ -41,6 +41,10 @@ namespace nsSdD
         {
             return m_next;
         }
+        // Vu que la V2 est juste la V1 + iterator - GetSuivant, une
+        // classe comprenant les 3 est logiquement compatible avec les 2 versions.
+        // D'apres le sujet, la V1 doit juste fournir un GetSuivant sans necessité de l'utiliser
+        // La V1 concerne toute les methodes n'utilisant pas d'iterateur (quasi aucune, mais yen a)
 
         /**
          * \brief Removes a node from its list.

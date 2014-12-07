@@ -27,4 +27,7 @@ template <typename T>                                              \
 typename std::enable_if<has_##name<T>::value, bool>::type          \
 test_##name(void)
 
+
+// FIXME: On ne peut pas tester plusieurs traits, donc ca pose probleme si un test depends d'un autre, par exemple le test de size a besoin de push_front pour remplir la liste
+// On est censé ignorer les tests interdependant ? Ou dire qu'ils ont echoué ? Est-ce que le fait de ne pas pourvoir passer un test equivaut a un echec ?
 // TODO: Trouver une facon d'enregistrer les tests des leur declaration

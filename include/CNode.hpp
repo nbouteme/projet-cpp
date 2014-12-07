@@ -19,5 +19,7 @@ namespace nsSdD
         T m_data;
         /// Instantiates a CNode from a copied value \a val
         CNode (const T& val) : m_data(val) {}
+        template<typename... Args>
+        CNode (Args&& ...args) : m_data(std::forward<Args>(args)...) {}
     };
 }
