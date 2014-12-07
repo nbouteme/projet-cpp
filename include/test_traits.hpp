@@ -7,10 +7,9 @@
 
 /**
  * \def HAS_MEMBER(member)
- * Generates a trait class that determines if a type has one or more method
+ * Generates a trait class that determines if a type has one or more method overload
  * called \a member
  */
-
 #define HAS_MEMBER(member)                 \
 template <class T>                         \
 struct has_member_##member                 \
@@ -23,7 +22,7 @@ struct has_member_##member                 \
                                            \
     template <class C>                     \
     static no& test(decltype(C::member)*); \
-    template < typename C>                 \
+    template <typename C>                  \
     static yes& test(C*);                  \
                                            \
     static constexpr bool val =            \

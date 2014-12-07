@@ -1,8 +1,9 @@
 #pragma once
-/** @file test_classes.hpp */
 
-/**My Preprocessor Macro.*/ 
-#define TEST_DEFINE(x) (x*x)
+/*
+ * \file test_classes.hpp
+ * \brief Defines classes to test instantiation and assignment with.
+ */
 
 /// Class that can't be copied
 class NonCopyable

@@ -1,5 +1,11 @@
 #pragma once
 
+/**
+ * \file CNode.hpp
+ * \brief Definition of a generic list node
+ */
+
+
 #include <CBaseNode.hpp>
 
 namespace nsSdD

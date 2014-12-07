@@ -13,16 +13,8 @@ using namespace std;
  * iterator validity
  */
 
-struct A
-{
-    int a;
-};
-
 int main()
 {
-	nsSdD::CList<A> l;
-    A a {1};
-    l.push_front(a);
-    l.begin()->a = 0;
+    // Se referer au programme de test.
     return 0;
 }

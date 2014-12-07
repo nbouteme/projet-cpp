@@ -1,11 +1,17 @@
 #pragma once
 
+/**
+ * \file CList.hpp
+ * \brief Definition of a generic list
+ */
+
 #include <cstddef>
 #include <limits>
 #include <memory>
 
 #include <CNode.hpp>
 
+/// Namespace holding data-structures
 namespace nsSdD
 {
     /**

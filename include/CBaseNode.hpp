@@ -1,5 +1,10 @@
 #pragma once
 
+/**
+ * \file CBaseNode.hpp
+ * \brief Definition of a basic node
+ */
+
 namespace nsSdD
 {
     /// Doubly-linked node in a circular list.
