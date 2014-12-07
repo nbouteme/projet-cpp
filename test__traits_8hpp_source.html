@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.8"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
-        <title>CList: test_traits.hpp Source File</title>
+        <title>CList: /home/mirai/docs/include/test_traits.hpp Source File</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -50,7 +50,7 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_181434f280711d8be768ceb7cd4365f5.html">include</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -65,7 +65,7 @@
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * \brief Defines traits that identify a list container</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">   13</a></span>&#160;<span class="preprocessor">#define HAS_MEMBER(member)                 \</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define HAS_MEMBER(member)                 \</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">template &lt;class T&gt;                         \</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">struct has_member_##member                 \</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">{                                          \</span></div>
@@ -90,32 +90,6 @@
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">: public std::integral_constant            \</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">&lt;bool,has_member_##member&lt;T&gt;::val&gt;         \</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">{ };                                       \</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(insert)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(erase)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(push_back)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(pop_back)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(push_front)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(back)</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(front)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(pop_front)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(assign)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(clear)</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(remove)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(remove_if)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(unique)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(empty)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(size)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(max_size)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(splice)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(merge)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(reverse)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(sort)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(<a class="code" href="namespacens_sd_d.html#a5e97bcc4eb3c219b6b25ce9a669c2905">swap</a>)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(resize)</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<a class="code" href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a>(test)</div>
-<div class="ttc" id="namespacens_sd_d_html_a5e97bcc4eb3c219b6b25ce9a669c2905"><div class="ttname"><a href="namespacens_sd_d.html#a5e97bcc4eb3c219b6b25ce9a669c2905">nsSdD::swap</a></div><div class="ttdeci">void swap(CList&lt; T &gt; &amp;x, CList&lt; T &gt; &amp;y)</div><div class="ttdoc">Swaps the content of two lists. </div><div class="ttdef"><b>Definition:</b> <a href="_c_list_8hpp_source.html#l00718">CList.hpp:718</a></div></div>
-<div class="ttc" id="test__traits_8hpp_html_a283bd26686fe6813fa031e8a0d9a0e1c"><div class="ttname"><a href="test__traits_8hpp.html#a283bd26686fe6813fa031e8a0d9a0e1c">HAS_MEMBER</a></div><div class="ttdeci">#define HAS_MEMBER(member)</div><div class="ttdef"><b>Definition:</b> <a href="test__traits_8hpp_source.html#l00013">test_traits.hpp:13</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->

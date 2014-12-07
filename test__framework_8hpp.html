@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.8"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
-        <title>CList: test_framework.hpp File Reference</title>
+        <title>CList: /home/mirai/docs/include/test_framework.hpp File Reference</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -50,41 +50,126 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_181434f280711d8be768ceb7cd4365f5.html">include</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">test_framework.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="test__traits_8hpp_source.html">test_traits.hpp</a>&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
 <code>#include &lt;<a class="el" href="_izi_assert_8h_source.html">IziAssert.h</a>&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for test_framework.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="test__framework_8hpp__incl.png" border="0" usemap="#test__framework_8hpp" alt=""/></div>
-<map name="test__framework_8hpp" id="test__framework_8hpp">
-<area shape="rect" id="node2" href="test__traits_8hpp.html" title="test_traits.hpp" alt="" coords="5,80,120,107"/><area shape="rect" id="node4" href="_izi_assert_8h.html" title="IZI_ASSERT. " alt="" coords="145,80,234,107"/></map>
+<div class="center"><img src="test__framework_8hpp__incl.png" border="0" usemap="#_2home_2mirai_2docs_2include_2test__framework_8hpp" alt=""/></div>
+<map name="_2home_2mirai_2docs_2include_2test__framework_8hpp" id="_2home_2mirai_2docs_2include_2test__framework_8hpp">
+<area shape="rect" id="node2" href="test__traits_8hpp.html" title="test_traits.hpp" alt="" coords="5,95,120,121"/><area shape="rect" id="node6" href="_izi_assert_8h.html" title="IZI_ASSERT. " alt="" coords="302,95,391,121"/></map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="test__framework_8hpp__dep__incl.png" border="0" usemap="#test__framework_8hppdep" alt=""/></div>
-<map name="test__framework_8hppdep" id="test__framework_8hppdep">
-<area shape="rect" id="node2" href="test_2main_8cpp.html" title="main.cpp" alt="" coords="41,80,123,107"/></map>
+<div class="center"><img src="test__framework_8hpp__dep__incl.png" border="0" usemap="#_2home_2mirai_2docs_2include_2test__framework_8hppdep" alt=""/></div>
+<map name="_2home_2mirai_2docs_2include_2test__framework_8hppdep" id="_2home_2mirai_2docs_2include_2test__framework_8hppdep">
+<area shape="rect" id="node2" href="test_2main_8cpp.html" title="/home/mirai/docs/test\l/main.cpp" alt="" coords="15,95,178,136"/></map>
 </div>
 </div>
 <p><a href="test__framework_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__base__test.html">_base_test</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:a6686571cd8d511b7268f872d6dcc226a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__framework_8hpp.html#a6686571cd8d511b7268f872d6dcc226a">CONCAT2</a>(x, y)&#160;&#160;&#160;x ## y</td></tr>
+<tr class="separator:a6686571cd8d511b7268f872d6dcc226a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f18db18bca26cafa95e9719de4a41ef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__framework_8hpp.html#a2f18db18bca26cafa95e9719de4a41ef">CONCAT</a>(x, y)&#160;&#160;&#160;<a class="el" href="test__framework_8hpp.html#a6686571cd8d511b7268f872d6dcc226a">CONCAT2</a>(x, y)</td></tr>
+<tr class="separator:a2f18db18bca26cafa95e9719de4a41ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45feb1f37ce559e49baf8655d769ef85"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__framework_8hpp.html#a45feb1f37ce559e49baf8655d769ef85">TEST</a>(name)</td></tr>
 <tr class="separator:a45feb1f37ce559e49baf8655d769ef85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a4297490fa5aeb65d83c916132a19daf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__framework_8hpp.html#a4297490fa5aeb65d83c916132a19daf8">_register_test</a> (const char *name, <a class="el" href="struct__base__test.html">_base_test</a> *self)</td></tr>
+<tr class="separator:a4297490fa5aeb65d83c916132a19daf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9074a8a6fdaf40c2775e80d057cc779"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__framework_8hpp.html#ad9074a8a6fdaf40c2775e80d057cc779">run_test</a> (std::string name)</td></tr>
+<tr class="separator:ad9074a8a6fdaf40c2775e80d057cc779"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf5fa5d1a8867dba73315c105f40b449"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__framework_8hpp.html#adf5fa5d1a8867dba73315c105f40b449">run_all_tests</a> ()</td></tr>
+<tr class="separator:adf5fa5d1a8867dba73315c105f40b449"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aa188bcde70f0dc7f74b0509aac5694e1"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <br class="typebreak" />
+<a class="el" href="struct__base__test.html">_base_test</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test__framework_8hpp.html#aa188bcde70f0dc7f74b0509aac5694e1">__tests</a></td></tr>
+<tr class="separator:aa188bcde70f0dc7f74b0509aac5694e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="a2f18db18bca26cafa95e9719de4a41ef"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONCAT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">y&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="test__framework_8hpp.html#a6686571cd8d511b7268f872d6dcc226a">CONCAT2</a>(x, y)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="test__framework_8hpp_source.html#l00048">48</a> of file <a class="el" href="test__framework_8hpp_source.html">test_framework.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6686571cd8d511b7268f872d6dcc226a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONCAT2</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">y&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;x ## y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="test__framework_8hpp_source.html#l00047">47</a> of file <a class="el" href="test__framework_8hpp_source.html">test_framework.hpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a45feb1f37ce559e49baf8655d769ef85"></a>
 <div class="memitem">
 <div class="memproto">
@@ -98,19 +183,128 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;                                              \</div>
-<div class="line">typename std::enable_if&lt;has_##name&lt;T&gt;::value == <span class="keyword">false</span>, <span class="keywordtype">bool</span>&gt;::type \</div>
-<div class="line">test_##name(<span class="keywordtype">void</span>)                                                  \</div>
+<b>Value:</b><div class="fragment"><div class="line">HAS_MEMBER(name)                                                   \</div>
+<div class="line">template &lt;typename T&gt;                                              \</div>
+<div class="line"> struct s_obj_##name : <span class="keyword">public</span> <a class="code" href="struct__base__test.html">_base_test</a>                           \</div>
+<div class="line">{                                                                  \</div>
+<div class="line">template &lt;typename C&gt;                                              \</div>
+<div class="line">typename std::enable_if&lt;has_##name&lt;C&gt;::value == <span class="keyword">false</span>, <span class="keywordtype">bool</span>&gt;::type \</div>
+<div class="line">    test_##name(<span class="keywordtype">void</span>);                                             \</div>
+<div class="line">template &lt;typename C&gt;                                              \</div>
+<div class="line">    typename std::enable_if&lt;has_##name&lt;C&gt;::value, <span class="keywordtype">bool</span>&gt;::type      \</div>
+<div class="line">    test_##name(<span class="keywordtype">void</span>);                                             \</div>
+<div class="line"> s_obj_##name() { <a class="code" href="test__framework_8hpp.html#a4297490fa5aeb65d83c916132a19daf8">_register_test</a>(#name, <span class="keyword">this</span>); }                   \</div>
+<div class="line">    virtual <span class="keywordtype">bool</span> test() { <span class="keywordflow">return</span> test_##name&lt;T&gt;(); }               \</div>
+<div class="line">};                                                                 \</div>
+<div class="line">s_obj_ ## name &lt; TTTEST &gt; <a class="code" href="test__framework_8hpp.html#a2f18db18bca26cafa95e9719de4a41ef">CONCAT</a>(_tmp, __LINE__);                  \</div>
+<div class="line">template &lt;typename T&gt;                                              \</div>
+<div class="line">template &lt;typename C&gt;                                              \</div>
+<div class="line">typename std::enable_if&lt;has_##name&lt;C&gt;::value == <span class="keyword">false</span>, <span class="keywordtype">bool</span>&gt;::type \</div>
+<div class="line"> s_obj_##name&lt;T&gt;::test_##name(<span class="keywordtype">void</span>)                                \</div>
 <div class="line">{                                                                  <a class="code" href="_izi_assert_8h.html#aa25bf78139c9907666ab506544972aa2">\</a></div>
 <div class="line"><a class="code" href="_izi_assert_8h.html#aa25bf78139c9907666ab506544972aa2">    IZI_ASSERT</a>(!<span class="stringliteral">&quot;Methode &quot;</span> #name <span class="stringliteral">&quot; non implémentée&quot;</span>);              \</div>
 <div class="line">    return <span class="keyword">false</span>;                                                  \</div>
 <div class="line">}                                                                  \</div>
 <div class="line">template &lt;typename T&gt;                                              \</div>
-<div class="line">typename std::enable_if&lt;has_##name&lt;T&gt;::value, <span class="keywordtype">bool</span>&gt;::type          \</div>
-<div class="line">test_##name(<span class="keywordtype">void</span>)</div>
+<div class="line">template &lt;typename C&gt;                                              \</div>
+<div class="line">typename std::enable_if&lt;has_##name&lt;C&gt;::value, <span class="keywordtype">bool</span>&gt;::type          \</div>
+<div class="line"> s_obj_##name&lt;T&gt;::test_##name(<span class="keywordtype">void</span>)</div>
+<div class="ttc" id="test__framework_8hpp_html_a2f18db18bca26cafa95e9719de4a41ef"><div class="ttname"><a href="test__framework_8hpp.html#a2f18db18bca26cafa95e9719de4a41ef">CONCAT</a></div><div class="ttdeci">#define CONCAT(x, y)</div><div class="ttdef"><b>Definition:</b> <a href="test__framework_8hpp_source.html#l00048">test_framework.hpp:48</a></div></div>
+<div class="ttc" id="struct__base__test_html"><div class="ttname"><a href="struct__base__test.html">_base_test</a></div><div class="ttdef"><b>Definition:</b> <a href="test__framework_8hpp_source.html#l00024">test_framework.hpp:24</a></div></div>
 <div class="ttc" id="_izi_assert_8h_html_aa25bf78139c9907666ab506544972aa2"><div class="ttname"><a href="_izi_assert_8h.html#aa25bf78139c9907666ab506544972aa2">IZI_ASSERT</a></div><div class="ttdeci">#define IZI_ASSERT(condition)</div><div class="ttdef"><b>Definition:</b> <a href="_izi_assert_8h_source.html#l00018">IziAssert.h:18</a></div></div>
+<div class="ttc" id="test__framework_8hpp_html_a4297490fa5aeb65d83c916132a19daf8"><div class="ttname"><a href="test__framework_8hpp.html#a4297490fa5aeb65d83c916132a19daf8">_register_test</a></div><div class="ttdeci">void _register_test(const char *name, _base_test *self)</div><div class="ttdef"><b>Definition:</b> <a href="test__framework_8hpp_source.html#l00031">test_framework.hpp:31</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="test__framework_8hpp_source.html#l00018">18</a> of file <a class="el" href="test__framework_8hpp_source.html">test_framework.hpp</a>.</p>
+<p>Definition at line <a class="el" href="test__framework_8hpp_source.html#l00056">56</a> of file <a class="el" href="test__framework_8hpp_source.html">test_framework.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a4297490fa5aeb65d83c916132a19daf8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void _register_test </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct__base__test.html">_base_test</a> *&#160;</td>
+          <td class="paramname"><em>self</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="test__framework_8hpp_source.html#l00031">31</a> of file <a class="el" href="test__framework_8hpp_source.html">test_framework.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adf5fa5d1a8867dba73315c105f40b449"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void run_all_tests </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="test__framework_8hpp_source.html#l00041">41</a> of file <a class="el" href="test__framework_8hpp_source.html">test_framework.hpp</a>.</p>
+
+<p>Referenced by <a class="el" href="test_2main_8cpp_source.html#l00429">main()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="test__framework_8hpp_adf5fa5d1a8867dba73315c105f40b449_icgraph.png" border="0" usemap="#test__framework_8hpp_adf5fa5d1a8867dba73315c105f40b449_icgraph" alt=""/></div>
+<map name="test__framework_8hpp_adf5fa5d1a8867dba73315c105f40b449_icgraph" id="test__framework_8hpp_adf5fa5d1a8867dba73315c105f40b449_icgraph">
+<area shape="rect" id="node2" href="test_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="main" alt="" coords="156,5,211,32"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ad9074a8a6fdaf40c2775e80d057cc779"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void run_test </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="test__framework_8hpp_source.html#l00036">36</a> of file <a class="el" href="test__framework_8hpp_source.html">test_framework.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="aa188bcde70f0dc7f74b0509aac5694e1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string, <a class="el" href="struct__base__test.html">_base_test</a>*&gt; __tests</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="test__framework_8hpp_source.html#l00029">29</a> of file <a class="el" href="test__framework_8hpp_source.html">test_framework.hpp</a>.</p>
 
 </div>
 </div>

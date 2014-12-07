@@ -2,4 +2,5 @@
 <area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#af41da388e9983741e7a559f1b6a0ae01" title="Returns an iterator to the first element. " alt="" coords="229,5,374,32"/>
 <area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#a9d67e4a55aac8ccd2b7cd8fd3939a176" title="Returns an iterator pointing after the last element. " alt="" coords="234,56,369,83"/>
 <area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#a0ab43df16936388ddf36555d762006db" title="Removes a node from the list, given an iterator position to it. " alt="" coords="228,107,375,133"/>
+<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_base_node.html#a1588132fb228c6d1874493051d6efc7c" title="Removes a node from its list. Its ressources aren&#39;t freed. " alt="" coords="423,107,625,133"/>
 </map>

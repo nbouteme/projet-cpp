@@ -1,3 +1,6 @@
 <map id="nsSdD::CBaseNode::hook" name="nsSdD::CBaseNode::hook">
-<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#aeccfa4803cdc7ffb336b3032e39e70a0" title="Inserts a copy of val before position. " alt="" coords="240,5,387,32"/>
+<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#a163c1352e0b5096b000cc64ce538900e" title="Construct and move an element before position. " alt="" coords="240,42,405,69"/>
+<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#aeccfa4803cdc7ffb336b3032e39e70a0" title="Inserts a copy of val before position. " alt="" coords="249,93,396,119"/>
+<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#a574c59832df935a639726e58377deb43" title="Construct and move an element to the beginning of the list. " alt="" coords="472,5,637,47"/>
+<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#a61fcd56eed48441118a156a8becc0805" title="Construct and move an element to the end of the list. " alt="" coords="453,71,656,98"/>
 </map>

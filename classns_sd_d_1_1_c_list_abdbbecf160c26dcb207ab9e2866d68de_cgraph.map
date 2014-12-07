@@ -1,4 +1,5 @@
 <map id="nsSdD::CList::pop_front" name="nsSdD::CList::pop_front">
 <area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#af41da388e9983741e7a559f1b6a0ae01" title="Returns an iterator to the first element. " alt="" coords="226,5,371,32"/>
 <area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#a0ab43df16936388ddf36555d762006db" title="Removes a node from the list, given an iterator position to it. " alt="" coords="225,56,372,83"/>
+<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_base_node.html#a1588132fb228c6d1874493051d6efc7c" title="Removes a node from its list. Its ressources aren&#39;t freed. " alt="" coords="420,56,623,83"/>
 </map>

@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.8"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
-        <title>CList: test_framework.hpp Source File</title>
+        <title>CList: /home/mirai/docs/include/test_framework.hpp Source File</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -50,7 +50,7 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_181434f280711d8be768ceb7cd4365f5.html">include</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -65,31 +65,91 @@
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * \brief Define the unit testing engine</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="test__traits_8hpp.html">test_traits.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_izi_assert_8h.html">IziAssert.h</a>&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * \def TEST(name)</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * Generate a generic test signature called if the T type has the \a</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * member declared, the test is callable with test_\a name.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * If the T type doesn&#39;t have a \a name member, a dummy test is called instead</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="test__framework_8hpp.html#a45feb1f37ce559e49baf8655d769ef85">   18</a></span>&#160;<span class="preprocessor">#define TEST(name)                                                 \</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">template &lt;typename T&gt;                                              \</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">typename std::enable_if&lt;has_##name&lt;T&gt;::value == false, bool&gt;::type \</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">test_##name(void)                                                  \</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">{                                                                  \</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">    IZI_ASSERT(!&quot;Methode &quot; #name &quot; non implémentée&quot;);              \</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">    return false;                                                  \</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">}                                                                  \</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">template &lt;typename T&gt;                                              \</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">typename std::enable_if&lt;has_##name&lt;T&gt;::value, bool&gt;::type          \</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">test_##name(void)</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// TODO: Trouver une facon d&#39;enregistrer les tests des leur declaration</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">//     _  _____ _____ _____ _   _ _____ ___ ___  _   _ </span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//    / \|_   _|_   _| ____| \ | |_   _|_ _/ _ \| \ | |</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//   / _ \ | |   | | |  _| |  \| | | |  | | | | |  \| |</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//  / ___ \| |   | | | |___| |\  | | |  | | |_| | |\  |</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// /_/   \_\_|   |_| |_____|_| \_| |_| |___\___/|_| \_|</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// Âmes sensibles, s&#39;abstenir</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="test__traits_8hpp.html">test_traits.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_izi_assert_8h.html">IziAssert.h</a>&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef TTTEST</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#error &quot;You must define TTTEST with the Type you want To TEST !&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="struct__base__test.html">   24</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct__base__test.html">_base_test</a></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="struct__base__test.html#a15d5da58ecdec771e98961c2bfd0de82">test</a>() = 0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="test__framework_8hpp.html#aa188bcde70f0dc7f74b0509aac5694e1">   29</a></span>&#160;std::map&lt;std::string, _base_test*&gt; <a class="code" href="test__framework_8hpp.html#aa188bcde70f0dc7f74b0509aac5694e1">__tests</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="test__framework_8hpp.html#a4297490fa5aeb65d83c916132a19daf8">   31</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="test__framework_8hpp.html#a4297490fa5aeb65d83c916132a19daf8">_register_test</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <a class="code" href="struct__base__test.html">_base_test</a> *<span class="keyword">self</span>)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    __tests[name] = <span class="keyword">self</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="test__framework_8hpp.html#ad9074a8a6fdaf40c2775e80d057cc779">   36</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="test__framework_8hpp.html#ad9074a8a6fdaf40c2775e80d057cc779">run_test</a>(std::string name)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    __tests[name]-&gt;test();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="test__framework_8hpp.html#adf5fa5d1a8867dba73315c105f40b449">   41</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="test__framework_8hpp.html#adf5fa5d1a8867dba73315c105f40b449">run_all_tests</a>()</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> t : __tests)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        t.second-&gt;test();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="test__framework_8hpp.html#a6686571cd8d511b7268f872d6dcc226a">   47</a></span>&#160;<span class="preprocessor">#define CONCAT2(x, y) x ## y </span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="test__framework_8hpp.html#a2f18db18bca26cafa95e9719de4a41ef">   48</a></span>&#160;<span class="preprocessor">#define CONCAT(x, y) CONCAT2(x, y)</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> * \def TEST(name)</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> * Generate a generic test signature called if the T type has the \a</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> * member declared, the test is callable with test_\a name.</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> * If the T type doesn&#39;t have a \a name member, a dummy test is called instead</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="test__framework_8hpp.html#a45feb1f37ce559e49baf8655d769ef85">   56</a></span>&#160;<span class="preprocessor">#define TEST(name)                                                 \</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">HAS_MEMBER(name)                                                   \</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">template &lt;typename T&gt;                                              \</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor"> struct s_obj_##name : public _base_test                           \</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">{                                                                  \</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">template &lt;typename C&gt;                                              \</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">typename std::enable_if&lt;has_##name&lt;C&gt;::value == false, bool&gt;::type \</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">    test_##name(void);                                             \</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">template &lt;typename C&gt;                                              \</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">    typename std::enable_if&lt;has_##name&lt;C&gt;::value, bool&gt;::type      \</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">    test_##name(void);                                             \</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor"> s_obj_##name() { _register_test(#name, this); }                   \</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">    virtual bool test() { return test_##name&lt;T&gt;(); }               \</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">};                                                                 \</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">s_obj_ ## name &lt; TTTEST &gt; CONCAT(_tmp, __LINE__);                  \</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">template &lt;typename T&gt;                                              \</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">template &lt;typename C&gt;                                              \</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">typename std::enable_if&lt;has_##name&lt;C&gt;::value == false, bool&gt;::type \</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor"> s_obj_##name&lt;T&gt;::test_##name(void)                                \</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">{                                                                  \</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">    IZI_ASSERT(!&quot;Methode &quot; #name &quot; non implémentée&quot;);              \</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">    return false;                                                  \</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">}                                                                  \</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">template &lt;typename T&gt;                                              \</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">template &lt;typename C&gt;                                              \</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">typename std::enable_if&lt;has_##name&lt;C&gt;::value, bool&gt;::type          \</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor"> s_obj_##name&lt;T&gt;::test_##name(void)</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">// J&#39;vous l&#39;avais bien dis.</span></div>
+<div class="ttc" id="test__framework_8hpp_html_aa188bcde70f0dc7f74b0509aac5694e1"><div class="ttname"><a href="test__framework_8hpp.html#aa188bcde70f0dc7f74b0509aac5694e1">__tests</a></div><div class="ttdeci">std::map&lt; std::string, _base_test * &gt; __tests</div><div class="ttdef"><b>Definition:</b> <a href="test__framework_8hpp_source.html#l00029">test_framework.hpp:29</a></div></div>
+<div class="ttc" id="struct__base__test_html_a15d5da58ecdec771e98961c2bfd0de82"><div class="ttname"><a href="struct__base__test.html#a15d5da58ecdec771e98961c2bfd0de82">_base_test::test</a></div><div class="ttdeci">virtual bool test()=0</div></div>
+<div class="ttc" id="struct__base__test_html"><div class="ttname"><a href="struct__base__test.html">_base_test</a></div><div class="ttdef"><b>Definition:</b> <a href="test__framework_8hpp_source.html#l00024">test_framework.hpp:24</a></div></div>
 <div class="ttc" id="_izi_assert_8h_html"><div class="ttname"><a href="_izi_assert_8h.html">IziAssert.h</a></div><div class="ttdoc">IZI_ASSERT. </div></div>
+<div class="ttc" id="test__framework_8hpp_html_adf5fa5d1a8867dba73315c105f40b449"><div class="ttname"><a href="test__framework_8hpp.html#adf5fa5d1a8867dba73315c105f40b449">run_all_tests</a></div><div class="ttdeci">void run_all_tests()</div><div class="ttdef"><b>Definition:</b> <a href="test__framework_8hpp_source.html#l00041">test_framework.hpp:41</a></div></div>
 <div class="ttc" id="test__traits_8hpp_html"><div class="ttname"><a href="test__traits_8hpp.html">test_traits.hpp</a></div></div>
+<div class="ttc" id="test__framework_8hpp_html_ad9074a8a6fdaf40c2775e80d057cc779"><div class="ttname"><a href="test__framework_8hpp.html#ad9074a8a6fdaf40c2775e80d057cc779">run_test</a></div><div class="ttdeci">void run_test(std::string name)</div><div class="ttdef"><b>Definition:</b> <a href="test__framework_8hpp_source.html#l00036">test_framework.hpp:36</a></div></div>
+<div class="ttc" id="test__framework_8hpp_html_a4297490fa5aeb65d83c916132a19daf8"><div class="ttname"><a href="test__framework_8hpp.html#a4297490fa5aeb65d83c916132a19daf8">_register_test</a></div><div class="ttdeci">void _register_test(const char *name, _base_test *self)</div><div class="ttdef"><b>Definition:</b> <a href="test__framework_8hpp_source.html#l00031">test_framework.hpp:31</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->

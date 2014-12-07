@@ -1,17 +1,12 @@
 <map id="nsSdD::CList::erase" name="nsSdD::CList::erase">
-<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#ac9c0f95ce50cfe935e81bc158c34c7aa" title="Assigns the content of the list by the elements in the [first; last[ range If the range is smaller th..." alt="" coords="212,5,363,32"/>
-<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#a257a4b4168de30c672465c649971f258" title="Removes a range [first;last[ from the list. " alt="" coords="214,56,361,83"/>
-<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#a99fba05885d5eec5ee004337244943bf" title="Removes the last element of a list. " alt="" coords="201,107,373,133"/>
-<area shape="rect" id="node7" href="$classns_sd_d_1_1_c_list.html#abdbbecf160c26dcb207ab9e2866d68de" title="Removes the first element of a list. " alt="" coords="201,157,373,184"/>
-<area shape="rect" id="node9" href="$classns_sd_d_1_1_c_list.html#a37b247ba8ad19c1b28dbe49576dbb556" title="Remove every elements equal to val Remove every elements in the list that are equal to val..." alt="" coords="207,208,367,235"/>
-<area shape="rect" id="node11" href="$classns_sd_d_1_1_c_list.html#a4df5ac6a378172689d7a0369f3f34cb8" title="nsSdD::CList::remove_if" alt="" coords="200,259,375,285"/>
-<area shape="rect" id="node13" href="$classns_sd_d_1_1_c_list.html#a3982b8ab302ebe53b0f7b8866d1d5aa9" title="Resize the container to n elements. If n &gt; size(), the extra element are default constructed or copie..." alt="" coords="213,309,361,336"/>
-<area shape="rect" id="node14" href="$test_2main_8cpp.html#a155f681cf85282a57b58ecbc3197a5d6" title="TEST" alt="" coords="260,360,315,387"/>
-<area shape="rect" id="node15" href="$classns_sd_d_1_1_c_list.html#a3d320af3b5706fdcd52a350fe3b71dde" title="Remove duplicated consecutive elements. " alt="" coords="211,411,364,437"/>
-<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#a054317243498e5a560050e16db28c5f2" title="Assigns the content of rhs to this Assigns the content of rhs to this. " alt="" coords="423,5,599,32"/>
-<area shape="rect" id="node6" href="$test_2main_8cpp.html#aa39807b16fb2f8695b25bfdd4893b59b" title="TEST" alt="" coords="483,107,538,133"/>
-<area shape="rect" id="node8" href="$test_2main_8cpp.html#adbbafc21068a029870c5e9619a10bf21" title="TEST" alt="" coords="483,157,538,184"/>
-<area shape="rect" id="node10" href="$test_2main_8cpp.html#ac01eb8c418210780d9e70f125aa52140" title="TEST" alt="" coords="483,208,538,235"/>
-<area shape="rect" id="node12" href="$test_2main_8cpp.html#ac0772c644307b326a919bf04ed741e61" title="TEST" alt="" coords="483,259,538,285"/>
-<area shape="rect" id="node16" href="$test_2main_8cpp.html#a4507235c78fce25dde5282f27b610d3b" title="TEST" alt="" coords="483,411,538,437"/>
+<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#a33a2cd3f7682a658bb90c176b49103d4" title="Assigns the content of the list by the elements in the [first; last[ range If the range is smaller th..." alt="" coords="212,31,363,57"/>
+<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#a257a4b4168de30c672465c649971f258" title="Removes a range [first;last[ from the list. " alt="" coords="214,81,361,108"/>
+<area shape="rect" id="node6" href="$classns_sd_d_1_1_c_list.html#a99fba05885d5eec5ee004337244943bf" title="Removes the last element of a list. " alt="" coords="201,132,373,159"/>
+<area shape="rect" id="node7" href="$classns_sd_d_1_1_c_list.html#abdbbecf160c26dcb207ab9e2866d68de" title="Removes the first element of a list. " alt="" coords="201,183,373,209"/>
+<area shape="rect" id="node8" href="$classns_sd_d_1_1_c_list.html#a37b247ba8ad19c1b28dbe49576dbb556" title="Remove every elements equal to val Remove every elements in the list that are equal to val..." alt="" coords="207,233,367,260"/>
+<area shape="rect" id="node9" href="$classns_sd_d_1_1_c_list.html#a4df5ac6a378172689d7a0369f3f34cb8" title="nsSdD::CList::remove_if" alt="" coords="200,284,375,311"/>
+<area shape="rect" id="node10" href="$classns_sd_d_1_1_c_list.html#a3982b8ab302ebe53b0f7b8866d1d5aa9" title="Resize the container to n elements. If n &gt; size(), the extra element are default constructed or copie..." alt="" coords="213,335,361,361"/>
+<area shape="rect" id="node11" href="$classns_sd_d_1_1_c_list.html#a3d320af3b5706fdcd52a350fe3b71dde" title="Remove duplicated consecutive elements. " alt="" coords="211,385,364,412"/>
+<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#aebdae51329d1d47dbaf1b452657cb0b8" title="Assigns the content of the list by n copies of val. " alt="" coords="435,5,586,32"/>
+<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#a054317243498e5a560050e16db28c5f2" title="Assigns the content of rhs to this Assigns the content of rhs to this. " alt="" coords="423,56,599,83"/>
 </map>

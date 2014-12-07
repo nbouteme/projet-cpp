@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
         <meta name="generator" content="Doxygen 1.8.8"/>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
-        <title>CList: CNode.hpp Source File</title>
+        <title>CList: /home/mirai/docs/include/CNode.hpp Source File</title>
         <!--<link href="tabs.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="dynsections.js"></script>
         <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -50,7 +50,7 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_181434f280711d8be768ceb7cd4365f5.html">include</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -70,10 +70,14 @@
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classns_sd_d_1_1_c_node.html#a729fc116048235a06027e697fe04c0ca">   19</a></span>&#160;        T <a class="code" href="classns_sd_d_1_1_c_node.html#a729fc116048235a06027e697fe04c0ca">m_data</a>;</div>
 <div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classns_sd_d_1_1_c_node.html#af88e5a80b5771fab279af5ce017baef6">   21</a></span>&#160;        <a class="code" href="classns_sd_d_1_1_c_node.html#af88e5a80b5771fab279af5ce017baef6">CNode</a> (<span class="keyword">const</span> T&amp; val) : m_data(val) {}</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    };</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classns_sd_d_1_1_c_node.html#ad40807a451361dce8f6b1160ae1b6afc">   23</a></span>&#160;        <a class="code" href="classns_sd_d_1_1_c_node.html#ad40807a451361dce8f6b1160ae1b6afc">CNode</a> (Args&amp;&amp; ...args) : m_data(<a class="code" href="namespacestd.html">std</a>::forward&lt;Args&gt;(args)...) {}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    };</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
 <div class="ttc" id="classns_sd_d_1_1_c_base_node_html"><div class="ttname"><a href="classns_sd_d_1_1_c_base_node.html">nsSdD::CBaseNode</a></div><div class="ttdoc">Doubly-linked node in a circular list. </div><div class="ttdef"><b>Definition:</b> <a href="_c_base_node_8hpp_source.html#l00011">CBaseNode.hpp:11</a></div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdoc">STL namespace. </div></div>
 <div class="ttc" id="_c_base_node_8hpp_html"><div class="ttname"><a href="_c_base_node_8hpp.html">CBaseNode.hpp</a></div><div class="ttdoc">Definition of a basic node. </div></div>
+<div class="ttc" id="classns_sd_d_1_1_c_node_html_ad40807a451361dce8f6b1160ae1b6afc"><div class="ttname"><a href="classns_sd_d_1_1_c_node.html#ad40807a451361dce8f6b1160ae1b6afc">nsSdD::CNode::CNode</a></div><div class="ttdeci">CNode(Args &amp;&amp;...args)</div><div class="ttdef"><b>Definition:</b> <a href="_c_node_8hpp_source.html#l00023">CNode.hpp:23</a></div></div>
 <div class="ttc" id="classns_sd_d_1_1_c_node_html"><div class="ttname"><a href="classns_sd_d_1_1_c_node.html">nsSdD::CNode</a></div><div class="ttdoc">Doubly linked node that can hold a value. </div><div class="ttdef"><b>Definition:</b> <a href="_c_node_8hpp_source.html#l00015">CNode.hpp:15</a></div></div>
 <div class="ttc" id="classns_sd_d_1_1_c_node_html_af88e5a80b5771fab279af5ce017baef6"><div class="ttname"><a href="classns_sd_d_1_1_c_node.html#af88e5a80b5771fab279af5ce017baef6">nsSdD::CNode::CNode</a></div><div class="ttdeci">CNode(const T &amp;val)</div><div class="ttdoc">Instantiates a CNode from a copied value val. </div><div class="ttdef"><b>Definition:</b> <a href="_c_node_8hpp_source.html#l00021">CNode.hpp:21</a></div></div>
 <div class="ttc" id="classns_sd_d_1_1_c_node_html_a729fc116048235a06027e697fe04c0ca"><div class="ttname"><a href="classns_sd_d_1_1_c_node.html#a729fc116048235a06027e697fe04c0ca">nsSdD::CNode::m_data</a></div><div class="ttdeci">T m_data</div><div class="ttdoc">The data contained in the node. </div><div class="ttdef"><b>Definition:</b> <a href="_c_node_8hpp_source.html#l00019">CNode.hpp:19</a></div></div>

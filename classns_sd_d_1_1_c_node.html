@@ -89,12 +89,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af88e5a80b5771fab279af5ce017baef6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classns_sd_d_1_1_c_node.html#af88e5a80b5771fab279af5ce017baef6">CNode</a> (const T &amp;val)</td></tr>
 <tr class="memdesc:af88e5a80b5771fab279af5ce017baef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates a <a class="el" href="classns_sd_d_1_1_c_node.html" title="Doubly linked node that can hold a value. ">CNode</a> from a copied value <em>val</em>.  <a href="#af88e5a80b5771fab279af5ce017baef6">More...</a><br /></td></tr>
 <tr class="separator:af88e5a80b5771fab279af5ce017baef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad40807a451361dce8f6b1160ae1b6afc"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:ad40807a451361dce8f6b1160ae1b6afc"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classns_sd_d_1_1_c_node.html#ad40807a451361dce8f6b1160ae1b6afc">CNode</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:ad40807a451361dce8f6b1160ae1b6afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classns_sd_d_1_1_c_base_node"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classns_sd_d_1_1_c_base_node')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classns_sd_d_1_1_c_base_node.html">nsSdD::CBaseNode</a></td></tr>
 <tr class="memitem:a8066d10993dc6b488f08093a88fb3cee inherit pub_methods_classns_sd_d_1_1_c_base_node"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classns_sd_d_1_1_c_base_node.html#a8066d10993dc6b488f08093a88fb3cee">hook</a> (<a class="el" href="classns_sd_d_1_1_c_base_node.html">pointer</a> elem)</td></tr>
 <tr class="memdesc:a8066d10993dc6b488f08093a88fb3cee inherit pub_methods_classns_sd_d_1_1_c_base_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Places this node before <em>elem</em>.  <a href="#a8066d10993dc6b488f08093a88fb3cee">More...</a><br /></td></tr>
 <tr class="separator:a8066d10993dc6b488f08093a88fb3cee inherit pub_methods_classns_sd_d_1_1_c_base_node"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3245c859ad2b91f11b9149d959b92720 inherit pub_methods_classns_sd_d_1_1_c_base_node"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classns_sd_d_1_1_c_base_node.html">pointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classns_sd_d_1_1_c_base_node.html#a3245c859ad2b91f11b9149d959b92720">GetSuivant</a> ()</td></tr>
-<tr class="memdesc:a3245c859ad2b91f11b9149d959b92720 inherit pub_methods_classns_sd_d_1_1_c_base_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the next node. This is unused and there only to maintain comptability with eventual tests.  <a href="#a3245c859ad2b91f11b9149d959b92720">More...</a><br /></td></tr>
+<tr class="memdesc:a3245c859ad2b91f11b9149d959b92720 inherit pub_methods_classns_sd_d_1_1_c_base_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the next node. This is unused and only there to maintain comptability with eventual tests.  <a href="#a3245c859ad2b91f11b9149d959b92720">More...</a><br /></td></tr>
 <tr class="separator:a3245c859ad2b91f11b9149d959b92720 inherit pub_methods_classns_sd_d_1_1_c_base_node"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1588132fb228c6d1874493051d6efc7c inherit pub_methods_classns_sd_d_1_1_c_base_node"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classns_sd_d_1_1_c_base_node.html#a1588132fb228c6d1874493051d6efc7c">unhook</a> ()</td></tr>
 <tr class="memdesc:a1588132fb228c6d1874493051d6efc7c inherit pub_methods_classns_sd_d_1_1_c_base_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a node from its list. Its ressources aren't freed.  <a href="#a1588132fb228c6d1874493051d6efc7c">More...</a><br /></td></tr>
@@ -161,6 +164,36 @@ template&lt;typename T&gt; </div>
 <p>Instantiates a <a class="el" href="classns_sd_d_1_1_c_node.html" title="Doubly linked node that can hold a value. ">CNode</a> from a copied value <em>val</em>. </p>
 
 <p>Definition at line <a class="el" href="_c_node_8hpp_source.html#l00021">21</a> of file <a class="el" href="_c_node_8hpp_source.html">CNode.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad40807a451361dce8f6b1160ae1b6afc"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classns_sd_d_1_1_c_node.html">nsSdD::CNode</a>&lt; T &gt;::<a class="el" href="classns_sd_d_1_1_c_node.html">CNode</a> </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="_c_node_8hpp_source.html#l00023">23</a> of file <a class="el" href="_c_node_8hpp_source.html">CNode.hpp</a>.</p>
 
 </div>
 </div>

@@ -89,7 +89,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8066d10993dc6b488f08093a88fb3cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Places this node before <em>elem</em>.  <a href="#a8066d10993dc6b488f08093a88fb3cee">More...</a><br /></td></tr>
 <tr class="separator:a8066d10993dc6b488f08093a88fb3cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3245c859ad2b91f11b9149d959b92720"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classns_sd_d_1_1_c_base_node.html">pointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classns_sd_d_1_1_c_base_node.html#a3245c859ad2b91f11b9149d959b92720">GetSuivant</a> ()</td></tr>
-<tr class="memdesc:a3245c859ad2b91f11b9149d959b92720"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the next node. This is unused and there only to maintain comptability with eventual tests.  <a href="#a3245c859ad2b91f11b9149d959b92720">More...</a><br /></td></tr>
+<tr class="memdesc:a3245c859ad2b91f11b9149d959b92720"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the next node. This is unused and only there to maintain comptability with eventual tests.  <a href="#a3245c859ad2b91f11b9149d959b92720">More...</a><br /></td></tr>
 <tr class="separator:a3245c859ad2b91f11b9149d959b92720"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1588132fb228c6d1874493051d6efc7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classns_sd_d_1_1_c_base_node.html#a1588132fb228c6d1874493051d6efc7c">unhook</a> ()</td></tr>
 <tr class="memdesc:a1588132fb228c6d1874493051d6efc7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a node from its list. Its ressources aren't freed.  <a href="#a1588132fb228c6d1874493051d6efc7c">More...</a><br /></td></tr>
@@ -142,7 +142,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a pointer to the next node. This is unused and there only to maintain comptability with eventual tests. </p>
+<p>Returns a pointer to the next node. This is unused and only there to maintain comptability with eventual tests. </p>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to the next node </dd></dl>
 
 <p>Definition at line <a class="el" href="_c_base_node_8hpp_source.html#l00040">40</a> of file <a class="el" href="_c_base_node_8hpp_source.html">CBaseNode.hpp</a>.</p>
@@ -185,14 +185,14 @@ Public Attributes</h2></td></tr>
 
 <p>References <a class="el" href="_c_base_node_8hpp_source.html#l00020">m_next</a>, and <a class="el" href="_c_base_node_8hpp_source.html#l00018">m_prev</a>.</p>
 
-<p>Referenced by <a class="el" href="_c_list_8hpp_source.html#l00299">nsSdD::CList&lt; T &gt;::insert()</a>.</p>
+<p>Referenced by <a class="el" href="_c_list_8hpp_source.html#l00818">nsSdD::CList&lt; T &gt;::emplace()</a>, and <a class="el" href="_c_list_8hpp_source.html#l00374">nsSdD::CList&lt; T &gt;::insert()</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classns_sd_d_1_1_c_base_node_a8066d10993dc6b488f08093a88fb3cee_icgraph.png" border="0" usemap="#classns_sd_d_1_1_c_base_node_a8066d10993dc6b488f08093a88fb3cee_icgraph" alt=""/></div>
 <map name="classns_sd_d_1_1_c_base_node_a8066d10993dc6b488f08093a88fb3cee_icgraph" id="classns_sd_d_1_1_c_base_node_a8066d10993dc6b488f08093a88fb3cee_icgraph">
-<area shape="rect" id="node2" href="classns_sd_d_1_1_c_list.html#aeccfa4803cdc7ffb336b3032e39e70a0" title="Inserts a copy of val before position. " alt="" coords="240,5,387,32"/></map>
+<area shape="rect" id="node2" href="classns_sd_d_1_1_c_list.html#a163c1352e0b5096b000cc64ce538900e" title="Construct and move an element before position. " alt="" coords="240,42,405,69"/><area shape="rect" id="node5" href="classns_sd_d_1_1_c_list.html#aeccfa4803cdc7ffb336b3032e39e70a0" title="Inserts a copy of val before position. " alt="" coords="249,93,396,119"/><area shape="rect" id="node3" href="classns_sd_d_1_1_c_list.html#a574c59832df935a639726e58377deb43" title="Construct and move an element to the beginning of the list. " alt="" coords="472,5,637,47"/><area shape="rect" id="node4" href="classns_sd_d_1_1_c_list.html#a61fcd56eed48441118a156a8becc0805" title="Construct and move an element to the end of the list. " alt="" coords="453,71,656,98"/></map>
 </div>
 </p>
 
@@ -221,9 +221,9 @@ Here is the caller graph for this function:</div>
 
 <p>Reverse the order of the elements in a list. </p>
 
-<p>Definition at line <a class="el" href="_c_base_node_8hpp_source.html#l00078">78</a> of file <a class="el" href="_c_base_node_8hpp_source.html">CBaseNode.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_c_base_node_8hpp_source.html#l00082">82</a> of file <a class="el" href="_c_base_node_8hpp_source.html">CBaseNode.hpp</a>.</p>
 
-<p>References <a class="el" href="_c_base_node_8hpp_source.html#l00020">m_next</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00018">m_prev</a>, and <a class="el" href="_c_list_8hpp_source.html#l00718">nsSdD::swap()</a>.</p>
+<p>References <a class="el" href="_c_base_node_8hpp_source.html#l00020">m_next</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00018">m_prev</a>, and <a class="el" href="_c_list_8hpp_source.html#l00858">nsSdD::swap()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -277,11 +277,11 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_c_base_node_8hpp_source.html#l00093">93</a> of file <a class="el" href="_c_base_node_8hpp_source.html">CBaseNode.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_c_base_node_8hpp_source.html#l00097">97</a> of file <a class="el" href="_c_base_node_8hpp_source.html">CBaseNode.hpp</a>.</p>
 
-<p>References <a class="el" href="_c_base_node_8hpp_source.html#l00020">m_next</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00018">m_prev</a>, and <a class="el" href="_c_list_8hpp_source.html#l00718">nsSdD::swap()</a>.</p>
+<p>References <a class="el" href="_c_base_node_8hpp_source.html#l00020">m_next</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00018">m_prev</a>, and <a class="el" href="_c_list_8hpp_source.html#l00858">nsSdD::swap()</a>.</p>
 
-<p>Referenced by <a class="el" href="_c_list_8hpp_source.html#l00495">nsSdD::CList&lt; T &gt;::swap()</a>.</p>
+<p>Referenced by <a class="el" href="_c_list_8hpp_source.html#l00602">nsSdD::CList&lt; T &gt;::swap()</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -297,7 +297,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classns_sd_d_1_1_c_base_node_aa988b77c9d11ded6ac33e0450616dceb_icgraph.png" border="0" usemap="#classns_sd_d_1_1_c_base_node_aa988b77c9d11ded6ac33e0450616dceb_icgraph" alt=""/></div>
 <map name="classns_sd_d_1_1_c_base_node_aa988b77c9d11ded6ac33e0450616dceb_icgraph" id="classns_sd_d_1_1_c_base_node_aa988b77c9d11ded6ac33e0450616dceb_icgraph">
-<area shape="rect" id="node2" href="classns_sd_d_1_1_c_list.html#a46b0ba608257cee1897c1ca772eeacd3" title="Swaps the content of two lists. " alt="" coords="241,5,385,32"/><area shape="rect" id="node3" href="classns_sd_d_1_1_c_list.html#a55df73e3651d4bcd13b671bf5cf7e5eb" title="Swaps the content of two lists. This sort is stable, it means consecutive equal elements keep their o..." alt="" coords="433,5,568,32"/><area shape="rect" id="node5" href="namespacens_sd_d.html#a5e97bcc4eb3c219b6b25ce9a669c2905" title="Swaps the content of two lists. " alt="" coords="448,56,553,83"/><area shape="rect" id="node4" href="test_2main_8cpp.html#aed75b3aafd0856fd8d1c9050617a8696" title="TEST" alt="" coords="690,5,745,32"/><area shape="rect" id="node6" href="classns_sd_d_1_1_c_base_node.html#a0656434b7fb2980ab261d51ac4b7741d" title="Reverse the order of the elements in a list. " alt="" coords="616,56,819,83"/></map>
+<area shape="rect" id="node2" href="classns_sd_d_1_1_c_list.html#a46b0ba608257cee1897c1ca772eeacd3" title="Swaps the content of two lists. " alt="" coords="241,107,385,133"/><area shape="rect" id="node3" href="classns_sd_d_1_1_c_list.html#abbdf8c9c5d48fbae9ccba62683d74d9d" title="Acquires the ressources of x. " alt="" coords="451,5,592,32"/><area shape="rect" id="node4" href="classns_sd_d_1_1_c_list.html#ab29fb9644b68b5029819d81242be9b5c" title="Moves the content of rhs to this moves the content of rhs to this. " alt="" coords="433,56,609,83"/><area shape="rect" id="node5" href="classns_sd_d_1_1_c_list.html#a55df73e3651d4bcd13b671bf5cf7e5eb" title="Swaps the content of two lists. This sort is stable, it means consecutive equal elements keep their o..." alt="" coords="454,107,589,133"/><area shape="rect" id="node6" href="namespacens_sd_d.html#a5e97bcc4eb3c219b6b25ce9a669c2905" title="Swaps the content of two lists. " alt="" coords="469,157,574,184"/><area shape="rect" id="node7" href="classns_sd_d_1_1_c_base_node.html#a0656434b7fb2980ab261d51ac4b7741d" title="Reverse the order of the elements in a list. " alt="" coords="657,157,860,184"/></map>
 </div>
 </p>
 
@@ -344,9 +344,20 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_c_base_node_8hpp_source.html#l00063">63</a> of file <a class="el" href="_c_base_node_8hpp_source.html">CBaseNode.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_c_base_node_8hpp_source.html#l00067">67</a> of file <a class="el" href="_c_base_node_8hpp_source.html">CBaseNode.hpp</a>.</p>
 
 <p>References <a class="el" href="_c_base_node_8hpp_source.html#l00020">m_next</a>, and <a class="el" href="_c_base_node_8hpp_source.html#l00018">m_prev</a>.</p>
+
+<p>Referenced by <a class="el" href="_c_list_8hpp_source.html#l00619">nsSdD::CList&lt; T &gt;::splice()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classns_sd_d_1_1_c_base_node_a6d709a12ee3158c4216f04d4976a9cfe_icgraph.png" border="0" usemap="#classns_sd_d_1_1_c_base_node_a6d709a12ee3158c4216f04d4976a9cfe_icgraph" alt=""/></div>
+<map name="classns_sd_d_1_1_c_base_node_a6d709a12ee3158c4216f04d4976a9cfe_icgraph" id="classns_sd_d_1_1_c_base_node_a6d709a12ee3158c4216f04d4976a9cfe_icgraph">
+<area shape="rect" id="node2" href="classns_sd_d_1_1_c_list.html#aa8b0bd58b9cb6a6463b6e22341e87ea7" title="Move the content of a list before an element in another Moves the content of x before the element poi..." alt="" coords="259,122,405,149"/><area shape="rect" id="node3" href="classns_sd_d_1_1_c_list.html#a2f58e2c548c992c26db609ceeac90e73" title="Inserts a copy of every element in the range [first;last[ before position. " alt="" coords="453,97,600,123"/><area shape="rect" id="node12" href="classns_sd_d_1_1_c_list.html#a55df73e3651d4bcd13b671bf5cf7e5eb" title="Swaps the content of two lists. This sort is stable, it means consecutive equal elements keep their o..." alt="" coords="459,147,594,174"/><area shape="rect" id="node4" href="classns_sd_d_1_1_c_list.html#a72562c1a0ba029b9f019790afe8a5425" title="nsSdD::CList::push\l_front" alt="" coords="667,5,808,47"/><area shape="rect" id="node5" href="classns_sd_d_1_1_c_list.html#a24058246d6dcac6b17dccc3569d81189" title="nsSdD::CList::push_back" alt="" coords="648,71,827,98"/><area shape="rect" id="node8" href="classns_sd_d_1_1_c_list.html#a33a2cd3f7682a658bb90c176b49103d4" title="Assigns the content of the list by the elements in the [first; last[ range If the range is smaller th..." alt="" coords="662,122,813,149"/><area shape="rect" id="node11" href="classns_sd_d_1_1_c_list.html#a3982b8ab302ebe53b0f7b8866d1d5aa9" title="Resize the container to n elements. If n &gt; size(), the extra element are default constructed or copie..." alt="" coords="663,173,811,199"/><area shape="rect" id="node6" href="classns_sd_d_1_1_c_list.html#abf73f0683c76800cbce70cffe5cd0649" title="Creates a list of n default&#45;constructed elements. " alt="" coords="892,21,1033,47"/><area shape="rect" id="node7" href="test_2main_8cpp.html#aa45dbd0e50d6e07f9bd50841b34af13d" title="TEST" alt="" coords="935,71,990,98"/><area shape="rect" id="node9" href="classns_sd_d_1_1_c_list.html#a054317243498e5a560050e16db28c5f2" title="Assigns the content of rhs to this Assigns the content of rhs to this. " alt="" coords="875,122,1051,149"/><area shape="rect" id="node10" href="classns_sd_d_1_1_c_list.html#aebdae51329d1d47dbaf1b452657cb0b8" title="Assigns the content of the list by n copies of val. " alt="" coords="887,173,1038,199"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -373,9 +384,20 @@ Here is the caller graph for this function:</div>
 
 <p>Removes a node from its list. Its ressources aren't freed. </p>
 
-<p>Definition at line <a class="el" href="_c_base_node_8hpp_source.html#l00049">49</a> of file <a class="el" href="_c_base_node_8hpp_source.html">CBaseNode.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_c_base_node_8hpp_source.html#l00053">53</a> of file <a class="el" href="_c_base_node_8hpp_source.html">CBaseNode.hpp</a>.</p>
 
 <p>References <a class="el" href="_c_base_node_8hpp_source.html#l00020">m_next</a>, and <a class="el" href="_c_base_node_8hpp_source.html#l00018">m_prev</a>.</p>
+
+<p>Referenced by <a class="el" href="_c_list_8hpp_source.html#l00436">nsSdD::CList&lt; T &gt;::erase()</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classns_sd_d_1_1_c_base_node_a1588132fb228c6d1874493051d6efc7c_icgraph.png" border="0" usemap="#classns_sd_d_1_1_c_base_node_a1588132fb228c6d1874493051d6efc7c_icgraph" alt=""/></div>
+<map name="classns_sd_d_1_1_c_base_node_a1588132fb228c6d1874493051d6efc7c_icgraph" id="classns_sd_d_1_1_c_base_node_a1588132fb228c6d1874493051d6efc7c_icgraph">
+<area shape="rect" id="node2" href="classns_sd_d_1_1_c_list.html#a0ab43df16936388ddf36555d762006db" title="Removes a node from the list, given an iterator position to it. " alt="" coords="256,183,403,209"/><area shape="rect" id="node3" href="classns_sd_d_1_1_c_list.html#a3d320af3b5706fdcd52a350fe3b71dde" title="Remove duplicated consecutive elements. " alt="" coords="461,5,615,32"/><area shape="rect" id="node4" href="classns_sd_d_1_1_c_list.html#a37b247ba8ad19c1b28dbe49576dbb556" title="Remove every elements equal to val Remove every elements in the list that are equal to val..." alt="" coords="458,56,618,83"/><area shape="rect" id="node5" href="classns_sd_d_1_1_c_list.html#a4df5ac6a378172689d7a0369f3f34cb8" title="nsSdD::CList::remove_if" alt="" coords="451,107,625,133"/><area shape="rect" id="node6" href="classns_sd_d_1_1_c_list.html#a257a4b4168de30c672465c649971f258" title="Removes a range [first;last[ from the list. " alt="" coords="465,157,611,184"/><area shape="rect" id="node7" href="classns_sd_d_1_1_c_list.html#abdbbecf160c26dcb207ab9e2866d68de" title="Removes the first element of a list. " alt="" coords="452,208,624,235"/><area shape="rect" id="node8" href="classns_sd_d_1_1_c_list.html#a99fba05885d5eec5ee004337244943bf" title="Removes the last element of a list. " alt="" coords="452,259,624,285"/><area shape="rect" id="node9" href="classns_sd_d_1_1_c_list.html#a33a2cd3f7682a658bb90c176b49103d4" title="Assigns the content of the list by the elements in the [first; last[ range If the range is smaller th..." alt="" coords="463,309,613,336"/><area shape="rect" id="node12" href="classns_sd_d_1_1_c_list.html#a3982b8ab302ebe53b0f7b8866d1d5aa9" title="Resize the container to n elements. If n &gt; size(), the extra element are default constructed or copie..." alt="" coords="464,360,612,387"/><area shape="rect" id="node10" href="classns_sd_d_1_1_c_list.html#a054317243498e5a560050e16db28c5f2" title="Assigns the content of rhs to this Assigns the content of rhs to this. " alt="" coords="673,284,849,311"/><area shape="rect" id="node11" href="classns_sd_d_1_1_c_list.html#aebdae51329d1d47dbaf1b452657cb0b8" title="Assigns the content of the list by n copies of val. " alt="" coords="686,335,837,361"/></map>
+</div>
+</p>
 
 </div>
 </div>
@@ -394,7 +416,7 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="_c_base_node_8hpp_source.html#l00020">20</a> of file <a class="el" href="_c_base_node_8hpp_source.html">CBaseNode.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="_c_base_node_8hpp_source.html#l00040">GetSuivant()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00026">hook()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00078">reverse()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00093">swap()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00063">transfer()</a>, and <a class="el" href="_c_base_node_8hpp_source.html#l00049">unhook()</a>.</p>
+<p>Referenced by <a class="el" href="_c_list_8hpp_source.html#l00436">nsSdD::CList&lt; T &gt;::erase()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00040">GetSuivant()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00026">hook()</a>, <a class="el" href="_c_list_8hpp_source.html#l00050">nsSdD::CList&lt; T &gt;::CNodeIterator::operator++()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00082">reverse()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00097">swap()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00067">transfer()</a>, and <a class="el" href="_c_base_node_8hpp_source.html#l00053">unhook()</a>.</p>
 
 </div>
 </div>
@@ -412,7 +434,7 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="_c_base_node_8hpp_source.html#l00018">18</a> of file <a class="el" href="_c_base_node_8hpp_source.html">CBaseNode.hpp</a>.</p>
 
-<p>Referenced by <a class="el" href="_c_base_node_8hpp_source.html#l00026">hook()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00078">reverse()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00093">swap()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00063">transfer()</a>, and <a class="el" href="_c_base_node_8hpp_source.html#l00049">unhook()</a>.</p>
+<p>Referenced by <a class="el" href="_c_base_node_8hpp_source.html#l00026">hook()</a>, <a class="el" href="_c_list_8hpp_source.html#l00071">nsSdD::CList&lt; T &gt;::CNodeIterator::operator--()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00082">reverse()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00097">swap()</a>, <a class="el" href="_c_base_node_8hpp_source.html#l00067">transfer()</a>, and <a class="el" href="_c_base_node_8hpp_source.html#l00053">unhook()</a>.</p>
 
 </div>
 </div>
