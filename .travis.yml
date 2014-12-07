@@ -4,7 +4,7 @@ compiler:
 cache: apt
 before_install:
         - lsb_release -sc
-        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
         - sudo apt-get clean
         - sudo apt-get update
 install:
