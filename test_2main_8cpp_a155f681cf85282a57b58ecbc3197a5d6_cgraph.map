@@ -1,8 +1,8 @@
 <map id="TEST" name="TEST">
-<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#a24058246d6dcac6b17dccc3569d81189" title="nsSdD::CList::push_back" alt="" coords="108,107,287,133"/>
-<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#adcaf31a4ab804a114bc7cca46f9b9904" title="nsSdD::CList::begin" alt="" coords="724,5,869,32"/>
-<area shape="rect" id="node6" href="$classns_sd_d_1_1_c_list.html#aa7c8127e1060788365bf82bf6618a39f" title="nsSdD::CList::end" alt="" coords="729,107,864,133"/>
-<area shape="rect" id="node7" href="$classns_sd_d_1_1_c_list.html#a0ab43df16936388ddf36555d762006db" title="nsSdD::CList::erase" alt="" coords="124,208,271,235"/>
-<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#a14b55f9a1acefa302eb5df42c7c99c9b" title="nsSdD::CList::insert" alt="" coords="335,56,481,83"/>
-<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#aa8b0bd58b9cb6a6463b6e22341e87ea7" title="nsSdD::CList::splice" alt="" coords="529,56,676,83"/>
+<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#af41da388e9983741e7a559f1b6a0ae01" title="Returns an iterator to the first element. " alt="" coords="724,133,869,160"/>
+<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#a9d67e4a55aac8ccd2b7cd8fd3939a176" title="Returns an iterator pointing after the last element. " alt="" coords="729,32,864,58"/>
+<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#a0ab43df16936388ddf36555d762006db" title="Removes a node from the list, given an iterator position to it. " alt="" coords="124,108,271,134"/>
+<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#a24058246d6dcac6b17dccc3569d81189" title="nsSdD::CList::push_back" alt="" coords="108,57,287,84"/>
+<area shape="rect" id="node6" href="$classns_sd_d_1_1_c_list.html#a14b55f9a1acefa302eb5df42c7c99c9b" title="Inserts a copy of every element in the range [first;last[ before position. " alt="" coords="335,82,481,109"/>
+<area shape="rect" id="node7" href="$classns_sd_d_1_1_c_list.html#aa8b0bd58b9cb6a6463b6e22341e87ea7" title="Move the content of a list before an element in another Moves the content of x before the element poi..." alt="" coords="529,82,676,109"/>
 </map>

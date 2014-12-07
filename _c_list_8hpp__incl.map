@@ -1,4 +1,4 @@
-<map id="/home/mirai/docs/include/CList.hpp" name="/home/mirai/docs/include/CList.hpp">
-<area shape="rect" id="node7" href="$_c_node_8hpp.html" title="CNode.hpp" alt="" coords="469,95,562,121"/>
-<area shape="rect" id="node8" href="$_c_base_node_8hpp.html" title="CBaseNode.hpp" alt="" coords="453,169,578,196"/>
+<map id="CList.hpp" name="CList.hpp">
+<area shape="rect" id="node5" href="$_c_node_8hpp.html" title="Definition of a generic list node. " alt="" coords="282,80,375,107"/>
+<area shape="rect" id="node6" href="$_c_base_node_8hpp.html" title="Definition of a basic node. " alt="" coords="266,155,391,181"/>
 </map>

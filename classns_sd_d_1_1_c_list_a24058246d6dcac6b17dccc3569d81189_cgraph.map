@@ -1,7 +1,6 @@
 <map id="nsSdD::CList::push_back" name="nsSdD::CList::push_back">
-<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#a9d67e4a55aac8ccd2b7cd8fd3939a176" title="Returns an iterator pointing after the last element. " alt="" coords="657,5,791,32"/>
-<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#a14b55f9a1acefa302eb5df42c7c99c9b" title="Inserts a copy of every element in the range [first;last[ before position. " alt="" coords="232,56,379,83"/>
-<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#af41da388e9983741e7a559f1b6a0ae01" title="Returns an iterator to the first element. " alt="" coords="651,107,797,133"/>
-<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#aa8b0bd58b9cb6a6463b6e22341e87ea7" title="Move the content of a list before an element in another Moves the content of x before the element poi..." alt="" coords="427,56,573,83"/>
-<area shape="rect" id="node6" href="$classns_sd_d_1_1_c_base_node.html#a6d709a12ee3158c4216f04d4976a9cfe" title="Moves a range [first;last[ of nodes and put it before &quot;this&quot; If last is the node that called this met..." alt="" coords="621,56,827,83"/>
+<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#a9d67e4a55aac8ccd2b7cd8fd3939a176" title="Returns an iterator pointing after the last element. " alt="" coords="627,5,761,32"/>
+<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#a14b55f9a1acefa302eb5df42c7c99c9b" title="Inserts a copy of every element in the range [first;last[ before position. " alt="" coords="232,43,379,69"/>
+<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#af41da388e9983741e7a559f1b6a0ae01" title="Returns an iterator to the first element. " alt="" coords="621,81,767,108"/>
+<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#aa8b0bd58b9cb6a6463b6e22341e87ea7" title="Move the content of a list before an element in another Moves the content of x before the element poi..." alt="" coords="427,43,573,69"/>
 </map>

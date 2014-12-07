@@ -1,5 +1,5 @@
-<map id="/home/mirai/docs/src/main.cpp" name="/home/mirai/docs/src/main.cpp">
-<area shape="rect" id="node2" href="$_c_list_8hpp.html" title="CList.hpp" alt="" coords="227,95,308,121"/>
-<area shape="rect" id="node8" href="$_c_node_8hpp.html" title="CNode.hpp" alt="" coords="469,169,562,196"/>
-<area shape="rect" id="node9" href="$_c_base_node_8hpp.html" title="CBaseNode.hpp" alt="" coords="453,244,578,271"/>
+<map id="main.cpp" name="main.cpp">
+<area shape="rect" id="node2" href="$_c_list_8hpp.html" title="Definition of a generic list. " alt="" coords="133,80,215,107"/>
+<area shape="rect" id="node6" href="$_c_node_8hpp.html" title="Definition of a generic list node. " alt="" coords="282,155,375,181"/>
+<area shape="rect" id="node7" href="$_c_base_node_8hpp.html" title="Definition of a basic node. " alt="" coords="266,229,391,256"/>
 </map>

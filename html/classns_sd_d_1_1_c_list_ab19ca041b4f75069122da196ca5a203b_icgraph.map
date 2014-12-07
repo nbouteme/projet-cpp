@@ -1,5 +1,0 @@
-<map id="nsSdD::CList::empty" name="nsSdD::CList::empty">
-<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#a3d320af3b5706fdcd52a350fe3b71dde" title="Remove duplicated consecutive elements. " alt="" coords="208,5,361,32"/>
-<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#af0ff3280e71844768357a3373b38e3cf" title="Reverse the content of the list. " alt="" coords="205,56,364,83"/>
-<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#a55df73e3651d4bcd13b671bf5cf7e5eb" title="Swaps the content of two lists. This sort is stable, it means consecutive equal elements keep their o..." alt="" coords="217,107,352,133"/>
-</map>

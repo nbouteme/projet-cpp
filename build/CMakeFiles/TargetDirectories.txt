@@ -1,2 +1,0 @@
-/home/mirai/projet-cpp/build/test/CMakeFiles/list_test.dir
-/home/mirai/projet-cpp/build/src/CMakeFiles/projet-cpp.dir

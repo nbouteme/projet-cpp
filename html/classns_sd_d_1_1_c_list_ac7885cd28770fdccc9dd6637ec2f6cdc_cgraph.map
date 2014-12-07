@@ -1,8 +1,0 @@
-<map id="nsSdD::CList::clear" name="nsSdD::CList::clear">
-<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#a0f3d5e1f58bf4be40a70205dfa5367bc" title="Remove every element in a list. " alt="" coords="195,56,343,83"/>
-<area shape="rect" id="node7" href="$classns_sd_d_1_1_c_list.html#ac0696f41e22cd73908c881ca6a7c0ec7" title="Initialize an empty list. " alt="" coords="204,107,333,133"/>
-<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#af41da388e9983741e7a559f1b6a0ae01" title="Returns an iterator to the first element. " alt="" coords="394,5,539,32"/>
-<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#ad9c0ecbdedb0a8ad28625874f3c11c4d" title="Checks whether a list is empty. " alt="" coords="391,56,543,83"/>
-<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#a0ab43df16936388ddf36555d762006db" title="Removes a node from the list, given an iterator position to it. " alt="" coords="393,107,540,133"/>
-<area shape="rect" id="node6" href="$classns_sd_d_1_1_c_base_node.html#a1588132fb228c6d1874493051d6efc7c" title="Removes a node from its list. Its ressources aren&#39;t freed. " alt="" coords="591,107,793,133"/>
-</map>

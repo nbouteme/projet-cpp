@@ -1,9 +1,9 @@
 <map id="TEST" name="TEST">
-<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#a72562c1a0ba029b9f019790afe8a5425" title="nsSdD::CList::push\l_front" alt="" coords="108,19,249,60"/>
-<area shape="rect" id="node7" href="$classns_sd_d_1_1_c_list.html#ac7885cd28770fdccc9dd6637ec2f6cdc" title="nsSdD::CList::clear" alt="" coords="108,157,249,184"/>
-<area shape="rect" id="node8" href="$classns_sd_d_1_1_c_list.html#a9e70261d6f313d59b2f557d2990702bb" title="nsSdD::CList::size" alt="" coords="498,117,633,144"/>
-<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#a14b55f9a1acefa302eb5df42c7c99c9b" title="nsSdD::CList::insert" alt="" coords="297,26,444,53"/>
-<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#adcaf31a4ab804a114bc7cca46f9b9904" title="nsSdD::CList::begin" alt="" coords="687,41,832,68"/>
-<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#aa8b0bd58b9cb6a6463b6e22341e87ea7" title="nsSdD::CList::splice" alt="" coords="492,66,639,93"/>
-<area shape="rect" id="node6" href="$classns_sd_d_1_1_c_list.html#aa7c8127e1060788365bf82bf6618a39f" title="nsSdD::CList::end" alt="" coords="692,92,827,118"/>
+<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#ac7885cd28770fdccc9dd6637ec2f6cdc" title="Remove every elements in the list. " alt="" coords="108,5,249,32"/>
+<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#a72562c1a0ba029b9f019790afe8a5425" title="nsSdD::CList::push\l_front" alt="" coords="108,57,249,98"/>
+<area shape="rect" id="node8" href="$classns_sd_d_1_1_c_list.html#af317152a38e8088b3c58449168735851" title="Computes the size of a list. " alt="" coords="498,155,633,181"/>
+<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#a14b55f9a1acefa302eb5df42c7c99c9b" title="Inserts a copy of every element in the range [first;last[ before position. " alt="" coords="297,64,444,91"/>
+<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#af41da388e9983741e7a559f1b6a0ae01" title="Returns an iterator to the first element. " alt="" coords="687,79,832,105"/>
+<area shape="rect" id="node6" href="$classns_sd_d_1_1_c_list.html#aa8b0bd58b9cb6a6463b6e22341e87ea7" title="Move the content of a list before an element in another Moves the content of x before the element poi..." alt="" coords="492,104,639,131"/>
+<area shape="rect" id="node7" href="$classns_sd_d_1_1_c_list.html#a9d67e4a55aac8ccd2b7cd8fd3939a176" title="Returns an iterator pointing after the last element. " alt="" coords="692,129,827,156"/>
 </map>

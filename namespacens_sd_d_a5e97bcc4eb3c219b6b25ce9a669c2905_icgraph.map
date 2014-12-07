@@ -1,7 +1,7 @@
 <map id="nsSdD::swap" name="nsSdD::swap">
-<area shape="rect" id="node2" href="$structns_sd_d_1_1_c_base_node.html#a0656434b7fb2980ab261d51ac4b7741d" title="nsSdD::CBaseNode::reverse" alt="" coords="159,5,361,32"/>
-<area shape="rect" id="node3" href="$structns_sd_d_1_1_c_base_node.html#aa988b77c9d11ded6ac33e0450616dceb" title="nsSdD::CBaseNode::swap" alt="" coords="166,56,354,83"/>
-<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#a46b0ba608257cee1897c1ca772eeacd3" title="nsSdD::CList::swap" alt="" coords="409,81,553,108"/>
-<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#a55df73e3651d4bcd13b671bf5cf7e5eb" title="nsSdD::CList::sort" alt="" coords="601,81,736,108"/>
+<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_base_node.html#a0656434b7fb2980ab261d51ac4b7741d" title="Reverse the order of the elements in a list. " alt="" coords="159,5,361,32"/>
+<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_base_node.html#aa988b77c9d11ded6ac33e0450616dceb" title="Swaps two nodes, that could be in differents lists. " alt="" coords="166,56,354,83"/>
+<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#a46b0ba608257cee1897c1ca772eeacd3" title="Swaps the content of two lists. " alt="" coords="409,81,553,108"/>
+<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#a55df73e3651d4bcd13b671bf5cf7e5eb" title="Swaps the content of two lists. This sort is stable, it means consecutive equal elements keep their o..." alt="" coords="601,81,736,108"/>
 <area shape="rect" id="node6" href="$test_2main_8cpp.html#aed75b3aafd0856fd8d1c9050617a8696" title="TEST" alt="" coords="784,81,839,108"/>
 </map>

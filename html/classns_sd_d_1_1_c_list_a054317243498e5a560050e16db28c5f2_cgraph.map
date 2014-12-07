@@ -1,8 +1,0 @@
-<map id="nsSdD::CList::operator=" name="nsSdD::CList::operator=">
-<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#ac9c0f95ce50cfe935e81bc158c34c7aa" title="Assigns the content of the list by the elements in the [first; last[ range If the range is smaller th..." alt="" coords="229,89,380,115"/>
-<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#af41da388e9983741e7a559f1b6a0ae01" title="Returns an iterator to the first element. " alt="" coords="817,38,963,65"/>
-<area shape="rect" id="node4" href="$classns_sd_d_1_1_c_list.html#a9d67e4a55aac8ccd2b7cd8fd3939a176" title="Returns an iterator pointing after the last element. " alt="" coords="823,165,957,191"/>
-<area shape="rect" id="node5" href="$classns_sd_d_1_1_c_list.html#a0ab43df16936388ddf36555d762006db" title="Removes a node from the list, given an iterator position to it. " alt="" coords="428,63,575,90"/>
-<area shape="rect" id="node6" href="$classns_sd_d_1_1_c_list.html#a14b55f9a1acefa302eb5df42c7c99c9b" title="Inserts a copy of every element in the range [first;last[ before position. " alt="" coords="428,114,575,141"/>
-<area shape="rect" id="node7" href="$classns_sd_d_1_1_c_list.html#aa8b0bd58b9cb6a6463b6e22341e87ea7" title="Move the content of a list before an element in another Moves the content of x before the element poi..." alt="" coords="623,114,769,141"/>
-</map>
