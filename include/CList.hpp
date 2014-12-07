@@ -1,28 +1,26 @@
 #pragma once
 
 #include <cstddef>
-#include <iterator>
 #include <limits>
 #include <memory>
-#include <cassert>
+
 #include <CNode.hpp>
 
 namespace nsSdD
 {
-    // L'implémentation utilise un minimum vital de smart_pointer (aka
-    // pas de weak_ptr), car deja ca a rien a foutre dans une
-    // structure de donnee complexe, ensuite la gestion de la memoire
-    // etait parfaite a la base, mais maintenant avec les
-    // smart_pointer on a encore plus de problemes a resoudre. Les
-    // weak ptr font une pagaille pas croyable dans le code. Mais bon
-    // sa c'est un eu faute d'avoir choisi d'implementer une liste
-    // circulaire. Au final, la liste est plus grosse et plus lente
-    // que ce quel a besoin d'etre
+    /**
+     * \class CList
+     * Circular list with memory being managed with a smart pointer
+     */
     template <typename T>
     class CList
     {
+        /// Iterator having iterator_traits, allowing to use it in a range-based for loop
         class CNodeIterator;
+
+        /// Internal size type
         typedef size_t size_type;
+        /// Internal iterator type
         typedef CNodeIterator iterator;
         
         class CNodeIterator
@@ -33,17 +31,26 @@ namespace nsSdD
             typedef CBaseNode*                          pointer;
             typedef CNodeIterator&                      reference;
             typedef std::bidirectional_iterator_tag     iterator_category;
-    
 
+            /// Creates an iterator from a pointer to a node
             CNodeIterator(CBaseNode* val = nullptr) : m_CNodePtr(val) {}
+            /// Pointer to the node being currently iterated
             pointer m_CNodePtr;
 
-            iterator operator++()
+            /**
+             * \brief Increments the iterator to point to the next node in the list
+             * \return A reference to itself, now pointing to the next node.
+             */
+            reference operator++()
             {
                 m_CNodePtr = m_CNodePtr->m_next;
                 return *this;
             }
 
+            /**
+             * \brief Increments the iterator to point to the next node in the list
+             * \return An iterator to the node, pre-incrementation.
+             */
             iterator operator++(int)
             {
                 CBaseNode* tmp = m_CNodePtr;
@@ -51,6 +58,10 @@ namespace nsSdD
                 return tmp;
             }
 
+            /**
+             * Decrements the iterator to point to the next node in the list
+             * \return An iterator to the previous node, pre-decrementation.
+             */
             iterator operator--(int)
             {
                 CBaseNode* tmp = m_CNodePtr;
@@ -58,105 +69,131 @@ namespace nsSdD
                 return tmp;
             }
 
-            iterator operator--()
+            /**
+             * Decrements the iterator to point to the next node in the list
+             * \return A reference to itself, now pointing to the previous node.
+             */
+            reference operator--()
             {
                 m_CNodePtr = m_CNodePtr->m_prev;
                 return *this;
             }
 
+            /**
+             * Checks if an iterator is pointing on the same node as this.
+             * \param CNode The node being compared.
+             * \return True if the two iterators points on the same element
+             */
             bool operator== (iterator CNode)
             {
                 return m_CNodePtr == CNode.m_CNodePtr;
             }
 
-            pointer operator->()
+            /**
+             * \brief Allows to acess members of the underlying type
+             * \return A pointer to the underlying object.
+             */
+            value_type* operator->()
             {
-                return reinterpret_cast<CNode<T>*>(m_CNodePtr);
+                return &reinterpret_cast<CNode<T>*>(m_CNodePtr)->m_data;
             }
 
+            /**
+             * \brief Checks if an iterator is pointing on the same node as this.
+             * \param CNode The node being compared.
+             * \return False if the two iterators points on the same element
+             */
             bool operator!= (const iterator& CNode)
             {
                 return m_CNodePtr != CNode.m_CNodePtr;
             }
 
+            /**
+             * \brief Dereference the iterator to access its underlying object
+             * \return A reference to the underlying object
+             */
             value_type& operator*()
             {
                 return reinterpret_cast<CNode<T>*>(m_CNodePtr)->m_data;
             }
         };
     private:
+        /// Initialize an empty list
         void init()
         {
             m_sentinel->m_next = m_sentinel.get();
             m_sentinel->m_prev = m_sentinel.get();
         }
 
+        /// Remove every element in a list
         void _clear()
         {
             while(!empty())
                 erase(begin());
         }
 
+        /**
+         * Moves a range [first;last[ from a list to another, and put it before \a position
+         * \param position The element in the list to puts the elements in the range before.
+         * \param first Iterator on the first element to move
+         * \param last Iterator on the node following the last node to move
+         */
         void transfer(iterator position, iterator first, iterator last)
         {
             position.m_CNodePtr->transfer(first.m_CNodePtr, last.m_CNodePtr);
         }
 
-        // Attention mesdames et messieurs c'est de la haute technique!
+        /// Dummy element that allows to have certain guarantees on the integrity of a list
         std::shared_ptr<CBaseNode> m_sentinel = std::make_shared<CBaseNode>();
-        //C'est literallement identique que
-        //CBaseCNode m_sentinel;
-        // si ce n'est que c'est plus lent a instancier, et plus long
-        // a ecrire et necessite de rajouter des .get() de partout les
-        // weak pointer sont literallement inutilisable dans notre
-        // contexte on a une classe CBaseCNode qui ne contient pas de
-        // donnee, et une classe CNode<T> qui contient des donnee la
-        // classe base CNode<T> est utilisee directement seulement par
-        // la m_sentinelle alors c'est elle qui devrait etre
-        // proprietaire et responsable de la liberation de la memoire,
-        // et donc ses membres m_next et m_prev devrait etre des shared
-        // ptr mais du coup, on perd la relation entre CBaseCNode et
-        // CNode<T> car CNode<T> ne doit alors avoir que des membre qui
-        // sont weak les const& et le polymorphisme avec les
-        // shared_ptr sont mutuellement exclusif aussi
-        // class A{};
-        // class B : A{};
-        // void f(const shared_ptr<A>&){}
-        // int main(int argc, char *argv[])
-        // {
-        //     shared_ptr<B> b = make_shared<B>();
-        //     f(b);
-        //     return 0;
-        // }
-        // ne compile pas
     public:
-        CList()
+        /// Initializes an empty list
+        explicit CList()
         {
             init();
         }
 
+        /**
+         * \brief Creates a list of \a n elements with a value of \a val
+         * \param n The number of elements to create
+         * \param val A value to copy 
+         */
         CList(size_type n, const T& val = T()) : CList()
         {
             while(n)
                 push_back(val), --n;
         }
 
-        CList(const CList& x) : CList()
+        /**
+         * \brief Creates a copy of \a x
+         * \param x The list to copy
+         */
+        explicit CList(const CList& x) : CList()
         {
             for(auto &val : x)
                 push_back(val);
         }
 
+        /**
+         * \brief Creates a list by copying the elements in the range [first;last[
+         * \param first An iterator on the first element to copy
+         * \param last An iterator on the next node of the last node to copy
+         */
         CList(iterator first, iterator last) : CList()
         {
             insert(end(), first, last);
         }
 
+        /// Frees the allocated ressources
         ~CList()
         {
             _clear();
         }
 
+        /**
+         * \brief Assigns the content of \a rhs to this
+         * Assigns the content of \a rhs to this
+         * \param rhs The Right Hand Side of the expression
+         */
         CList<T>& operator=(const CList<T> &rhs)
         {
             if(this == &rhs) return *this;
@@ -164,6 +201,7 @@ namespace nsSdD
             return *this;
         }
 
+        /// Remove duplicated consecutive elements
         void unique()
         {
             if(empty()) return;
@@ -180,22 +218,35 @@ namespace nsSdD
             }
         }
 
+        /// Remove every elements in the list
         void clear()
         {
             _clear();
             init();
         }
 
-        // [23.3.5.4]
-        // 12. Suprime tout les element de la CListe si *it = val
-        // 13. Ne leve pas d'exception sauf si la comparaison est surchargée tel que elle puisse en lever une
-        void remove (const T& val)
+        /**
+         * \brief Remove every elements equal to \a val
+         * Remove every elements in the list that are equal to \a val
+         * \par Complexity
+         * Linear.
+         * \par Iterator Validity
+         * Every iterators are still valid, except those on removed elements
+         * \par Data races
+         * Container is modified, removed elements are modified, iterating on removed elements is not safe.
+         * \param val Value to compare
+         */
+        void remove(const T& val)
         {
             for(CNodeIterator it = begin(); it != end(); ++it)
                 if(*it == val)
                     it = erase(it);
         }
 
+        /**
+         * Remove every elements in the list if the predicates evaluates to true
+         * \param predicate Unary predicates evaluating to true for elements to be removed
+         */
         void remove_if(std::function<bool(const T&)> predicate)
         {
             CNodeIterator it = begin();
@@ -204,9 +255,20 @@ namespace nsSdD
                     it = erase(it++);
         }
 
-        // [23.3.5.4]
-        // 1. L'insertion dans la CListe n'affecte pas la validité des iterateur existant
-        // 2. L'insertion de plusieurs element est linéaire.
+        /**
+         * \brief Inserts a copy of every element in the range [\a first;\a last[ before \a position
+         * \par Complexity
+         * Linear.
+         * \par Iterator Validity
+         * Every iterators are still valid
+         * \par Data races
+         * Container is modified, no contained element are modified, acessing and iterating through the others elements is safe, except through
+         * ranges including \a position
+         * \param position Iterator on the element the range is copied before. 
+         * \param first Iterator on the first element to be copied
+         * \param last Iterator on the last element of the range
+         * \return An iterator to the first added element
+         */
         iterator insert (iterator position, iterator first, iterator last)
         {
             CList t(first, last);
@@ -215,9 +277,19 @@ namespace nsSdD
             return tmp;
         }
 
-        // [23.3.5.4]
-        // 1. L'insertion dans la CListe n'affecte pas la validité des iterateur existant
-        // 2. L'insertion d'un seul élément est constante.
+        /**
+         * \brief Inserts a copy of \a val before \a position
+         * \par Complexity
+         * Constant.
+         * \par Iterator Validity
+         * Every iterators are still valid
+         * \par Data races
+         * Container is modified, no contained element are modified, acessing and iterating through the others elements is safe, except through
+         * ranges including \a position
+         * \param position Iterator on the element \a val is copied before. 
+         * \param val The value to copy.
+         * \return An iterator to the first added element
+         */
         iterator insert(iterator position, const T& val)
         {
             CNode<T> *elem = new CNode<T>(val);
@@ -225,6 +297,20 @@ namespace nsSdD
             return elem;
         }
 
+        /**
+         * \brief Inserts \a n copy of \a val before \a position
+         * \par Complexity
+         * Linear.
+         * \par Iterator Validity
+         * Every iterators are still valid
+         * \par Data races
+         * Container is modified, no contained element are modified, acessing and iterating through the others elements is safe, except through
+         * ranges including \a position
+         * \param position Iterator on the element \a val is copied before. 
+         * \param n The number of copies to insert before \a position.
+         * \param val The value to copy.
+         * \return An iterator to the first added element
+         */
         iterator insert(iterator position, size_type n, const T& val)
         {
             if(n == 0) return position;
@@ -237,19 +323,35 @@ namespace nsSdD
             return ret;
         }
 
+        /**
+         * Copies an element and put it at the beginning of the list
+         * \param val The value to copie 
+         */
         void push_front(const T& val)
         {
             insert(begin(), val);
         }
 
+        /**
+         * Copies an element and put it at the end of the list
+         * \param val The value to copie 
+         */
         void push_back(const T& val)
         {
             insert(end(), val);
         }
 
-        // [23.3.5.4]
-        // 1. La supresseion d'un element n'affecte que les iterateurs sur cet element
-        // 2. La supression d'un seul élément est constante.
+        /**
+         * \brief Removes a node from the list, given an iterator \a position to it
+         * \par Complexity
+         * Constant.
+         * \par Iterator Validity
+         * Every iterator in the removed range are invalidated
+         * \par Data races
+         * Container is modified, removed elements are modified, acessing and iterating through the others elements is safe
+         * \param position An iterator pointing the element to remove
+         * \return An iterator to the element following the one deleted
+         */
         iterator erase(iterator position)
         {
             CNodeIterator tmp(position.m_CNodePtr->m_next);
@@ -258,9 +360,18 @@ namespace nsSdD
             return tmp;
         }
 
-        // [23.3.5.4]
-        // 1. La supresseion d'un element n'affecte que les iterateurs sur cet element
-        // 2. La supression de plusieurs elements est linéaire.
+        /**
+         * \brief Removes a range [\a first;\a last[ from the list
+         * \par Complexity
+         * Linear.
+         * \par Iterator Validity
+         * Every iterator in the removed range are invalidated
+         * \par Data races
+         * Container is modified, removed elements are modified, acessing and iterating through the others elements is safe
+         * \param first An iterator to the first element to remove
+         * \param last An iterator following the last element to remove
+         * \return An iterator to the element following the last deleted element
+         */
         iterator erase(iterator first, iterator last)
         {
             while(first != last)
@@ -268,55 +379,88 @@ namespace nsSdD
             return last;
         }
 
+        /// Removes the first element of a list
         void pop_front()
         {
             erase(begin());
         }
 
+        /// Removes the last element of a list
         void pop_back()
         {
             CNodeIterator tmp = end();
             erase(--tmp);
         }
 
-        bool empty()
+        /**
+         * \brief Checks whether a list is empty
+         * \return True if the list is empty
+         */
+        bool empty() const noexcept
         {
             return m_sentinel.get() == m_sentinel->m_prev;
         }
 
-        // La complexité est constante, pour eviter d'avoir un autre membre et de devoir mettre a jour ce rendre qui rendrait splice lineaire.
-        size_type size()
+        /**
+         * \brief Computes the size of a list
+         * \return The size of the list
+         */
+        size_type size() const noexcept
         {
             return std::distance(begin(), end());
         }
 
-        CNodeIterator begin() const
+        /**
+         * \brief Returns an iterator to the first element
+         * \return An iterator to the first element
+         */
+        CNodeIterator begin() const noexcept
         {
             return m_sentinel->m_next;
         }
 
-        CNodeIterator end() const
+        /**
+         * \brief Returns an iterator pointing after the last element.
+         * \return An iterator pointing after the last element.
+         */
+        CNodeIterator end() const noexcept
         {
             return m_sentinel->m_next->m_prev;
         }
 
-        size_type max_size()
+        /// Returns the maximum number of elements that the list container can hold.
+        size_type max_size() const noexcept
         {
             return std::numeric_limits<size_type>::max();
         }
 
-        T& front()
+        /// Returns a reference to the first element of the list
+        T& front() noexcept
         {
             return *begin();
         }
 
-        T& back ()
+        /// Returns a reference to the last element of the list
+        T& back () noexcept
         {
             CNodeIterator tmp;
             tmp = end();
             return *(--tmp);
         }
 
+        /**
+         * \brief Assigns the content of the list by the elements in the [\a first; \a last[ range
+         * If the range is smaller than the current list size, the extra elements are erased.
+         * If the range is bigger than the current list size, the extra elements are copied.
+         * \par Complexity
+         * Linear.
+         * \par Iterator Validity
+         * Every iterator are invalidated
+         * \par Data races
+         * Copied elements are accessed, container is modified, contained elements are modified
+         * \param first An iterator to the first element to assign
+         * \param last An iterator following the last element to assign
+         */
         void assign (iterator first, iterator last)
         {
             CNodeIterator frst = begin();
@@ -332,27 +476,52 @@ namespace nsSdD
                 insert(lst, first, last);
         }
 
-        // Swap a complexité constante
+        /**
+         * \brief Swaps the content of two lists.
+         * \par Complexity
+         * Constant.
+         * \par Iterator Validity
+         * All iterator remain valid, but instead refers to elements in the other list
+         * \par Data races
+         * Both container are accessed, none of the contained elements are.
+         * \param x A list to swap
+         */
         void swap(CList& x)
         {
             CBaseNode::swap(*m_sentinel, *x.m_sentinel);
         }
 
-        // [23.3.5.5]
-        // 2. splice detruit une CListe en deplacant ses elements vers une autre
-        // 4. x devient vide
-        // 5. compléxité: constante
+        /**
+         * \brief Move the content of a list before an element in another
+         * Moves the content of x before the element pointed by position
+         * \par Complexity
+         * Constant.
+         * \par Iterator Validity
+         * All iterator remain valid, the iterators on the transfered element are now iterating in the other list
+         * \par Data races
+         * Both container are accessed, accessing and modifying elements is safe, iterating through is not safe.
+         * \param position Iterator on the element to move before
+         * \param x List to move before \a position
+         */
         void splice(iterator position, CList& x)
         {
             if(&x != this) // [23.3.5.5] 3
-            position.m_CNodePtr->transfer(x.begin().m_CNodePtr, x.end().m_CNodePtr);
+                position.m_CNodePtr->transfer(x.begin().m_CNodePtr, x.end().m_CNodePtr);
         }
 
-        // [23.3.5.5]
-        // 6. deplace i avant position si x possede le meme allocateur que this
-        // et n'affecte pas la CListe si position == i ou ++i
-        // 7. i doit etre valide
-        // 8. complexité constante
+        /**
+         * \brief Move an element from a list to another
+         * Moves the element at \a i from the list \a x and put it before \a position
+         * \par Complexity
+         * Constant.
+         * \par Iterator Validity
+         * All iterator remain valid, the iterators on the transfered element are now iterating in the other list
+         * \par Data races
+         * Both container are accessed, accessing and modifying elements is safe, iterating through is not safe.
+         * \param position Iterator on the element to move before
+         * \param x List to move an element from
+         * \param i Iterator on the element to move
+         */
         void splice(iterator position, CList& x, iterator i)
         {
             (void)x;
@@ -362,28 +531,55 @@ namespace nsSdD
             position.m_CNodePtr->transfer(i.m_CNodePtr, j.m_CNodePtr);
         }
 
-        // [23.3.5.5]
-        // 9.deplace les elements de x dans l'interval [first;last[ avant position
-        // 10.comportement indefini si position est entre first et last
-        // 11.Complexité constante si &x == this, et au moins lineaire dans le cas contraire.
-        // mais notre implementation est constante dans les 2 cas
+        /**
+         * \brief Move a range of elements from a list to another
+         * Moves the elements in the range [\a first; \a last[ from the list \a x and put them before \a position
+         * \par Complexity
+         * Constant.
+         * \par Iterator Validity
+         * All iterator remain valid, the iterators on \a x are now iterating in the other list
+         * \par Data races
+         * Both container are accessed, accessing and modifying elements is safe, iterating through is not safe.
+         * \param position Iterator on the element to move before
+         * \param x List to move an element from
+         * \param first Iterator on the first element of the range
+         * \param last Iterator on the last element of the range
+         */
         void splice(iterator position, CList& x, iterator first, iterator last)
         {
             (void)x;
             position.m_CNodePtr->transfer(first, last);
         }
 
-        // [23.3.5.5]
-        // 23. Inverse l'ordre de la CListe
-        // Complexité lineaire
+        /**
+         * \brief Reverse the order of elements in a list
+         * \par Complexity
+         * Linear.
+         * \par Iterator Validity
+         * All iterator remain valid
+         * \par Data races
+         * Both container are accessed, accessing and modifying elements is safe, iterating through is not safe.
+         */
         void reverse()
         {
             if(!empty() && m_sentinel->m_next->m_next != m_sentinel.get())
                 m_sentinel->reverse();
         }
 
-        // [23.3.5.5]
-        // 4. T doit être copiable
+        /**
+         * \brief Resize the container to n elements.
+         * If n > size(), the extra element are default constructed or copies of \a val
+         * else the list is truncated
+         * \par Complexity
+         * Linear.
+         * \par Iterator Validity
+         * All iterator remain valid, except the ones on the removed elements
+         * \par Data races
+         * Both container are accessed, removed elements are accessed, iterating throught the others is safe.
+         * Iterating through the list concurrently is not safe
+         * \param n The new size of the list
+         * \param val Element to copy when creating elements in the container
+         */
         void resize(size_type n, const T& val = T())
         {
             CNodeIterator first = begin();
@@ -392,20 +588,43 @@ namespace nsSdD
             if(first != last)//on reduit
                 erase(first, last);
             else//ou on rajoute ce qui manque
-                insert(last, n - std::distance(first, last));
+                insert(last, n - std::distance(first, last), val);
         }
 
-        // [23.3.5.5]
-        // 19. *this et x doivent etre trié, autrement le comportement est indéfini 
-        // 20. ne fait rien si &x == this, sinon, fusionne les 2 CListes en detruisant x
-        // les iterateur sont toujours valide, sauf que ils pointent sur des membre de *this au lieu de x
-        // 21. x devient vide
-        // 22. complexité lineraire
+        /**
+         * \brief Merges two sorted lists into one
+         * If the lists aren't sorted this causes undefined behavior
+         * x is emptied after this operation
+         * \par Complexity
+         * Linear.
+         * \par Iterator Validity
+         * All iterator remain valid
+         * \par Data races
+         * Both container are accessed, contained elements are accessed but never modified.
+         * Iterating through the list concurrently is not safe
+         * \param x The list to merge into
+         */
         void merge(CList& x)
         {
             merge(x, [](const T &a, const T& b){ return a < b; });
         }
 
+        /**
+         * \brief Merges two sorted lists into one
+         * If the lists aren't sorted this causes undefined behavior
+         * x is emptied after this operation
+         * \par Complexity
+         * Linear.
+         * \par Iterator Validity
+         * All iterator remain valid
+         * \par Data races
+         * Both container are accessed, contained elements are accessed but never modified.
+         * Iterating through the list concurrently is not safe
+         * \param x The list to merge into
+         * \param comp Binary predicate that evaluates to true if its
+         * first argument is considered strictly inferior to its
+         * second
+         */
         void merge(CList& x, std::function<bool(const T &a, const T& b)> comp)
         {
             if(this == &x) return; //on ne merge pas avec elle meme !
@@ -430,11 +649,17 @@ namespace nsSdD
                 transfer(last, first2, last2);//tout le reste va a la fin
         }
 
-        // [23.3.5.5]
-        // 25. Necessite la comparaison <
-        // 26. Trie la CListe sans affecter la validité des iterateur existant
-        // 27. Stable (l'ordre d'element egaux ne change pas)
-        // 28. Complexité N log N
+        /**
+         * \brief Swaps the content of two lists.
+         * This sort is stable, it means consecutive equal elements keep their order
+         * \par Complexity
+         * Approximately N log N.
+         * \par Iterator Validity
+         * All iterator remain valid
+         * \par Data races
+         * Both container are accessed, contained elements are accessed but never modified.
+         * Iterating through the list concurrently is not safe
+         */
         void sort()
         {
             // merge s'attend a avoir une CListe deja triee en parametre,
@@ -445,17 +670,6 @@ namespace nsSdD
             {
                 CList reg;//cette CListe repartie les element dans les partitions
                 CList tmp[sizeof(void*) << 3];
-                // CListes de partitionements, le nombre de CListe
-                // utilisées est depend du nombre d'element a trier,
-                // le nombre de CListe depends de la quantite de donnee adressable dans la ram de la machine,
-                // l'algo foire si on a un ensemble de donnee a trier
-                // de plus de quelque dizaines d'exibytes (enfin moins
-                // car par exemple sous linux la taille max d'un
-                // pointeur en user-space est de 48bits)
-                // sizeof(void*) << 3 veut juste dire "assez de CListe
-                // pour ne pas deborder", puisque pour deborder faut
-                // avoir plus d'element a trier que de memoire
-                // addressable
                 CList *last = &tmp[0];//pointeur sur la derniere CListe de partition utilisé
                 CList *counter;// pointeur sur la CListe de partition
 
@@ -483,7 +697,17 @@ namespace nsSdD
         }
     };
 
-    // specialisation de complexité constante de swap au lieu d'etre lineaire
+    /**
+     * \brief Swaps the content of two lists.
+     * \par Complexity
+     * Constant.
+     * \par Iterator Validity
+     * All iterator remain valid, but instead refers to elements in the other list
+     * \par Data races
+     * Both container are accessed, none of the contained elements are.
+     * \param x A list to swap
+     * \param y A list to swap
+     */
     template <class T>
     void swap(CList<T>& x, CList<T>& y)
     {

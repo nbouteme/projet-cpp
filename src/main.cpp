@@ -3,21 +3,26 @@
 
 using namespace std;
 
+/**
+ *\mainpage CList
+ * Rewrite of the STL's list template.  The goal of this rewrite is to
+ * implement automatic memory managment with smart pointers while
+ * being as close as the C++'s standard draft as possible.  By "as the
+ * C++'s standard draft as possible", we mean for example that
+ * algorithms complexities are respected, as well as data-race and
+ * iterator validity
+ */
+
+struct A
+{
+    int a;
+};
+
 int main()
 {
-	nsSdD::CList<int> l;
-	nsSdD::CList<int> n;
-    l.push_back(1);
-    l.push_back(2);
-    l.push_back(3);
-    l.push_back(4);
-    l.push_back(5);
-    l.push_back(6);
-    n.push_back(4);
-    n.push_back(5);
-    n.push_back(6);
-    l = n;
-    for(auto i : l)
-        printf("%d\n", i);
+	nsSdD::CList<A> l;
+    A a {1};
+    l.push_front(a);
+    l.begin()->a = 0;
     return 0;
 }

@@ -2,13 +2,22 @@
 
 namespace nsSdD
 {
-    struct CBaseNode
+    /// Doubly-linked node in a circular list.
+    class CBaseNode
     {
+        /// Defines the internal type of the class
         typedef CBaseNode* pointer;
 
+    public:
+        /// Pointer to the previous node
         pointer m_prev = nullptr;
+        /// Pointer to the next node
         pointer m_next = nullptr;
 
+        /**
+         * \brief Places this node before \a elem
+         * \param elem The node to put "this" before.
+         */
         void hook(pointer elem)
         {
             m_next = elem;
@@ -17,12 +26,21 @@ namespace nsSdD
             elem->m_prev = this;
         }
 
+        /**
+         * \brief Returns a pointer to the next node.
+         * This is unused and there only to maintain comptability with
+         * eventual tests.
+         * \return A pointer to the next node
+         */
         pointer GetSuivant()
         {
             return m_next;
         }
 
-        
+        /**
+         * \brief Removes a node from its list.
+         * Its ressources aren't freed.
+         */
         void unhook()
         {
             m_prev->m_next = m_next;
@@ -31,20 +49,27 @@ namespace nsSdD
             m_next = nullptr;
         }
 
+        /**
+         * \brief Moves a range [first;last[ of nodes and put it before "this"
+         * If last is the node that called this method, the list remains untouched.
+         * \param first Pointer to the first element in the range
+         * \param last Pointer to the last element in the range
+         */
         void transfer(CBaseNode* first, CBaseNode* last)
         {
             if(last != this)
-                {
-                    last->m_prev->m_next = this;
-                    first->m_prev->m_next = last;
-                    m_prev->m_next = first;
-                    pointer tmp_this = m_prev;
-                    m_prev = last->m_prev;
-                    last->m_prev = first->m_prev;
-                    first->m_prev = tmp_this;
-                }
+            {
+                last->m_prev->m_next = this;
+                first->m_prev->m_next = last;
+                m_prev->m_next = first;
+                pointer tmp_this = m_prev;
+                m_prev = last->m_prev;
+                last->m_prev = first->m_prev;
+                first->m_prev = tmp_this;
+            }
         }
 
+        /// Reverse the order of the elements in a list.
         void reverse()
         {
             CBaseNode* tmp = this;
@@ -55,6 +80,11 @@ namespace nsSdD
             } while(this != tmp);
         }
 
+        /**
+         * \brief Swaps two nodes, that could be in differents lists.
+         * \param x A node to swap
+         * \param y Another node to swap
+         */
         static void swap(CBaseNode& x, CBaseNode& y)
         {
             if (x.m_next != &x)

@@ -4,10 +4,14 @@
 
 namespace nsSdD
 {
+    /// Doubly linked node that can hold a value
     template<typename T>
-    struct CNode : public CBaseNode
+    class CNode : public CBaseNode
     {
+    public:
+        /// The data contained in the node
         T m_data;
+        /// Instantiates a CNode from a copied value \a val
         CNode (const T& val) : m_data(val) {}
     };
 }

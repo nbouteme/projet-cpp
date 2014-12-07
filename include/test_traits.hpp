@@ -1,19 +1,15 @@
 #pragma once
 #include <type_traits>
+/*
+ * \file test_traits.hpp
+ * \brief Defines traits that identify a list container
+ */
 
-// Ce fichier permet de determiner les membre existant d'une classe
-// C'est utilisé dans les test comme substitution a la compilation
-// conditionelle car plus modulable avec du code externe Une des
-// lacune de ce systeme est de ne pas faire de difference entre donnee
-// membre et fonction ne peut detecter une surcharge specifique d'une
-// fonction specifique, et ne peux analyser que les membres public
-// (mais ca c'est pas grave car seul l'interface nous interesse lors
-// des tests)
-
-// Aussi, je ne peux pas implementer de trait pour GetSuivant car on
-// ne sais pas si il CNode est interne a CList ou pas, le qualifier
-// change.  peutetre tester pour T::CNode::GetSuivant et T::GetSuivant
-// dans le meme trait ? A tester.
+/**
+ * \def HAS_MEMBER(member)
+ * Generates a trait class that determines if a type has one or more method
+ * called \a member
+ */
 
 #define HAS_MEMBER(member)                 \
 template <class T>                         \
