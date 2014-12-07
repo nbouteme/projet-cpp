@@ -5,6 +5,13 @@
  * \brief Define the unit testing engine
  */
 
+//     _  _____ _____ _____ _   _ _____ ___ ___  _   _ 
+//    / \|_   _|_   _| ____| \ | |_   _|_ _/ _ \| \ | |
+//   / _ \ | |   | | |  _| |  \| | | |  | | | | |  \| |
+//  / ___ \| |   | | | |___| |\  | | |  | | |_| | |\  |
+// /_/   \_\_|   |_| |_____|_| \_| |_| |___\___/|_| \_|
+// Âmes sensibles, s'abstenir
+
 #include <test_traits.hpp>
 #include <map>
 #include <string>
@@ -37,6 +44,9 @@ void run_all_tests()
         t.second->test();
 }
 
+#define CONCAT2(x, y) x ## y 
+#define CONCAT(x, y) CONCAT2(x, y)
+
 /*
  * \def TEST(name)
  * Generate a generic test signature called if the T type has the \a
@@ -44,26 +54,31 @@ void run_all_tests()
  * If the T type doesn't have a \a name member, a dummy test is called instead
  */
 #define TEST(name)                                                 \
+HAS_MEMBER(name)                                                   \
 template <typename T>                                              \
  struct s_obj_##name : public _base_test                           \
 {                                                                  \
- s_obj_##name() { _register_test(#name, this); }                   \
-    virtual bool test() { return test_##name<T>(); }               \
-                                                                   \
 template <typename C>                                              \
 typename std::enable_if<has_##name<C>::value == false, bool>::type \
-test_##name(void)                                                  \
+    test_##name(void);                                             \
+template <typename C>                                              \
+    typename std::enable_if<has_##name<C>::value, bool>::type      \
+    test_##name(void);                                             \
+ s_obj_##name() { _register_test(#name, this); }                   \
+    virtual bool test() { return test_##name<T>(); }               \
+};                                                                 \
+s_obj_ ## name < TTTEST > CONCAT(_tmp, __LINE__);                  \
+template <typename T>                                              \
+template <typename C>                                              \
+typename std::enable_if<has_##name<C>::value == false, bool>::type \
+ s_obj_##name<T>::test_##name(void)                                \
 {                                                                  \
     IZI_ASSERT(!"Methode " #name " non implémentée");              \
     return false;                                                  \
 }                                                                  \
+template <typename T>                                              \
 template <typename C>                                              \
 typename std::enable_if<has_##name<C>::value, bool>::type          \
-test_##name(void) {
-#define CONCAT2(x, y) x ## y 
-#define CONCAT(x, y) CONCAT2(x, y)
-#define END_TEST(name) }}; s_obj_ ## name < TTTEST > CONCAT(_tmp, __LINE__);
+ s_obj_##name<T>::test_##name(void)
 
-// FIXME: On ne peut pas tester plusieurs traits, donc ca pose probleme si un test depends d'un autre, par exemple le test de size a besoin de push_front pour remplir la liste
-// On est censé ignorer les tests interdependant ? Ou dire qu'ils ont echoué ? Est-ce que le fait de ne pas pourvoir passer un test equivaut a un echec ?
-// TODO: Trouver une facon d'enregistrer les tests des leur declaration
+// J'vous l'avais bien dis.

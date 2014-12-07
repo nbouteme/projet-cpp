@@ -46,8 +46,6 @@ TEST(insert)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(insert)
-
 
 TEST(sort)
 {
@@ -69,7 +67,6 @@ TEST(sort)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(sort)
 
 TEST(erase)
 {
@@ -97,7 +94,6 @@ TEST(erase)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(erase)
 
 TEST(unique)
 {
@@ -119,7 +115,6 @@ TEST(unique)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(unique)
 
 TEST(merge)
 {
@@ -156,14 +151,12 @@ TEST(merge)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(merge)
 
 /*
 TEST(test)
 {
     IZI_ASSERT(!"Vous n'etes pas censes voir ca");
 }
-END_TEST(test)
 */
 
 TEST(pop_back)
@@ -192,7 +185,6 @@ TEST(pop_back)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(pop_back)
 
 TEST(pop_front)
 {
@@ -220,7 +212,6 @@ TEST(pop_front)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(pop_front)
 
 TEST(push_back)
 {
@@ -248,7 +239,6 @@ TEST(push_back)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(push_back)
 
 TEST(push_front)
 {
@@ -277,7 +267,6 @@ TEST(push_front)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(push_front)
 
 TEST(front)
 {
@@ -299,7 +288,6 @@ TEST(front)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(front)
 
 TEST(back)
 {
@@ -321,7 +309,6 @@ TEST(back)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(back)
 
 TEST(clear)
 {
@@ -337,7 +324,6 @@ TEST(clear)
     IZI_ASSERT(l.size() == 0);
     return true;
 }
-END_TEST(clear)
 
 TEST(remove)
 {
@@ -359,7 +345,6 @@ TEST(remove)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(remove)
 
 TEST(remove_if)
 {
@@ -381,7 +366,6 @@ TEST(remove_if)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(remove_if)
 
 TEST(reverse)
 {
@@ -403,7 +387,6 @@ TEST(reverse)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(reverse)
 
 TEST(size)
 {
@@ -421,7 +404,6 @@ TEST(size)
     IZI_ASSERT(l.size() == n.size());
     return true;
 }
-END_TEST(size)
 
 TEST(assign)
 {
@@ -442,7 +424,6 @@ TEST(assign)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
-END_TEST(assign)
 
 
 int main()
