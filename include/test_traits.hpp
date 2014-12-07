@@ -34,4 +34,4 @@ template <class T>                         \
 struct has_##member                        \
 : public std::integral_constant            \
 <bool,has_member_##member<T>::val>         \
-{ };                                       \
+{ };                                       
