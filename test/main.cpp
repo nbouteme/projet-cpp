@@ -1,6 +1,8 @@
 #include <CList.hpp>
 #include <list>
 #include <sstream>
+
+#define TTTEST nsSdD::CList<int>
 #include <test_traits.hpp>
 #include <test_framework.hpp>
 #include <test_classes.hpp>
@@ -44,6 +46,8 @@ TEST(insert)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(insert)
+
 
 TEST(sort)
 {
@@ -65,6 +69,7 @@ TEST(sort)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(sort)
 
 TEST(erase)
 {
@@ -92,6 +97,7 @@ TEST(erase)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(erase)
 
 TEST(unique)
 {
@@ -113,6 +119,7 @@ TEST(unique)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(unique)
 
 TEST(merge)
 {
@@ -149,11 +156,15 @@ TEST(merge)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(merge)
 
+/*
 TEST(test)
 {
     IZI_ASSERT(!"Vous n'etes pas censes voir ca");
 }
+END_TEST(test)
+*/
 
 TEST(pop_back)
 {
@@ -181,6 +192,7 @@ TEST(pop_back)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(pop_back)
 
 TEST(pop_front)
 {
@@ -208,6 +220,7 @@ TEST(pop_front)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(pop_front)
 
 TEST(push_back)
 {
@@ -235,6 +248,7 @@ TEST(push_back)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(push_back)
 
 TEST(push_front)
 {
@@ -263,6 +277,7 @@ TEST(push_front)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(push_front)
 
 TEST(front)
 {
@@ -284,6 +299,7 @@ TEST(front)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(front)
 
 TEST(back)
 {
@@ -305,6 +321,7 @@ TEST(back)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(back)
 
 TEST(clear)
 {
@@ -320,6 +337,7 @@ TEST(clear)
     IZI_ASSERT(l.size() == 0);
     return true;
 }
+END_TEST(clear)
 
 TEST(remove)
 {
@@ -341,6 +359,7 @@ TEST(remove)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(remove)
 
 TEST(remove_if)
 {
@@ -362,6 +381,7 @@ TEST(remove_if)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(remove_if)
 
 TEST(reverse)
 {
@@ -383,6 +403,7 @@ TEST(reverse)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(reverse)
 
 TEST(size)
 {
@@ -400,6 +421,7 @@ TEST(size)
     IZI_ASSERT(l.size() == n.size());
     return true;
 }
+END_TEST(size)
 
 TEST(assign)
 {
@@ -420,6 +442,7 @@ TEST(assign)
     IZI_ASSERT(out.str() == comp.str());
     return true;
 }
+END_TEST(assign)
 
 
 int main()
@@ -434,25 +457,6 @@ int main()
         int_list();
     }
 
-    test_insert     <int_list>();
-    test_push_back  <int_list>();
-    test_pop_back   <int_list>();
-    test_pop_front  <int_list>();
-    test_push_front <int_list>();
-    test_front      <int_list>();
-    test_back       <int_list>();
-    test_merge      <int_list>();
-    test_sort       <int_list>();
-    test_erase      <int_list>();
-    test_remove     <int_list>();
-    test_unique     <int_list>();
-    test_clear      <int_list>();
-    test_remove     <int_list>();
-    test_remove_if  <int_list>();
-    test_reverse    <int_list>();
-    test_assign     <int_list>();
-
-    //permet de montrer que la detection fonctionne:
-    //test_test <int_list>(); // Il n'y a pas de membre test dans list, mais cela ne provoque pas d'erreur de compilation
+    run_all_tests();
     return 0;
 }
