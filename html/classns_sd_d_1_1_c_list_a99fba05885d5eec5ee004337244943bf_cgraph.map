@@ -1,0 +1,4 @@
+<map id="nsSdD::CList::pop_back" name="nsSdD::CList::pop_back">
+<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#a9d67e4a55aac8ccd2b7cd8fd3939a176" title="Returns an iterator pointing after the last element. " alt="" coords="231,5,366,32"/>
+<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_list.html#a0ab43df16936388ddf36555d762006db" title="Removes a node from the list, given an iterator position to it. " alt="" coords="225,56,372,83"/>
+</map>
