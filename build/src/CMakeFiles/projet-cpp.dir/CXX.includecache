@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/CBaseNode.hpp
+
+../include/CList.hpp
+cstddef
+-
+iterator
+-
+limits
+-
+memory
+-
+cassert
+-
+CNode.hpp
+-
+
+../include/CNode.hpp
+CBaseNode.hpp
+-
+
+/home/mirai/projet-cpp/src/main.cpp
+CList.hpp
+-
+iostream
+-
+

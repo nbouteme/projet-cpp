@@ -1,0 +1,4 @@
+<map id="nsSdD::CList::erase" name="nsSdD::CList::erase">
+<area shape="rect" id="node2" href="$classns_sd_d_1_1_c_list.html#a0ab43df16936388ddf36555d762006db" title="Removes a node from the list, given an iterator position to it. " alt="" coords="200,5,347,32"/>
+<area shape="rect" id="node3" href="$classns_sd_d_1_1_c_base_node.html#a1588132fb228c6d1874493051d6efc7c" title="Removes a node from its list. Its ressources aren&#39;t freed. " alt="" coords="395,5,597,32"/>
+</map>
